@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 
 export const Home = () => {
-  useEffect(() => document.title = 'Home', [])
+  useEffect(() => { document.title = 'Home', [] })
   return (
     <div className="home">
       <h2>Contact</h2>
