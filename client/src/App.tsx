@@ -1,27 +1,26 @@
 import React from "react";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
-import { About } from "./pages/About";
-import { Home } from "./pages/Home";
-import { Contact } from "./pages/Contact";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Main } from "./pages/Main";
+import { Product } from "./pages/Product";
 import { Nav } from './components/Nav';
+import { Cart } from "./pages/Cart";
+import './App.css';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="container">
         <Nav />
-        <Routes>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/about'>
-            <About />
-          </Route>
-          <Route path='/contact'>
-            <Contact />
-          </Route>
-        </Routes>
       </div>
-    </BrowserRouter>
+      <main>
+        <div className="container">
+          <Routes>
+            <Route path="/main" element={<Main />} />
+            <Route path='/product' element={<Product />} />
+            <Route path='/cart' element={<Cart />} />
+          </Routes>
+        </div>
+      </main>
+    </Router>
   )
 };
