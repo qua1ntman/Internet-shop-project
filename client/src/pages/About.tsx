@@ -1,3 +1,4 @@
+import React from "react"
 import { useEffect } from "react"
 
 
@@ -9,5 +10,4 @@ export const About = () => {
       <p>We are the company that sales clothes</p>
     </div>
   )
-
 }
