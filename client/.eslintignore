@@ -5,3 +5,4 @@ templates/*
 src/react-app-env.d.ts
 src/serviceWorker.ts
 webpack.dev.config.ts
+webpack.prod.config.ts
