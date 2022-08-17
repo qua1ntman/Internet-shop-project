@@ -33,15 +33,19 @@ const config: Configuration = {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
           }
         ]
       },
       { 
-        test: /\.css$/i,
+        test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader',
+          "style-loader",
+          "css-loader",
+          "sass-loader",
         ],
       },
     ],
