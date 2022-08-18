@@ -9,9 +9,11 @@ export const ThemeController = () => {
 
   const themeHandler = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
-    console.log(theme);
+    localStorage.setItem('theme', 
+      localStorage.getItem('theme') ? localStorage.getItem('theme') === 'light' ? 'dark' : 'light' : theme
+    )
     let bodyBack = document.body as HTMLBodyElement
-    bodyBack.style.background = bodyBack.style.background === 'black' ? 'white' : 'black' 
+    bodyBack.style.background = theme === 'dark' ? 'white' : 'black' 
   }
 
   return (
