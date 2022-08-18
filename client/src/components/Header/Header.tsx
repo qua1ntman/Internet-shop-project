@@ -16,9 +16,9 @@ export const Header = () => {
       <Search />
       <ThemeController />
       <div className='lang'></div>
-      <a className='login' href='/login'>
+      <Link className='login' to='/login'>
         {localStorage.getItem('token') ? 'Exit' : 'Log in'}
-      </a>
+      </Link>
       <div className='cart'></div>
     </header>
   )
