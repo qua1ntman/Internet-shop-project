@@ -4,7 +4,7 @@ import { Main } from "./pages/Main";
 import { Product } from "./pages/Product";
 import { Nav } from './components/Nav';
 import { Cart } from "./pages/Cart";
-import './App.css';
+import './App.scss';
 
 export const App = () => {
   return (
@@ -15,7 +15,7 @@ export const App = () => {
       <main>
         <div className="container">
           <Routes>
-            <Route path="/main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path='/product' element={<Product />} />
             <Route path='/cart' element={<Cart />} />
           </Routes>
