@@ -9,8 +9,8 @@ export const Header = () => {
   return (
     <header>
       <div className='logo'>          
-        <Link to='/'>
-          <img src={Logo} alt="logo" />
+        <Link to='/main'>
+          <img src={Logo} alt='logo' />
         </Link>
       </div>
       <Search />

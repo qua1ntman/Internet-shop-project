@@ -7,7 +7,7 @@ export const ThemeController = () => {
   const { theme, setTheme } = useContext(appContext) as 
     { theme: string; setTheme: React.Dispatch<SetStateAction<string>>; }
 
-  //Хендлер для смены темы и обновления значения "theme" в localStorage
+  //Хендлер для смены темы и обновления значения 'theme' в localStorage
   const themeHandler = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
     localStorage.setItem('theme', 

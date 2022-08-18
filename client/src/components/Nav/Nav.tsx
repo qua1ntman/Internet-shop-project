@@ -1,8 +1,8 @@
-import React, { SetStateAction, useContext } from "react"
+import React, { SetStateAction, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './Nav.scss'
-import { appContext } from "../../App";
-import { themeBackChanger } from "../../helpers/themeStyleChanger";
+import { appContext } from '../../App';
+import { themeBackChanger } from '../../helpers/themeStyleChanger';
 import { themeTextChanger } from './../../helpers/themeStyleChanger';
 
 export const Nav = () => {

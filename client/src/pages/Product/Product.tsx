@@ -1,6 +1,6 @@
-import React, { SetStateAction, useContext } from "react"
-import { appContext } from "../../App";
-import { themeTextChanger } from "../../helpers/themeStyleChanger";
+import React, { SetStateAction, useContext } from 'react'
+import { appContext } from '../../App';
+import { themeTextChanger } from '../../helpers/themeStyleChanger';
 
 export const Product = () => {
   
@@ -8,7 +8,7 @@ export const Product = () => {
   { theme: string; setTheme: React.Dispatch<SetStateAction<string>>; }
 
   return (
-    <div className="product-page">
+    <div className='product-page'>
       <h2
       style={themeTextChanger(theme)}
       >Product</h2>

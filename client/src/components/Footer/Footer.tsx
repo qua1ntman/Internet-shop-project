@@ -10,13 +10,13 @@ export const Footer = () => {
         href='https://rs.school/js/' 
         rel='noreferrer' 
         target={'_blank'} 
-        className="rs-logo" 
+        className='rs-logo' 
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(RSLogo) }}
       ></a>
-      <div className="devs-links">
-        <a href="https://github.com/qua1ntman" className="dev" rel='noreferrer' target={'_blank'}>Mikhail</a>
-        <a href="https://github.com/Olgamalk" className="dev" rel='noreferrer' target={'_blank'}>Olga</a>
-        <a href="https://github.com/0iskak" className="dev" rel='noreferrer' target={'_blank'}>Iskak</a>
+      <div className='devs-links'>
+        <a href='https://github.com/qua1ntman' className='dev' rel='noreferrer' target={'_blank'}>Mikhail</a>
+        <a href='https://github.com/Olgamalk' className='dev' rel='noreferrer' target={'_blank'}>Olga</a>
+        <a href='https://github.com/0iskak' className='dev' rel='noreferrer' target={'_blank'}>Iskak</a>
       </div>
     </footer>
   )
