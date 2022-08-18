@@ -4,11 +4,16 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 body {
   display: flex;
 }
 
 #root {
   margin: auto;
-  width: 1280px;
+  width: max(85vw, 320px);
 }
