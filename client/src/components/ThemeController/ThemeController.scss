@@ -1,10 +1,22 @@
+
+.theme-container {
+  display: flex;
+  flex-direction: column;
+  width: 85px;
+  align-items: center;
+}
+
+.theme-title {
+  font-size: .8rem;
+  color: white;
+}
+
 .theme {
   position: relative;
   width: 50px;
   height: 24px;
   border-radius: 12px;
   border: 2px solid rgb(92, 92, 92);
-  background: black;
   &:hover {
     cursor: pointer;
   }
@@ -14,7 +26,7 @@
     border-radius: 50%;
     position: absolute;
     top: 1px;
-    left: 1px;
-    background: white;
+
+
   }
 }

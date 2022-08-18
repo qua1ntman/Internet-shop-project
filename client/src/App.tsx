@@ -7,6 +7,7 @@ import { Cart } from "./pages/Cart/Cart";
 import './App.scss';
 import { Header } from './components/Header/Header';
 import { Footer } from "./components/Footer/Footer";
+import { themeBackChanger } from "./helpers/themeStyleChanger";
 
 export const appContext = React.createContext(Object) as unknown as 
 Context<{ theme: string; setTheme: Dispatch<SetStateAction<string>>; }>
@@ -25,7 +26,9 @@ export const App = () => {
       <div className="container">
         <Nav />
       </div>
-      <main>
+      <main
+        style={themeBackChanger(theme)}
+      >
         <div className="container">
           <Routes>
             <Route path="/" element={<Main />} />
