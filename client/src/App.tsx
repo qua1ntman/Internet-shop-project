@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Main } from "./pages/Main";
-import { Product } from "./pages/Product";
-import { Nav } from './components/Nav';
-import { Cart } from "./pages/Cart";
+import { Main } from "./pages/Main/Main";
+import { Product } from "./pages/Product/Product";
+import { Nav } from './components/Nav/Nav';
+import { Cart } from "./pages/Cart/Cart";
 import './App.scss';
 
 export const App = () => {
