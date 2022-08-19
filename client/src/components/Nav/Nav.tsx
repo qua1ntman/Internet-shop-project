@@ -1,35 +1,33 @@
-import React, { SetStateAction, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './Nav.scss'
 import { appContext } from '../../App';
-import { themeBackChanger } from '../../helpers/themeStyleChanger';
-import { themeTextChanger } from './../../helpers/themeStyleChanger';
 
 export const Nav = () => {
 
-  const { theme } = useContext(appContext) as 
-  { theme: string; setTheme: React.Dispatch<SetStateAction<string>>; }
+  const { color, backgroundColor } = useContext(appContext) as 
+    { color: string, backgroundColor: string }
 
   return (
     <nav
-      style={themeBackChanger(theme)}
+      style={{ backgroundColor }}
     >
       <ul>
         <li>
           <Link 
-            style={themeTextChanger(theme)}
+            style={{ color }}
             to='/main'
           >Main</Link>
         </li>
         <li>
           <Link 
-            style={themeTextChanger(theme)}
+            style={{ color }}
             to='/product'
           >Product</Link>
         </li>
         <li>
           <Link 
-            style={themeTextChanger(theme)}
+            style={{ color }}
             to='/cart'
           >Cart</Link>
         </li>
