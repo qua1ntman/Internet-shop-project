@@ -8,10 +8,10 @@
 .login-content,
 .register-content {
   margin: auto;
-  &>h1 {
+  & > h1 {
     margin-bottom: 20px;
   }
-  &>form {
+  & > form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -22,7 +22,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  &>input {
+  & > input {
     width: max(290px, 25vw);
     border: 1px solid black;
     border-radius: 0;
@@ -34,17 +34,17 @@
         color: black;
         background-color: white;
         padding: 0 5px;
-        font-size: .7rem;
+        font-size: 0.7rem;
         left: 10px;
         top: -6px;
       }
     }
   }
-  &>label {
+  & > label {
     color: rgb(129, 129, 129);
     position: absolute;
     left: 10px;
     top: 9px;
-    transition: all .15s ease-in;
+    transition: all 0.15s ease-in;
   }
 }
