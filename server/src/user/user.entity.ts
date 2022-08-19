@@ -1,11 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import {
-  IsEmail,
-  IsEmpty,
-  IsOptional,
-  IsString,
-  Length,
-} from 'class-validator';
+import { IsEmail, IsEmpty, IsMobilePhone, IsString } from 'class-validator';
 import { Role } from '../Role';
 
 @Entity()
@@ -14,15 +8,21 @@ export class User {
   @IsEmpty()
   id: number;
 
-  @Column({ unique: true })
+  @Column()
   @IsString()
-  @Length(5, 10)
-  username: string;
+  name: string;
 
-  @Column({ nullable: true })
+  @Column()
+  @IsString()
+  surname: string;
+
+  @Column({ unique: true })
   @IsEmail()
-  @IsOptional()
   email: string;
+
+  @Column()
+  @IsMobilePhone()
+  phone: string;
 
   @Column()
   @IsString()
