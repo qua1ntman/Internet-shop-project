@@ -1,6 +1,5 @@
-import React, { SetStateAction, useContext, useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { appContext } from '../../App';
-import { themeBackChanger, themeTextChanger } from '../../helpers/themeStyleChanger';
 
 export const Register = () => {
 
@@ -15,11 +14,11 @@ export const Register = () => {
   const { color, backgroundColor } = useContext(appContext) as 
     { color: string, backgroundColor: string }
   
-  const [isFormValid, setIsFormValid] = useState<Boolean>(false)
+  // const [isFormValid, setIsFormValid] = useState<Boolean>(false)
 
-  function isNormEmail(): boolean {
-    return /\S+@\S+\.\S+/.test(emailRef.current.value)
-  }
+  // function isNormEmail(): boolean {
+  //   return /\S+@\S+\.\S+/.test(emailRef.current.value)
+  // }
 
   return (
     <div className='register-container'>

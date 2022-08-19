@@ -9,7 +9,7 @@ export const Main = () => {
   return (
     <div className='main-page'>
       <h2
-        style={{color}}
+        style={{ color }}
       >Main</h2>
     </div>
   )

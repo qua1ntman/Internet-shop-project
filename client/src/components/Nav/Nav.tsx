@@ -1,7 +1,5 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { themeBackChanger } from '../../helpers/themeStyleChanger';
-import { themeTextChanger } from './../../helpers/themeStyleChanger';
 import './Nav.scss'
 import { appContext } from '../../App';
 

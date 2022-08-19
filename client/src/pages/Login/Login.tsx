@@ -1,6 +1,5 @@
-import React, { SetStateAction, useContext } from 'react'
+import React, { useContext } from 'react'
 import { appContext } from '../../App';
-import { themeBackChanger, themeTextChanger } from '../../helpers/themeStyleChanger';
 import './Login.scss'
 
 export const Login = () => {

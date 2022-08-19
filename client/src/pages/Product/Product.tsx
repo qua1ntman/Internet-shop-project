@@ -9,7 +9,7 @@ export const Product = () => {
   return (
     <div className='product-page'>
       <h2
-      style={{color}}
+      style={{ color }}
       >Product</h2>
     </div>
   )
