@@ -1,0 +1,24 @@
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .menu-category {
+    display: flex;
+    list-style-type: none;
+    
+    .menu-item {
+      margin: 10px;
+  
+      a {
+        font-size: 1rem;
+        color: black;
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+
