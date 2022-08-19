@@ -1,29 +1,38 @@
 import React, { SetStateAction, useContext } from 'react'
 import { appContext } from '../../App';
-import { themeTextChanger } from '../../helpers/themeStyleChanger';
+import { themeBackChanger, themeTextChanger } from '../../helpers/themeStyleChanger';
+import './Login.scss'
 
 export const Login = () => {
 
-  const { theme } = useContext(appContext) as 
-    { theme: string; setTheme: React.Dispatch<SetStateAction<string>>; }
+  const { color, backgroundColor } = useContext(appContext) as 
+    { color: string, backgroundColor: string }
 
   return (
     <div className='login-container'>
-      <h1
-        style={themeTextChanger(theme)}
-      >Log in</h1>
-      <form action=''>
-        <div>
-          <label
-            style={themeTextChanger(theme)}
-          >Email<input type='text' /></label>
-        </div>
-        <div>
-          <label
-            style={themeTextChanger(theme)}
-          >Password<input type='text' /></label>
-        </div>
-      </form>
+      <div className='login-content'>
+        <h1
+          style={{ color }}
+        >Login</h1>
+        <form action=''>
+          <div className='input-container'>
+            <input id='login_email' type='text' placeholder=' ' />
+            <label
+              htmlFor='login_email'
+            >EMAIL *</label>
+          </div>
+          <div className='input-container'>
+            <input id='login_password' type='text' placeholder=' ' />
+            <label
+              htmlFor='login_password'
+            >PASSWORD *</label>
+          </div>
+          <button 
+            className='default-btn'
+            style={{ color: backgroundColor, backgroundColor: color }}
+          >LOGIN</button>
+        </form>
+      </div>
     </div>
   )
 }

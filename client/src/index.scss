@@ -20,3 +20,10 @@ body {
   margin: auto;
   width: max(85vw, 320px);
 }
+
+.default-btn {
+  padding: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}
