@@ -29,25 +29,28 @@ const config: Configuration = {
           },
         },
       },
-      { 
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ]
-      },
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [
           {
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              name: 'images/[hash]-[name].[ext]',
+            },
           }
         ]
       },
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader'
+      },
+      { 
+        test: /\.s[ac]ss$/i,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
