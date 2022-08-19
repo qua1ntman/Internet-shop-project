@@ -1,0 +1,50 @@
+.login-container,
+.register-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-content,
+.register-content {
+  margin: auto;
+  &>h1 {
+    margin-bottom: 20px;
+  }
+  &>form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  &>input {
+    width: max(290px, 25vw);
+    border: 1px solid black;
+    border-radius: 0;
+    padding: 10px;
+    &:focus,
+    &:not(:placeholder-shown) {
+      & ~ label {
+        border-radius: 6px;
+        color: black;
+        background-color: white;
+        padding: 0 5px;
+        font-size: .7rem;
+        left: 10px;
+        top: -6px;
+      }
+    }
+  }
+  &>label {
+    color: rgb(129, 129, 129);
+    position: absolute;
+    left: 10px;
+    top: 9px;
+    transition: all .15s ease-in;
+  }
+}
