@@ -1,7 +1,7 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { IsEmpty, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
-import { JoinColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { IsEmpty, IsInt, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Category } from '../category/category.entity';
+import { JoinTable } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -10,16 +10,13 @@ export class Product {
   id: number;
 
   @Column()
-  @IsNotEmpty()
+  @IsString()
   title: string;
 
   @Column({ nullable: true })
+  @IsString()
+  @IsOptional()
   description: string;
-
-  @JoinColumn()
-  @IsNotEmpty()
-  @OneToMany(() => Category, (category) => category.id)
-  categories: Category[];
 
   @Column({ nullable: true })
   @IsUrl()
@@ -30,4 +27,12 @@ export class Product {
   @IsUrl(undefined, { each: true })
   @IsOptional()
   images: string[];
+
+  @IsEmpty()
+  @ManyToMany(() => Category)
+  @JoinTable()
+  categories: Category[];
+
+  @IsInt({ each: true })
+  categoryIds: number[];
 }

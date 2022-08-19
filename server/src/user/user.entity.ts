@@ -2,8 +2,8 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import {
   IsEmail,
   IsEmpty,
-  IsNotEmpty,
   IsOptional,
+  IsString,
   Length,
 } from 'class-validator';
 import { Role } from '../Role';
@@ -15,7 +15,7 @@ export class User {
   id: number;
 
   @Column({ unique: true })
-  @IsNotEmpty()
+  @IsString()
   @Length(5, 10)
   username: string;
 
@@ -25,7 +25,7 @@ export class User {
   email: string;
 
   @Column()
-  @IsNotEmpty()
+  @IsString()
   password: string;
 
   @Column({ default: Role.USER })

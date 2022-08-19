@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IsEmpty, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
+import { IsEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
 
 @Entity()
 export class Category {
@@ -8,10 +8,12 @@ export class Category {
   id: number;
 
   @Column()
-  @IsNotEmpty()
+  @IsString()
   title: string;
 
   @Column({ nullable: true })
+  @IsString()
+  @IsOptional()
   description: string;
 
   @Column({ nullable: true })

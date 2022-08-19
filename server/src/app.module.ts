@@ -1,15 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { User } from './user/user.entity';
-import { CategoryModule } from './category/category.module';
 import { Category } from './category/category.entity';
-import { ProductModule } from './product/product.module';
 import { Product } from './product/product.entity';
-import { GuardModule } from './guard/guard.module';
+import { JwtModule } from '@nestjs/jwt';
+import { UserController } from './user/user.controller';
+import { CategoryController } from './category/category.controller';
+import { ProductController } from './product/product.controller';
+import { UserService } from './user/user.service';
+import { CategoryService } from './category/category.service';
+import { ProductService } from './product/product.service';
 
 const entities = [User, Category, Product];
+const controllers = [UserController, CategoryController, ProductController];
+const providers = [UserService, CategoryService, ProductService];
 
 @Module({
   imports: [
@@ -26,10 +31,16 @@ const entities = [User, Category, Product];
       entities,
       synchronize: true,
     }),
-    UserModule,
-    CategoryModule,
-    ProductModule,
-    GuardModule,
+    TypeOrmModule.forFeature(entities),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        algorithm: 'HS256',
+        expiresIn: '7d',
+      },
+    }),
   ],
+  controllers,
+  providers,
 })
 export class AppModule {}
