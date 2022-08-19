@@ -1,0 +1,32 @@
+
+.theme-container {
+  display: flex;
+  flex-direction: column;
+  width: 85px;
+  align-items: center;
+}
+
+.theme-title {
+  font-size: .8rem;
+  color: white;
+}
+
+.theme {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  border-radius: 12px;
+  border: 2px solid rgb(92, 92, 92);
+  &:hover {
+    cursor: pointer;
+  }
+  &>span {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    position: absolute;
+    top: 1px;
+
+
+  }
+}

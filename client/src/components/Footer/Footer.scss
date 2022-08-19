@@ -1,0 +1,24 @@
+footer {
+  height: 60px;
+  background-color: rgb(87, 87, 87);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.rs-logo {
+  &>svg {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.devs-links {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  & a {
+    color: white;
+  }
+}
