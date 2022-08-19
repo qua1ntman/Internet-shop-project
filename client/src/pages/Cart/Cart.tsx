@@ -1,16 +1,18 @@
+
 import React, { SetStateAction, useContext } from 'react'
 import { appContext } from '../../App';
 import { themeTextChanger } from '../../helpers/themeStyleChanger';
 
-export const Main = () => {
+export const Cart = () => {
+
   const { theme } = useContext(appContext) as 
     { theme: string; setTheme: React.Dispatch<SetStateAction<string>>; }
 
   return (
-    <div className='main-page'>
+    <div className='cart-page'>
       <h2
         style={themeTextChanger(theme)}
-      >Main</h2>
+      >Cart</h2>
     </div>
   )
 }
