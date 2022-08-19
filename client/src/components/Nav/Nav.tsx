@@ -32,7 +32,9 @@ export const Nav = () => {
             style={themeTextChanger(theme)}
             to='/women'
           >Women</Link>
-          <Link 
+        </li>
+        <li>
+        <Link 
             style={themeTextChanger(theme)}
             to='/children'
           >Children</Link>
