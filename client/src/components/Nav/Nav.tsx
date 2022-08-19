@@ -18,7 +18,7 @@ export const Nav = () => {
         <li>
           <Link 
             style={themeTextChanger(theme)}
-            to='/'
+            to='/main'
           >Main</Link>
         </li>
         <li>

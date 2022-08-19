@@ -1,13 +1,20 @@
-import React, { Context, Dispatch, SetStateAction } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Main } from "./pages/Main/Main";
-import { Product } from "./pages/Product/Product";
-import { Nav } from './components/Nav/Nav';
-import { Cart } from "./pages/Cart/Cart";
+import React, { Context, Dispatch, SetStateAction } from 'react';
+import { BrowserRouter as Router, Route,  Routes } from 'react-router-dom';
+// import { Main } from './pages/Main/Main';
+// import { Product } from './pages/Product/Product';
+// import { Nav } from './components/Nav/Nav';
+// import { Cart } from './pages/Cart/Cart';
 import './App.scss';
-import { Header } from './components/Header/Header';
-import { Footer } from "./components/Footer/Footer";
-import { themeBackChanger } from "./helpers/themeStyleChanger";
+// import { Header } from './components/Header/Header';
+// import { Footer } from './components/Footer/Footer';
+// import { themeBackChanger } from './helpers/themeStyleChanger';
+import { Login } from './pages/Login/Login';
+import { ErrorPage } from './pages/ErrorPage/ErrorPage';
+import { Content } from './components/Content/Content';
+import { Cart } from './pages/Cart/Cart';
+import { Main } from './pages/Main/Main';
+import { Product } from './pages/Product/Product';
+import { Register } from './pages/Register/Register';
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = React.createContext(Object) as unknown as 
@@ -24,22 +31,16 @@ export const App = () => {
   return (
     <Router>
       <appContext.Provider value = {{ theme, setTheme }}>
-        <Header />
-        <div className="container">
-          <Nav />
-        </div>
-        <main
-          style={themeBackChanger(theme)}
-        >
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path='/product' element={<Product />} />
-              <Route path='/cart' element={<Cart />} />
-            </Routes>
-          </div>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path='/' element={<Content />} >
+            <Route path='main' element={<Main />} />
+            <Route path='product' element={<Product />} />
+            <Route path='cart' element={<Cart />} />
+          </Route>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes> 
       </appContext.Provider>
     </Router>
   )
