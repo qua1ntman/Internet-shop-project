@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { themeBackChanger } from '../../helpers/themeStyleChanger';
+import { themeTextChanger } from './../../helpers/themeStyleChanger';
 import './Nav.scss'
 import { appContext } from '../../App';
 
@@ -13,23 +15,29 @@ export const Nav = () => {
       style={{ backgroundColor }}
     >
       <ul>
-        <li>
+        {/* <li>
           <Link 
             style={{ color }}
             to='/main'
           >Main</Link>
+        </li> */}
+        <li>
+          <Link
+            style={{ color }}
+            to='/men'
+          >Men</Link>
         </li>
         <li>
           <Link 
             style={{ color }}
-            to='/product'
-          >Product</Link>
+            to='/women'
+          >Women</Link>
         </li>
         <li>
           <Link 
             style={{ color }}
-            to='/cart'
-          >Cart</Link>
+            to='/children'
+          >Children</Link>
         </li>
       </ul>
     </nav>

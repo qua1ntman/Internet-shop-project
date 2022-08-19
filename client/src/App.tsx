@@ -1,12 +1,11 @@
 import React, { Context, Dispatch, SetStateAction } from 'react';
 import { BrowserRouter as Router, Route,  Routes } from 'react-router-dom';
 import './App.scss';
+import { Category } from "./pages/Category/Category";
 import { Login } from './pages/Login/Login';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { Content } from './components/Content/Content';
-import { Cart } from './pages/Cart/Cart';
 import { Main } from './pages/Main/Main';
-import { Product } from './pages/Product/Product';
 import { Register } from './pages/Register/Register';
 import { themeTextChanger, themeBackChanger } from './helpers/themeStyleChanger';
 
@@ -36,10 +35,11 @@ export const App = () => {
         value = {{ theme, setTheme, color, backgroundColor }}
       >
         <Routes>
-          <Route path='/' element={<Content />} >
-            <Route path='main' element={<Main />} />
-            <Route path='product' element={<Product />} />
-            <Route path='cart' element={<Cart />} />
+          <Route path='/' element={<Content />}>
+            <Route path="main" element={<Main />} />
+            <Route path="men" element={<Category />} />
+            <Route path="women" element={<Category />} />
+            <Route path="children" element={<Category />} />
           </Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

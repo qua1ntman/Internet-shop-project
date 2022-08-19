@@ -28,4 +28,4 @@ export const Content = () => {
         <Footer />
     </>
   )
-}
+};
