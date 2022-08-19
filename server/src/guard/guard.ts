@@ -1,9 +1,13 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { CanActivate, ExecutionContext } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Role } from '../Role';
+import { JwtPayload } from '../JwtPayload';
 
-@Injectable()
-export class UserGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+export abstract class Guard implements CanActivate {
+  protected constructor(
+    private jwtService: JwtService,
+    private allowed: Role[],
+  ) {}
 
   canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
@@ -14,7 +18,9 @@ export class UserGuard implements CanActivate {
       if (!(bearer === 'Bearer' && token)) return false;
 
       req.user = this.jwtService.verify(token);
-      return true;
+      return this.allowed.includes(
+        (this.jwtService.decode(token) as JwtPayload).role,
+      );
     } catch (_) {
       return false;
     }

@@ -7,6 +7,7 @@ import { CategoryModule } from './category/category.module';
 import { Category } from './category/category.entity';
 import { ProductModule } from './product/product.module';
 import { Product } from './product/product.entity';
+import { GuardModule } from './guard/guard.module';
 
 const entities = [User, Category, Product];
 
@@ -28,6 +29,7 @@ const entities = [User, Category, Product];
     UserModule,
     CategoryModule,
     ProductModule,
+    GuardModule,
   ],
 })
 export class AppModule {}

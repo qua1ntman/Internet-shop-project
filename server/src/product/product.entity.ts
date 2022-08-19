@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { IsEmpty, IsNotEmpty } from 'class-validator';
+import { IsEmpty, IsNotEmpty, IsOptional, IsUrl } from 'class-validator';
 import { JoinColumn } from 'typeorm';
 import { Category } from '../category/category.entity';
 
@@ -20,4 +20,14 @@ export class Product {
   @IsNotEmpty()
   @OneToMany(() => Category, (category) => category.id)
   categories: Category[];
+
+  @Column({ nullable: true })
+  @IsUrl()
+  @IsOptional()
+  thumbnail: string;
+
+  @Column('simple-array', { default: [] })
+  @IsUrl(undefined, { each: true })
+  @IsOptional()
+  images: string[];
 }

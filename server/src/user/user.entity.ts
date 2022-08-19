@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from './user.role';
 import {
   IsEmail,
   IsEmpty,
   IsNotEmpty,
+  IsOptional,
   Length,
-  ValidateIf,
 } from 'class-validator';
+import { Role } from '../Role';
 
 @Entity()
 export class User {
@@ -21,7 +21,7 @@ export class User {
 
   @Column({ nullable: true })
   @IsEmail()
-  @ValidateIf((object, value) => value !== undefined)
+  @IsOptional()
   email: string;
 
   @Column()
