@@ -1,13 +1,12 @@
-
 .search {
   position: relative;
   width: 50%;
-  &>input {
+  & > input {
     width: 100%;
     height: 50px;
     padding: 10px 50px;
     border-radius: 25px;
-    border: 2px solid rgba($color: #000000, $alpha: .3);
+    border: 2px solid rgba($color: #000000, $alpha: 0.3);
   }
 }
 

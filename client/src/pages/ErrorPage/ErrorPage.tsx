@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export const ErrorPage = () => {
-  return (
-    <div className='error-page'>Page Not Found</div>
-  )
-}
+  return <div className="error-page">Page Not Found</div>;
+};
