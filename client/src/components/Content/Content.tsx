@@ -19,7 +19,7 @@ export const Content = () => {
           <Nav />
         </div>
         <main
-          style={{backgroundColor}}
+          style={{ backgroundColor }}
         >
           <div className='container'>
             <Outlet />
