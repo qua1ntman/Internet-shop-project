@@ -28,37 +28,61 @@ export const Register = () => {
         >Sign up</h1>
         <form action=''>
           <div className='input-container'>
-            <input id='first_name' ref={firstNameRef} type='text' placeholder=' ' />
+            <input 
+              id='first_name' 
+              ref={firstNameRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='first_name'
             >FIRST NAME *</label>
           </div>
           <div className='input-container'>
-            <input id='second_name' ref={secondNameRef} type='text' placeholder=' ' />
+            <input 
+              id='second_name' 
+              ref={secondNameRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='second_name'
             >SECOND NAME *</label>
           </div>
           <div className='input-container'>
-            <input id='register_email' ref={emailRef} type='text' placeholder=' ' />
+            <input 
+              id='register_email' 
+              ref={emailRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='register_email'
             >EMAIL *</label>
           </div>
           <div className='input-container'>
-            <input id='phone' type='text' ref={phoneRef} placeholder=' ' />
+            <input 
+              id='phone' 
+              ref={phoneRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='phone'
             >PHONE *</label>
           </div>
           <div className='input-container'>
-            <input id='register_password' ref={passwordRef} type='text' placeholder=' ' />
+            <input 
+              id='register_password' 
+              ref={passwordRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='register_password'
             >PASSWORD *</label>
           </div>
           <div className='input-container'>
-            <input id='register_password_repeat' ref={repeatPasswordRef} type='text' placeholder=' ' />
+            <input 
+              id='register_password_repeat' 
+              ref={repeatPasswordRef} 
+              placeholder=' ' 
+            />
             <label
               htmlFor='register_password_repeat'
             >REPEAT PASSWORD *</label>

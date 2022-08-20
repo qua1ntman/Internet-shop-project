@@ -15,13 +15,19 @@ export const Login = () => {
         >Login</h1>
         <form action=''>
           <div className='input-container'>
-            <input id='login_email' type='text' placeholder=' ' />
+            <input 
+              id='login_email' 
+              placeholder=' ' 
+            />
             <label
               htmlFor='login_email'
             >EMAIL *</label>
           </div>
           <div className='input-container'>
-            <input id='login_password' type='text' placeholder=' ' />
+            <input 
+              id='login_password'
+              placeholder=' ' 
+            />
             <label
               htmlFor='login_password'
             >PASSWORD *</label>
