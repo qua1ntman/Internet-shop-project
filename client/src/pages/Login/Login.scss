@@ -8,13 +8,31 @@
 .login-content,
 .register-content {
   margin: auto;
-  & > h1 {
-    margin-bottom: 20px;
-  }
   & > form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+}
+
+.login-nav,
+.register-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  & > a {
+    font-size: .8rem;
+  }
+}
+
+.login-header,
+.register-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  & > h1 {
+    display: flex;
+    align-items: center;
   }
 }
 

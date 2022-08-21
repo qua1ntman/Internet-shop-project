@@ -32,31 +32,35 @@ export const InputField = ({
 
   let fieldId: string= fieldName.split(" ").join("_").toLocaleLowerCase()
 
-  const isInputValueValid = () => {
-    if (formData[fieldNameCamelCase] === "") {
+  const isInputValueValid = (e: React.FormEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
+    if (value === "") {
       setIsInputEmpty(true);
       setIsInputInvalid(false)
-    } else if (validFunc) {
-      if (!validFunc!(formData[fieldNameCamelCase])) {
+    } else if (validFunc && !validFunc!(value)) {
         setIsInputEmpty(false);
         setIsInputInvalid(true);
-      } else {
-        setIsInputEmpty(false);
+    }
+  }
+
+  const isInputValueValid2 = (value: string) => {
+    if (value !== "") {
+      setIsInputEmpty(false);
+    } 
+    if (validFunc && validFunc!(value)) {
         setIsInputInvalid(false);
-      }
-    }    
-  };
-    
+    }  
+  }
+
   const inputValueHandler = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    if (isInputEmpty || isInputInvalid) isInputValueValid()
+    isInputValueValid2(value)
     setFormData((formDataObj: TFormState | null): TFormState => {
       let newForm = { ...formDataObj }
       formDataObj=null
       newForm[fieldNameCamelCase] = value;
       return newForm;
     });
-    console.log(formData, fieldNameCamelCase, formData[fieldNameCamelCase], `${fieldName[0].toUpperCase()}${fieldName.slice(1)}`);
 
   };
 
@@ -73,6 +77,7 @@ export const InputField = ({
         value={formData[fieldNameCamelCase]}
         onBlur={isInputValueValid}
         autoComplete={fieldId.includes('password') ? 'off' : 'on'}
+        type={fieldName.toLocaleLowerCase().includes('password') ? 'password' : 'text'}
       />
       <label htmlFor={fieldId}>
         {fieldName.toUpperCase()} *
