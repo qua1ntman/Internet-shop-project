@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 
 export const Register = () => {
-
   const { color, backgroundColor } = useContext(appContext) as {
     color: string;
     backgroundColor: string;
@@ -23,45 +22,46 @@ export const Register = () => {
     repeatPassword: "",
   });
 
-  const [isFormValid, setIsFormValid] = useState<boolean>(false)
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
   function isValidPhone(value: string): boolean {
-    return /^\s*\+?375((33\d{7})|(29\d{7})|(44\d{7}|)|(25\d{7}))\s*$/
-      .test(value)
+    return /^\s*\+?375((33\d{7})|(29\d{7})|(44\d{7}|)|(25\d{7}))\s*$/.test(
+      value
+    );
   }
 
   function isValidPassword(value: string): boolean {
-    return value.length>7
+    return value.length > 7;
   }
 
   function isValidRepeatPassword(value: string): boolean {
-    return formData.password === value
+    return formData.password === value;
   }
 
   useEffect(() => {
     setIsFormValid(
       isValidName(formData.firstName) &&
-      isValidName(formData.secondName) &&
-      isValidPhone(formData.phone) &&
-      isValidEmail(formData.email) &&
-      isValidPassword(formData.password) &&
-      isValidRepeatPassword(formData.repeatPassword)
-    )
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+        isValidName(formData.secondName) &&
+        isValidPhone(formData.phone) &&
+        isValidEmail(formData.email) &&
+        isValidPassword(formData.password) &&
+        isValidRepeatPassword(formData.repeatPassword)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
-    
+
   let navigate = useNavigate();
 
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     const toServerData = {
       firstName: formData.firstName,
       secondName: formData.secondName,
       email: formData.email,
       phone: formData.phone,
-      password: formData.password
-    }
-    console.log(toServerData)
+      password: formData.password,
+    };
+    console.log(toServerData);
     setFormData({
       firstName: "",
       secondName: "",
@@ -69,9 +69,9 @@ export const Register = () => {
       phone: "",
       password: "",
       repeatPassword: "",
-    })
-    navigate('/')
-  }
+    });
+    navigate("/");
+  };
 
   console.log(isFormValid);
 
@@ -79,16 +79,10 @@ export const Register = () => {
     <div className="register-container">
       <div className="register-content">
         <nav className="login-nav">
-          <Link
-            style={{ color }}
-            to={'/'}
-          >
+          <Link style={{ color }} to={"/"}>
             back to products
           </Link>
-          <Link
-            style={{ color }}
-            to={'/login'}
-          >
+          <Link style={{ color }} to={"/login"}>
             or log in
           </Link>
         </nav>
@@ -97,34 +91,34 @@ export const Register = () => {
           <Logo />
         </header>
         <form>
-          <InputField 
-            fieldName="first name" 
-            validFunc={isValidName} 
-            formData={formData} 
+          <InputField
+            fieldName="first name"
+            validFunc={isValidName}
+            formData={formData}
             setFormData={setFormData}
           />
-          <InputField 
-            fieldName="second name" 
-            validFunc={isValidName} 
-            formData={formData} 
+          <InputField
+            fieldName="second name"
+            validFunc={isValidName}
+            formData={formData}
             setFormData={setFormData}
           />
-          <InputField 
-            fieldName="phone" 
-            validFunc={isValidPhone} 
-            formData={formData} 
+          <InputField
+            fieldName="phone"
+            validFunc={isValidPhone}
+            formData={formData}
             setFormData={setFormData}
           />
-          <InputField 
-            fieldName="email" 
-            validFunc={isValidEmail} 
-            formData={formData} 
+          <InputField
+            fieldName="email"
+            validFunc={isValidEmail}
+            formData={formData}
             setFormData={setFormData}
           />
-          <InputField 
-            fieldName="password" 
-            validFunc={isValidPassword} 
-            formData={formData} 
+          <InputField
+            fieldName="password"
+            validFunc={isValidPassword}
+            formData={formData}
             setFormData={setFormData}
           />
           <InputField
@@ -135,16 +129,19 @@ export const Register = () => {
           />
           <button
             className="default-btn"
-            style={isFormValid ? { 
-              color: backgroundColor, backgroundColor: color
-            } : { 
-              color: changeOpasity(backgroundColor, .5), 
-              backgroundColor: changeOpasity(color, .5)
-            }}
-            disabled={!isFormValid}
-            onClick={
-              (e: MouseEvent<HTMLButtonElement>) => handleForm(e)
+            style={
+              isFormValid
+                ? {
+                    color: backgroundColor,
+                    backgroundColor: color,
+                  }
+                : {
+                    color: changeOpasity(backgroundColor, 0.5),
+                    backgroundColor: changeOpasity(color, 0.5),
+                  }
             }
+            disabled={!isFormValid}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleForm(e)}
           >
             REGISTER
           </button>

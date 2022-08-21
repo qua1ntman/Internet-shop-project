@@ -7,7 +7,7 @@ import { Logo } from "../Logo/Logo";
 
 export const Header = () => {
   return (
-    <header className='main-header'>
+    <header className="main-header">
       <Logo />
       <Search />
       <ThemeController />

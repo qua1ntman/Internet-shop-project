@@ -77,7 +77,7 @@ const config: Configuration = {
     static: path.join(__dirname, 'build'),
     historyApiFallback: true,
     open: true,
-    port: 4000,
+    port: 4500,
     hot: true
   },
 };

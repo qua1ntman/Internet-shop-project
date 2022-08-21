@@ -9,53 +9,45 @@ import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 
 export const Login = () => {
-
   const { color, backgroundColor } = useContext(appContext) as {
     color: string;
     backgroundColor: string;
   };
 
   const [formData, setFormData] = useState<TFormState>({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
-  const [isFormValid, setIsFormValid] = useState<boolean>(false)
-  
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+
   useEffect(() => {
     setIsFormValid(
-      isValidEmail(formData.email) &&
-      formData.password.length > 0
-    )
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      isValidEmail(formData.email) && formData.password.length > 0
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   let navigate = useNavigate();
 
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-    console.log(formData)
+    e.preventDefault();
+    console.log(formData);
     setFormData({
       email: "",
       password: "",
-    })
-    navigate('/')
-  }
+    });
+    navigate("/");
+  };
 
   return (
     <div className="login-container">
       <div className="login-content">
         <nav className="login-nav">
-          <Link
-            style={{ color }}
-            to={'/'}
-            >
+          <Link style={{ color }} to={"/"}>
             back to products
           </Link>
-          <Link
-            style={{ color }}
-            to={'/register'}
-          >
+          <Link style={{ color }} to={"/register"}>
             or sign up
           </Link>
         </nav>
@@ -64,29 +56,32 @@ export const Login = () => {
           <Logo />
         </header>
         <form action="">
-          <InputField 
-            fieldName="email" 
-            validFunc={isValidEmail} 
-            formData={formData} 
+          <InputField
+            fieldName="email"
+            validFunc={isValidEmail}
+            formData={formData}
             setFormData={setFormData}
           />
-          <InputField 
-            fieldName="password" 
-            formData={formData} 
+          <InputField
+            fieldName="password"
+            formData={formData}
             setFormData={setFormData}
           />
           <button
             className="default-btn"
-            style={isFormValid ? { 
-              color: backgroundColor, backgroundColor: color
-            } : { 
-              color: changeOpasity(backgroundColor, .5), 
-              backgroundColor: changeOpasity(color, .5)
-            }}
-            disabled={!isFormValid}
-            onClick={
-              (e: MouseEvent<HTMLButtonElement>) => handleForm(e)
+            style={
+              isFormValid
+                ? {
+                    color: backgroundColor,
+                    backgroundColor: color,
+                  }
+                : {
+                    color: changeOpasity(backgroundColor, 0.5),
+                    backgroundColor: changeOpasity(color, 0.5),
+                  }
             }
+            disabled={!isFormValid}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleForm(e)}
           >
             LOGIN
           </button>

@@ -1,5 +1,10 @@
 import React, { Context, Dispatch, SetStateAction } from "react";
-import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./App.scss";
 import { Category } from "./pages/Category/Category";
 import { Login } from "./pages/Login/Login";
@@ -11,6 +16,9 @@ import {
   themeTextChanger,
   themeBackChanger,
 } from "./helpers/themeStyleChanger";
+import { data } from "./@types/data";
+import { ICategory } from "./interfaces/dataInterface";
+import { ProductCardContainer } from "./components/ProductCardContainer/ProductCardContainer";
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = React.createContext(Object) as unknown as Context<{
@@ -40,17 +48,58 @@ export const App = () => {
     <Router>
       <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
         <Routes>
-          <Route path="/" element={<Content />}>
-            <Route path="/" element={<Navigate to={'main'} />} />
-            <Route path="main" element={<Main />} />
-            <Route path="men" element={<Category />} />
-            <Route path="women" element={<Category />} />
-            <Route path="children" element={<Category />} />
-            <Route path="*" element={<ErrorPage />} />
+          <Route path={"/"} element={<Content />}>
+            <Route path={"/"} element={<Navigate to={"main"} />} />
+            <Route path={"main"} element={<Main />} />
+            {data.map((item: ICategory) => {
+              console.log(item);
+              return (
+                <Route
+                  key={item.name}
+                  path={item.name}
+                  element={<Category categoryData={item} />}
+                >
+                  {item.subCategories.map((subcategory, i) => {
+                    if (i === 0) {
+                      return (
+                        <>
+                          <Route
+                            key={"base"}
+                            path={"/" + item.name}
+                            element={<Navigate to={subcategory.name} />}
+                          />
+                          <Route
+                            key={subcategory.name}
+                            path={subcategory.name}
+                            element={
+                              <ProductCardContainer
+                                products={subcategory.products}
+                              />
+                            }
+                          />
+                        </>
+                      );
+                    }
+                    return (
+                      <Route
+                        key={subcategory.name}
+                        path={subcategory.name}
+                        element={
+                          <ProductCardContainer
+                            products={subcategory.products}
+                          />
+                        }
+                      />
+                    );
+                  })}
+                </Route>
+              );
+            })}
+            <Route path={"*"} element={<ErrorPage />} />
           </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path={"/login"} element={<Login />} />
+          <Route path={"/register"} element={<Register />} />
+          <Route path={"*"} element={<ErrorPage />} />
         </Routes>
       </appContext.Provider>
     </Router>
