@@ -7,17 +7,6 @@
   background-color: rgb(39, 39, 39);
 }
 
-.logo {
-  height: 50px;
-  width: auto;
-  & * {
-    height: 100%;
-    width: 100%;
-  }
-  & img {
-    border-radius: 5px;
-  }
-}
 
 .login {
   color: white;
