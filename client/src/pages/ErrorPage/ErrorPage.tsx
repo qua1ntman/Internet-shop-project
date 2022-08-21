@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { appContext } from "../../App";
 
 export const ErrorPage = () => {
-  return <div className="error-page">Page Not Found</div>;
+  const { color } = useContext(appContext) as {
+    color: string;
+  };
+  return <div 
+      style={{ color }}
+      className="error-page"
+    >Page Not Found</div>;
 };

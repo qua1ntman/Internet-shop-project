@@ -10,7 +10,10 @@ export const Nav = () => {
   };
 
   return (
-    <nav style={{ backgroundColor }}>
+    <nav 
+      className='main-nav'
+      style={{ backgroundColor }}
+    >
       <ul>
         {/* <li>
           <Link 

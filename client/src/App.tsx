@@ -1,5 +1,5 @@
 import React, { Context, Dispatch, SetStateAction } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import { Category } from "./pages/Category/Category";
 import { Login } from "./pages/Login/Login";
@@ -24,7 +24,7 @@ export const appContext = React.createContext(Object) as unknown as Context<{
 document.body.style.backgroundColor = localStorage.getItem("theme")
   ? localStorage.getItem("theme") === "light"
     ? ""
-    : "black"
+    : "#464545"
   : "";
 
 export const App = () => {
@@ -41,10 +41,12 @@ export const App = () => {
       <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
         <Routes>
           <Route path="/" element={<Content />}>
+            <Route path="/" element={<Navigate to={'main'} />} />
             <Route path="main" element={<Main />} />
             <Route path="men" element={<Category />} />
             <Route path="women" element={<Category />} />
             <Route path="children" element={<Category />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -2,17 +2,13 @@ import React from "react";
 import { Search } from "./Search/Search";
 import { Link } from "react-router-dom";
 import "./Header.scss";
-import Logo from "../../assets/png/logo.png";
-import { ThemeController } from "../ThemeController/ThemeController";
+import { ThemeController } from "./ThemeController/ThemeController";
+import { Logo } from "../Logo/Logo";
 
 export const Header = () => {
   return (
-    <header>
-      <div className="logo">
-        <Link to="/m">
-          <img src={Logo} alt="logo" />
-        </Link>
-      </div>
+    <header className='main-header'>
+      <Logo />
       <Search />
       <ThemeController />
       <div className="lang"></div>

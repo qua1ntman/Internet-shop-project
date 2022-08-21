@@ -1,5 +1,5 @@
 import React, { SetStateAction, useContext } from "react";
-import { appContext } from "../../App";
+import { appContext } from "../../../App";
 import "./ThemeController.scss";
 
 export const ThemeController = () => {
@@ -20,7 +20,7 @@ export const ThemeController = () => {
         : theme
     );
     let bodyBack = document.body as HTMLBodyElement;
-    bodyBack.style.background = theme === "dark" ? "white" : "black";
+    bodyBack.style.background = theme === "dark" ? "white" : "#464545";
   };
 
   return (
