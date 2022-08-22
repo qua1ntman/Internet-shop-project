@@ -15,12 +15,6 @@ export const Category = ({ categoryData }: { categoryData: ICategory }) => {
   ] = useState<string>(categoryData.subCategories[0].name)
 
   return (
-    <div className="category-page">
-      <h2
-        style={{ color }}
-      >{`${categoryData.name[0].toUpperCase()}${categoryData.name.slice(
-        1
-      )}`}</h2>
       <div className="category-data-container">
         <div className="subcategories">
           {categoryData.subCategories.map((item) => {
@@ -37,6 +31,5 @@ export const Category = ({ categoryData }: { categoryData: ICategory }) => {
         </div>
           <Outlet />
       </div>
-    </div>
   );
 };
