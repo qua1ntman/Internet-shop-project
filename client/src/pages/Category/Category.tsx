@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ICategory } from "./../../interfaces/dataInterface";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
@@ -6,7 +6,13 @@ import { appContext } from "../../App";
 import "./Category.scss";
 
 export const Category = ({ categoryData }: { categoryData: ICategory }) => {
+  
   const { color } = useContext(appContext) as { color: string };
+
+  const [
+    clickedSubcategory, 
+    setClickedSubcategory
+  ] = useState<string>(categoryData.subCategories[0].name)
 
   return (
     <div className="category-page">
@@ -20,16 +26,16 @@ export const Category = ({ categoryData }: { categoryData: ICategory }) => {
           {categoryData.subCategories.map((item) => {
             return (
               <Link
+                className={clickedSubcategory === item.name ? 'link-active' : ''}
                 style={{ color }}
                 key={item.name}
-                to={item.name}
+                to={item.name === clickedSubcategory ? '#' : item.name}
+                onClick={() => setClickedSubcategory(item.name)}
               >{`${item.name[0].toUpperCase()}${item.name.slice(1)}`}</Link>
             );
           })}
         </div>
-        <div className="cards-container">
           <Outlet />
-        </div>
       </div>
     </div>
   );
