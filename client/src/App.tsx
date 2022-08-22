@@ -32,7 +32,7 @@ export const appContext = React.createContext(Object) as unknown as Context<{
 document.body.style.backgroundColor = localStorage.getItem("theme")
   ? localStorage.getItem("theme") === "light"
     ? ""
-    : "#464545"
+    : "rgb(56 54 68)"
   : "";
 
 export const App = () => {

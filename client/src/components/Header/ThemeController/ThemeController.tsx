@@ -20,7 +20,7 @@ export const ThemeController = () => {
         : theme
     );
     let bodyBack = document.body as HTMLBodyElement;
-    bodyBack.style.background = theme === "dark" ? "white" : "#464545";
+    bodyBack.style.background = theme === "dark" ? "white" : "rgb(56, 54, 68)";
   };
 
   return (
