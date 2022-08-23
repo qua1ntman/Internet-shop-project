@@ -1,14 +1,16 @@
 footer {
   height: 60px;
-  background-color: rgb(87, 87, 87);
+  background-color: rgb(48 47 78);
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-around;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .rs-logo {
-  &>svg {
+  & > svg {
     height: 40px;
     width: auto;
   }
@@ -19,6 +21,7 @@ footer {
   width: 200px;
   justify-content: space-around;
   & a {
+    font-size: 1rem;
     color: white;
   }
 }

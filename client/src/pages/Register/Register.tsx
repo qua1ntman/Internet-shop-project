@@ -1,74 +1,152 @@
-import React, { useContext, useRef } from 'react'
-import { appContext } from '../../App';
+import React, { useContext, useEffect, useState, MouseEvent } from "react";
+import { appContext } from "../../App";
+import { InputField } from "../../components/InputFIeld/InputField";
+import { changeOpasity } from "../../helpers/changeOpasity";
+import { isValidEmail, isValidName } from "../../helpers/validators";
+import { TFormState } from "../../types/defaultObjType";
+import { Link, useNavigate } from "react-router-dom";
+import { Logo } from "../../components/Logo/Logo";
 
 export const Register = () => {
+  const { color, backgroundColor } = useContext(appContext) as {
+    color: string;
+    backgroundColor: string;
+  };
 
-  // Ссылки на инпуты 
-  const firstNameRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const secondNameRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const emailRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const phoneRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const passwordRef = useRef() as React.MutableRefObject<HTMLInputElement>
-  const repeatPasswordRef = useRef() as React.MutableRefObject<HTMLInputElement>
+  const [formData, setFormData] = useState<TFormState>({
+    firstName: "",
+    secondName: "",
+    email: "",
+    phone: "",
+    password: "",
+    repeatPassword: "",
+  });
 
-  const { color, backgroundColor } = useContext(appContext) as 
-    { color: string, backgroundColor: string }
-  
-  // const [isFormValid, setIsFormValid] = useState<Boolean>(false)
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
-  // function isNormEmail(): boolean {
-  //   return /\S+@\S+\.\S+/.test(emailRef.current.value)
-  // }
+  function isValidPhone(value: string): boolean {
+    return /^\s*\+?375((33\d{7})|(29\d{7})|(44\d{7}|)|(25\d{7}))\s*$/.test(
+      value
+    );
+  }
+
+  function isValidPassword(value: string): boolean {
+    return value.length > 7;
+  }
+
+  function isValidRepeatPassword(value: string): boolean {
+    return formData.password === value;
+  }
+
+  useEffect(() => {
+    setIsFormValid(
+      isValidName(formData.firstName) &&
+        isValidName(formData.secondName) &&
+        isValidPhone(formData.phone) &&
+        isValidEmail(formData.email) &&
+        isValidPassword(formData.password) &&
+        isValidRepeatPassword(formData.repeatPassword)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData]);
+
+  let navigate = useNavigate();
+
+  const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const toServerData = {
+      firstName: formData.firstName,
+      secondName: formData.secondName,
+      email: formData.email,
+      phone: formData.phone,
+      password: formData.password,
+    };
+    console.log(toServerData);
+    setFormData({
+      firstName: "",
+      secondName: "",
+      email: "",
+      phone: "",
+      password: "",
+      repeatPassword: "",
+    });
+    navigate("/");
+  };
+
+  console.log(isFormValid);
 
   return (
-    <div className='register-container'>
+    <div className="register-container">
       <div className="register-content">
-        <h1
-          style={{ color }}
-        >Sign up</h1>
-        <form action=''>
-          <div className='input-container'>
-            <input id='first_name' ref={firstNameRef} type='text' placeholder=' ' />
-            <label
-              htmlFor='first_name'
-            >FIRST NAME *</label>
-          </div>
-          <div className='input-container'>
-            <input id='second_name' ref={secondNameRef} type='text' placeholder=' ' />
-            <label
-              htmlFor='second_name'
-            >SECOND NAME *</label>
-          </div>
-          <div className='input-container'>
-            <input id='register_email' ref={emailRef} type='text' placeholder=' ' />
-            <label
-              htmlFor='register_email'
-            >EMAIL *</label>
-          </div>
-          <div className='input-container'>
-            <input id='phone' type='text' ref={phoneRef} placeholder=' ' />
-            <label
-              htmlFor='phone'
-            >PHONE *</label>
-          </div>
-          <div className='input-container'>
-            <input id='register_password' ref={passwordRef} type='text' placeholder=' ' />
-            <label
-              htmlFor='register_password'
-            >PASSWORD *</label>
-          </div>
-          <div className='input-container'>
-            <input id='register_password_repeat' ref={repeatPasswordRef} type='text' placeholder=' ' />
-            <label
-              htmlFor='register_password_repeat'
-            >REPEAT PASSWORD *</label>
-          </div>
-          <button 
-              className='default-btn'
-              style={{ color: backgroundColor, backgroundColor: color }}
-            >REGISTER</button>
+        <nav className="login-nav">
+          <Link style={{ color }} to={"/"}>
+            back to products
+          </Link>
+          <Link style={{ color }} to={"/login"}>
+            or log in
+          </Link>
+        </nav>
+        <header className="register-header">
+          <h1 style={{ color }}>Sign up</h1>
+          <Logo />
+        </header>
+        <form>
+          <InputField
+            fieldName="first name"
+            validFunc={isValidName}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InputField
+            fieldName="second name"
+            validFunc={isValidName}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InputField
+            fieldName="phone"
+            validFunc={isValidPhone}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InputField
+            fieldName="email"
+            validFunc={isValidEmail}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InputField
+            fieldName="password"
+            validFunc={isValidPassword}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <InputField
+            fieldName="repeat password"
+            validFunc={isValidRepeatPassword}
+            formData={formData}
+            setFormData={setFormData}
+          />
+          <button
+            className="default-btn"
+            style={
+              isFormValid
+                ? {
+                    color: backgroundColor,
+                    backgroundColor: color,
+                  }
+                : {
+                    color: changeOpasity(backgroundColor, 0.5),
+                    backgroundColor: changeOpasity(color, 0.5),
+                  }
+            }
+            disabled={!isFormValid}
+            onClick={(e: MouseEvent<HTMLButtonElement>) => handleForm(e)}
+          >
+            REGISTER
+          </button>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};

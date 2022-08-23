@@ -1,31 +1,30 @@
-import React, { useContext } from 'react';
-import { appContext } from '../../App';
-import { Outlet } from 'react-router-dom'
-import { Footer } from '../Footer/Footer'
-import { Header } from '../Header/Header'
-import { Nav } from '../Nav/Nav'
-import './Content.scss'
+import React, { useContext } from "react";
+import { appContext } from "../../App";
+import { Outlet } from "react-router-dom";
+import { Footer } from "../Footer/Footer";
+import { Header } from "../Header/Header";
+import { Nav } from "../Nav/Nav";
+import "./Content.scss";
+import { ToTop } from "../ToTop/ToTop";
 
 export const Content = () => {
-
-
-  const { backgroundColor } = useContext(appContext) as 
-    { backgroundColor: string }
+  const { backgroundColor } = useContext(appContext) as {
+    backgroundColor: string;
+  };
 
   return (
     <>
       <Header />
-        <div className='container'>
-          <Nav />
+      <div className="container">
+        <Nav />
+      </div>
+      <main style={{ backgroundColor }}>
+        <div className="container">
+          <Outlet />
         </div>
-        <main
-          style={{ backgroundColor }}
-        >
-          <div className='container'>
-            <Outlet />
-          </div>
-        </main>
-        <Footer />
+      </main>
+      <Footer />
+      <ToTop />
     </>
-  )
+  );
 };

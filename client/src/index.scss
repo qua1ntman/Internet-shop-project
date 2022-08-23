@@ -14,6 +14,20 @@ a {
 
 body {
   display: flex;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(left, #4A4A4A, #404040);
+    box-shadow: inset 0 0 1px 1px #191919;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(left, #555555, #4e4e4e);
+    box-shadow: inset 0 0 1px 1px #727272;
+  }
 }
 
 #root {
@@ -22,8 +36,16 @@ body {
 }
 
 .default-btn {
+  border: none;
   padding: 10px;
+  transition: all 0.1s ease-in-out;
   &:hover {
     cursor: pointer;
+  }
+}
+
+.default-btn:disabled {
+  &:hover {
+    cursor: default;
   }
 }

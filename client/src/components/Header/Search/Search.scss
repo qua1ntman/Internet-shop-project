@@ -1,13 +1,21 @@
-
 .search {
   position: relative;
   width: 50%;
-  &>input {
+  & > input {
     width: 100%;
     height: 50px;
     padding: 10px 50px;
     border-radius: 25px;
-    border: 2px solid rgba($color: #000000, $alpha: .3);
+    border: 2px solid rgb(56, 54, 68);
+    opacity: .3;
+    transition: opacity .2s;
+    &:hover {
+      opacity: .6;
+      cursor: pointer;
+    }
+    &:focus {
+      opacity: 1;
+    }
   }
 }
 
