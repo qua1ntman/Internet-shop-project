@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import "./App.scss";
 import { Category } from "./pages/Category/Category";
+
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
