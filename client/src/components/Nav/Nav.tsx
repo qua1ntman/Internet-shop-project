@@ -13,12 +13,12 @@ export const Nav = () => {
       style={{ backgroundColor }}
     >
       <ul>
-        {/* <li>
+        <li>
           <Link 
             style={{ color }}
             to='/main'
           >Main</Link>
-        </li> */}
+        </li>
         <li>
           <Link
             style={{ color }}
