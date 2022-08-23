@@ -1,0 +1,20 @@
+.item-container {
+  width: 150px;
+  border: 1px solid darkgrey;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.amount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .minus {
+    margin-right: 5px;
+  }
+  .plus {
+    margin-left: 5px;
+  }
+}
