@@ -5,9 +5,13 @@ import { Category } from "./pages/Category/Category";
 import { Login } from './pages/Login/Login';
 import { ErrorPage } from './pages/ErrorPage/ErrorPage';
 import { Content } from './components/Content/Content';
-import { Main } from './pages/Main/Main';
+// import { Main } from './pages/Main/Main';
 import { Register } from './pages/Register/Register';
 import { themeTextChanger, themeBackChanger } from './helpers/themeStyleChanger';
+import { Store } from './pages/Store/Store';
+import { ShoppingCartProvider } from './pages/Basket/ShoppingCartContext';
+// import Wraped from './pages/Product/Product';
+// import { CartButton } from './pages/Cart/CartButton';
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = React.createContext(Object) as unknown as 
@@ -29,14 +33,15 @@ export const App = () => {
   let { color } = themeTextChanger(theme)
   let { backgroundColor } = themeBackChanger(theme)
 
-  return (
-    <Router>
+  return (  
+    <ShoppingCartProvider>
+      <Router>
       <appContext.Provider 
         value = {{ theme, setTheme, color, backgroundColor }}
       >
         <Routes>
           <Route path='/' element={<Content />}>
-            <Route path="main" element={<Main />} />
+            <Route path="main" element={<Store />} />
             <Route path="men" element={<Category />} />
             <Route path="women" element={<Category />} />
             <Route path="children" element={<Category />} />
@@ -47,5 +52,7 @@ export const App = () => {
         </Routes> 
       </appContext.Provider>
     </Router>
+    </ShoppingCartProvider>  
+      
   )
 };
