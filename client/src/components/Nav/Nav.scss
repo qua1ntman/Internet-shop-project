@@ -1,12 +1,12 @@
-nav {
+.main-nav {
   display: flex;
   background-color: rgb(207, 194, 173);
   height: 40px;
-  &>ul {
+  & > ul {
     margin: auto;
     display: flex;
     gap: 50px;
-    &>li {
+    & > li {
       text-align: center;
       min-width: 70px;
       margin: 0 auto;

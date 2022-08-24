@@ -1,0 +1,24 @@
+.category-data-container {
+  display: flex;
+  width: 100%;
+  padding: 20px auto;
+}
+
+.subcategories {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+  margin: 20px auto;
+  & > a {
+    margin: 10px auto;
+  }
+}
+
+.cards-container {
+  display: grid;
+  width: 80%;
+  grid-auto-columns: min-content;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 20px auto;
+}
