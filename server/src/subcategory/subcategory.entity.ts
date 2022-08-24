@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { IsEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
-import { Subcategory } from '../subcategory/subcategory.entity';
+import { Category } from '../category/category.entity';
 
 @Entity()
-export class Category {
+export class Subcategory {
   @PrimaryGeneratedColumn()
   @IsEmpty()
   id: number;
@@ -27,7 +27,7 @@ export class Category {
   @IsOptional()
   images: string[];
 
-  @OneToMany(() => Subcategory, (subcategory) => subcategory.category)
   @IsEmpty()
-  subcategories: Subcategory[];
+  @ManyToOne(() => Category, (category) => category.subcategories)
+  category: Category;
 }
