@@ -8,6 +8,6 @@ export function themeTextChanger(theme: string): { color: string } {
 // Вернет объект с цветом бэкграунда
 export function themeBackChanger(theme: string): { backgroundColor: string } {
   return theme === "light"
-    ? { backgroundColor: "rgba(255, 255, 255, 1)" }
-    : { backgroundColor: "rgba(56, 54, 68, 1)" };
+    ? { backgroundColor: "rgba(243, 239, 229, .7)" }
+    : { backgroundColor: "rgba(56, 54, 68, .5)" };
 }

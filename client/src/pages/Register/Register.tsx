@@ -73,7 +73,7 @@ export const Register = () => {
     navigate("/");
   };
 
-  console.log(isFormValid);
+  // console.log(isFormValid);
 
   return (
     <div className="register-container">

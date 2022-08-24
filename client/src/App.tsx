@@ -11,7 +11,6 @@ import { Category } from "./pages/Category/Category";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
-import { Main } from "./pages/Main/Main";
 import { Register } from "./pages/Register/Register";
 import {
   themeTextChanger,
@@ -21,8 +20,8 @@ import { data } from "./@types/data";
 import { ICategory } from "./interfaces/dataInterface";
 import { ProductCardContainer } from "./components/ProductCardContainer/ProductCardContainer";
 
-import { Store } from './pages/Store/Store';
-import { ShoppingCartProvider } from './pages/Basket/ShoppingCartContext';
+import { Store } from "./pages/Store/Store";
+import { ShoppingCartProvider } from "./pages/Basket/ShoppingCartContext";
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = React.createContext(Object) as unknown as Context<{
@@ -33,11 +32,12 @@ export const appContext = React.createContext(Object) as unknown as Context<{
 }>;
 
 // Установка body backgroundColor в зависимости от темы
-document.body.style.backgroundColor = localStorage.getItem("theme")
-  ? localStorage.getItem("theme") === "light"
-    ? ""
-    : "rgb(56 54 68)"
-  : "";
+if (localStorage.getItem('theme')) {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark')
+  }
+}
+
 
 export const App = () => {
 
@@ -52,7 +52,9 @@ export const App = () => {
   return (
     <ShoppingCartProvider>
       <Router>
-        <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
+        <appContext.Provider
+          value={{ theme, setTheme, color, backgroundColor }}
+        >
           <Routes>
             <Route path={"/"} element={<Content />}>
               <Route path={"/"} element={<Navigate to={"main"} />} />
@@ -109,6 +111,6 @@ export const App = () => {
           </Routes>
         </appContext.Provider>
       </Router>
-    </ShoppingCartProvider>  
+    </ShoppingCartProvider>
   );
 };

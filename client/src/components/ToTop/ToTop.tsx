@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
-import { appContext } from '../../App';
-import './ToTop.scss'
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { appContext } from "../../App";
+import "./ToTop.scss";
 
 export const ToTop = () => {
-
   const { color } = useContext(appContext) as {
     color: string;
   };
@@ -13,19 +12,21 @@ export const ToTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
-  }
+  };
 
   return (
-    <Link 
-      onClick={scrollToTop} 
+    <Link
+      onClick={scrollToTop}
       style={{
         color,
-        borderColor: color
+        borderColor: color,
       }}
-      className='to-top-btn' 
-      to={'#'}
-    >&#5123;</Link>
-  )
-}
+      className="to-top-btn"
+      to={"#"}
+    >
+      &#5123;
+    </Link>
+  );
+};

@@ -1,17 +1,17 @@
-import { useShoppingCart } from "./ShoppingCartContext"
-import storeItems from "./items.json"
-import { formatCurrency } from "./formatCurrency"
-import React from "react"
+import { useShoppingCart } from "./ShoppingCartContext";
+import storeItems from "./items.json";
+import React from "react";
+import { formatCurrency } from "../../helpers/formatCurrency";
 
 type CartItemProps = {
-  id: number
-  quantity: number
-}
+  id: number;
+  quantity: number;
+};
 
 export function CartItem({ id, quantity }: CartItemProps) {
-  const { removeFromCart } = useShoppingCart()
-  const item = storeItems.find(i => i.id === id)
-  if (item == null) return null
+  const { removeFromCart } = useShoppingCart();
+  const item = storeItems.find((i) => i.id === id);
+  if (item == null) return null;
 
   return (
     <div className="item">
@@ -34,11 +34,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
         </div>
       </div>
       <div> {formatCurrency(item.price * quantity)}</div>
-      <button
-        onClick={() => removeFromCart(item.id)}
-      >
-        &times;
-      </button>
+      <button onClick={() => removeFromCart(item.id)}>&times;</button>
     </div>
-  )
+  );
 }

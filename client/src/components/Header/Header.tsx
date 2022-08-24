@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Search } from "./Search/Search";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import { ThemeController } from "./ThemeController/ThemeController";
 import { Logo } from "../Logo/Logo";
 
-import { useShoppingCart } from '../../pages/Basket/ShoppingCartContext'
+import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
+import { appContext } from "../../App";
 
 export const Header = () => {
-
-  const { openCart, cartQuantity } = useShoppingCart()
+  const { openCart, cartQuantity } = useShoppingCart();
+  
+  const { color } = useContext(appContext) as {
+    color: string;
+  };
 
   return (
     <header className="main-header">
@@ -18,17 +22,23 @@ export const Header = () => {
       <Search />
       <ThemeController />
       <div className="lang"></div>
-      <Link className="login" to="/login">
+      <Link 
+        style={{ color }} 
+        className="login" 
+        to="/login"
+      >
         {localStorage.getItem("token") ? "Exit" : "Log in"}
       </Link>
-      <div className='cart' onClick={openCart}>Cart
+      <div 
+        className="cart" 
+        onClick={openCart}
+        style={{ color }}
+      >
+        Cart
         {cartQuantity > 0 && (
-          <span className="badge-circle">
-          {cartQuantity}
-        </span>
+          <span className="badge-circle">{cartQuantity}</span>
         )}
-
-      </div>   
+      </div>
     </header>
   );
 };
