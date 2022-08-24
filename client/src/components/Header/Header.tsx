@@ -1,8 +1,8 @@
-import React from 'react'
-import { Search } from './Search/Search'
-import { Link } from 'react-router-dom'
-import './Header.scss'
-import { ThemeController } from './ThemeController/ThemeController'
+import React from "react";
+import { Search } from "./Search/Search";
+import { Link } from "react-router-dom";
+import "./Header.scss";
+import { ThemeController } from "./ThemeController/ThemeController";
 import { Logo } from "../Logo/Logo";
 import { useShoppingCart } from '../../pages/Basket/ShoppingCartContext'
 
@@ -25,7 +25,7 @@ export const Header = () => {
           {cartQuantity}
         </span>
         )}
-      </div>
+      </div>  
     </header>
   );
 };

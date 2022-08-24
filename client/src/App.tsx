@@ -22,6 +22,7 @@ import { ICategory } from "./interfaces/dataInterface";
 import { ShoppingCartProvider } from './pages/Basket/ShoppingCartContext';
 import { ProductCardContainer } from "./components/ProductCardContainer/ProductCardContainer";
 
+
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = React.createContext(Object) as unknown as Context<{
   theme: string;
@@ -34,7 +35,7 @@ export const appContext = React.createContext(Object) as unknown as Context<{
 document.body.style.backgroundColor = localStorage.getItem("theme")
   ? localStorage.getItem("theme") === "light"
     ? ""
-    : "#464545"
+    : "rgb(56 54 68)"
   : "";
 
 export const App = () => {
@@ -49,12 +50,11 @@ export const App = () => {
   return (
     <ShoppingCartProvider>
       <Router>
-      <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
-        <Routes>
-          <Route path={"/"} element={<Content />}>
-            <Route path="main" element={<Store />} />
-            <Route path={"/"} element={<Navigate to={"main"} />} />
-            <Route path={"main"} element={<Main />} />
+        <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
+          <Routes>
+            <Route path={"/"} element={<Content />}>
+              <Route path={"/"} element={<Navigate to={"main"} />} />
+              <Route path={"main"} element={<Store />} />
               {data.map((item: ICategory) => {
                 console.log(item);
                 return (
@@ -84,29 +84,29 @@ export const App = () => {
                           </>
                         );
                       }
-                    return (
-                      <Route
-                        key={subcategory.name}
-                        path={subcategory.name}
-                        element={
-                          <ProductCardContainer
-                            products={subcategory.products}
-                          />
-                        }
-                      />
-                    );
-                  })}
-                </Route>
-              );
-            })}
+                      return (
+                        <Route
+                          key={subcategory.name}
+                          path={subcategory.name}
+                          element={
+                            <ProductCardContainer
+                              products={subcategory.products}
+                            />
+                          }
+                        />
+                      );
+                    })}
+                  </Route>
+                );
+              })}
+              <Route path={"*"} element={<ErrorPage />} />
+            </Route>
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/register"} element={<Register />} />
             <Route path={"*"} element={<ErrorPage />} />
-          </Route>
-          <Route path={"/login"} element={<Login />} />
-          <Route path={"/register"} element={<Register />} />
-          <Route path={"*"} element={<ErrorPage />} />
-        </Routes>
-      </appContext.Provider>
-    </Router>
+          </Routes>
+        </appContext.Provider>
+      </Router>
     </ShoppingCartProvider>
   );
 };

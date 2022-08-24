@@ -7,18 +7,21 @@
 .subcategories {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: max(150px, 20%);
   align-items: center;
   margin: 20px auto;
   & > a {
     margin: 10px auto;
   }
 }
+// <<<<<<< HEAD
 
-.cards-container {
-  display: grid;
-  width: 80%;
-  grid-auto-columns: min-content;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 20px auto;
-}
+// .cards-container {
+//   display: grid;
+//   width: 80%;
+//   grid-auto-columns: min-content;
+//   grid-template-columns: repeat(3, 1fr);
+//   margin: 20px auto;
+// }
+// =======
+// >>>>>>> 43593f66408db0213e5e77b7b83d61a4eb55e033
