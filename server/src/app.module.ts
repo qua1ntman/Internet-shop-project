@@ -11,10 +11,23 @@ import { ProductController } from './product/product.controller';
 import { UserService } from './user/user.service';
 import { CategoryService } from './category/category.service';
 import { ProductService } from './product/product.service';
+import { SubcategoryService } from './subcategory/subcategory.service';
+import { SubcategoryController } from './subcategory/subcategory.controller';
+import { Subcategory } from './subcategory/subcategory.entity';
 
-const entities = [User, Category, Product];
-const controllers = [UserController, CategoryController, ProductController];
-const providers = [UserService, CategoryService, ProductService];
+const entities = [User, Category, Product, Subcategory];
+const controllers = [
+  UserController,
+  CategoryController,
+  ProductController,
+  SubcategoryController,
+];
+const providers = [
+  UserService,
+  CategoryService,
+  ProductService,
+  SubcategoryService,
+];
 
 @Module({
   imports: [
@@ -22,7 +35,7 @@ const providers = [UserService, CategoryService, ProductService];
       envFilePath: '.env',
     }),
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
