@@ -38,8 +38,8 @@ export class ProductController {
   @Get(':id')
   async id(@Param('id') id: number) {
     if (isNaN(id)) throw new NotFoundException();
-    const category = await this.service.findById(id);
-    if (category) return category;
+    const product = await this.service.findById(id);
+    if (product) return product;
     throw new NotFoundException();
   }
 
@@ -47,8 +47,8 @@ export class ProductController {
   @UseGuards(GuardAdmin)
   async idDelete(@Param('id') id: number) {
     if (isNaN(id)) throw new NotFoundException();
-    const category = await this.service.deleteById(id);
-    if (category) return category;
+    const product = await this.service.deleteById(id);
+    if (product) return product;
     throw new NotFoundException();
   }
 }

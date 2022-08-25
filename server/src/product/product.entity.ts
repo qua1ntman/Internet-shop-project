@@ -8,8 +8,8 @@ import {
   IsString,
   IsUrl,
 } from 'class-validator';
-import { Category } from '../category/category.entity';
 import { JoinTable } from 'typeorm';
+import { Subcategory } from '../subcategory/subcategory.entity';
 
 @Entity()
 export class Product {
@@ -31,18 +31,18 @@ export class Product {
   @IsOptional()
   thumbnail: string;
 
-  @Column('simple-array', { default: [] })
+  @Column('simple-array', { default: {} })
   @IsUrl(undefined, { each: true })
   @IsOptional()
   images: string[];
 
   @IsEmpty()
-  @ManyToMany(() => Category)
+  @ManyToMany(() => Subcategory)
   @JoinTable()
-  categories: Category[];
+  subcategories: Subcategory[];
 
   @IsInt({ each: true })
-  categoryIds: number[];
+  subcategoryIds: number[];
 
   @IsBoolean()
   @Column({ default: false })

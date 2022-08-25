@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { Repository } from 'typeorm';
-import { CategoryService } from '../category/category.service';
 import { Category } from '../category/category.entity';
+import { SubcategoryService } from '../subcategory/subcategory.service';
 
 @Injectable()
 export class ProductService {
@@ -11,29 +11,29 @@ export class ProductService {
     @InjectRepository(Product)
     private repo: Repository<Product>,
 
-    private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService,
   ) {}
 
   findAll() {
     return this.repo.find({
       relations: {
-        categories: true,
+        subcategories: true,
       },
     });
   }
 
   async add(product: Product) {
-    product.categoryIds = Array.from(new Set(product.categoryIds));
-    product.categories = await Promise.all(
-      product.categoryIds.map((id) => {
-        return this.categoryService.findById(id);
+    product.subcategoryIds = Array.from(new Set(product.subcategoryIds));
+    product.subcategories = await Promise.all(
+      product.subcategoryIds.map((id) => {
+        return this.subcategoryService.findById(id);
       }),
     );
 
     const invalidIds = [];
-    product.categories.forEach((category, index) => {
+    product.subcategories.forEach((category, index) => {
       if (category instanceof Category) return;
-      invalidIds.push(product.categoryIds[index]);
+      invalidIds.push(product.subcategoryIds[index]);
     });
 
     if (invalidIds.length) return invalidIds;
