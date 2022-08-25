@@ -1,15 +1,14 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import {
   IsBoolean,
   IsEmpty,
   IsInt,
+  IsJSON,
   IsNumber,
   IsOptional,
   IsString,
   IsUrl,
 } from 'class-validator';
-import { JoinTable } from 'typeorm';
-import { Subcategory } from '../subcategory/subcategory.entity';
 
 @Entity()
 export class Product {
@@ -36,11 +35,6 @@ export class Product {
   @IsOptional()
   images: string[];
 
-  @IsEmpty()
-  @ManyToMany(() => Subcategory)
-  @JoinTable()
-  subcategories: Subcategory[];
-
   @IsInt({ each: true })
   subcategoryIds: number[];
 
@@ -53,7 +47,32 @@ export class Product {
   @Column()
   color: string;
 
+  @IsOptional()
+  @IsJSON()
+  @Column('simple-json', { default: {} })
+  colors: object;
+
   @IsNumber({ maxDecimalPlaces: 2 })
   @Column('float')
   price: number;
+
+  @Column('simple-array', { default: {} })
+  @IsOptional()
+  @IsString({ each: true })
+  material: string[];
+
+  @Column({ nullable: true })
+  @IsOptional()
+  @IsString()
+  collection: string;
+
+  @Column({ nullable: true })
+  @IsOptional()
+  @IsString()
+  kind: string;
+
+  @Column({ nullable: true })
+  @IsOptional()
+  @IsNumber({ maxDecimalPlaces: 2 })
+  discount: number;
 }

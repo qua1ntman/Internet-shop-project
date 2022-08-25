@@ -11,7 +11,11 @@ export class CategoryService {
   ) {}
 
   findAll() {
-    return this.repo.find();
+    return this.repo.find({
+      relations: {
+        subcategories: true,
+      },
+    });
   }
 
   add(category: Category) {

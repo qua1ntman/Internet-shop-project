@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { Repository } from 'typeorm';
-import { Category } from '../category/category.entity';
 import { SubcategoryService } from '../subcategory/subcategory.service';
 
 @Injectable()
@@ -15,29 +14,11 @@ export class ProductService {
   ) {}
 
   findAll() {
-    return this.repo.find({
-      relations: {
-        subcategories: true,
-      },
-    });
+    return this.repo.find();
   }
 
   async add(product: Product) {
-    product.subcategoryIds = Array.from(new Set(product.subcategoryIds));
-    product.subcategories = await Promise.all(
-      product.subcategoryIds.map((id) => {
-        return this.subcategoryService.findById(id);
-      }),
-    );
-
-    const invalidIds = [];
-    product.subcategories.forEach((category, index) => {
-      if (category instanceof Category) return;
-      invalidIds.push(product.subcategoryIds[index]);
-    });
-
-    if (invalidIds.length) return invalidIds;
-    return await this.repo.save(product);
+    // TODO
   }
 
   findById(id: number) {

@@ -1,5 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IsEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import { Subcategory } from '../subcategory/subcategory.entity';
+import { JoinColumn } from 'typeorm';
 
 @Entity()
 export class Category {
@@ -20,4 +29,9 @@ export class Category {
   @IsUrl()
   @IsOptional()
   thumbnail: string;
+
+  @IsEmpty()
+  @ManyToMany(() => Subcategory)
+  @JoinTable()
+  subcategories: Subcategory[];
 }
