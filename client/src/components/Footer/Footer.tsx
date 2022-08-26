@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import DOMPurify from "dompurify";
 import RSLogo from "../../assets/svg/rs_school_js.svg";
 import "./Footer.scss";
+import { appContext } from "../../App";
 
 export const Footer = () => {
+
+  const { color } = useContext(appContext) as {
+    color: string;
+  };
+
   return (
     <footer>
       <a
@@ -19,6 +25,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
+          style={{ color }} 
         >
           Mikhail
         </a>
@@ -27,6 +34,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
+          style={{ color }} 
         >
           Olga
         </a>
@@ -35,6 +43,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
+          style={{ color }} 
         >
           Iskak
         </a>
