@@ -1,5 +1,3 @@
-import { TFormState } from "../types/defaultObjType";
-
 export interface ICategory {
   name: string;
   subCategories: ISubCategory[];
@@ -23,5 +21,6 @@ export interface IProduct {
   size: string[] | number[];
   image: string[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  colors?: TFormState[] | any;
+  colors?: any;
+  discount?: number
 }
