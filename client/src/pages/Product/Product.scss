@@ -1,0 +1,32 @@
+.product-page-container {
+  display: flex;
+  width: 100%; 
+}
+
+.product-images-container {
+  width: calc(100% / 9 * 5);
+  display: flex;
+}
+
+.product-slider {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% / 9);
+}
+
+.product-info-container {
+  width: calc(100% / 9 * 4);
+}
+
+.product-description {
+  display: flex;
+  // flex-direction: column;
+  gap: 30px;
+
+}
+
+.product-description-name, 
+.product-description-value {
+  display: flex;
+  flex-direction: column;
+} 
