@@ -9,10 +9,7 @@ import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 
 export const Login = () => {
-  const { color, backgroundColor } = useContext(appContext) as {
-    color: string;
-    backgroundColor: string;
-  };
+  const { color, backgroundColor } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     email: "",

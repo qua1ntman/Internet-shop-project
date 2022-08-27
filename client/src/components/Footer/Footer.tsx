@@ -6,9 +6,7 @@ import { appContext } from "../../App";
 
 export const Footer = () => {
 
-  const { color } = useContext(appContext) as {
-    color: string;
-  };
+  const { color } = useContext(appContext);
 
   return (
     <footer>

@@ -14,10 +14,7 @@ export const ProductCard = ({ item }: { item: IProduct }) => {
   const { 
     color, 
     setChosenProduct 
-  } = useContext(appContext) as { 
-    color: string, 
-    setChosenProduct: Dispatch<SetStateAction<IProduct>>
-  };
+  } = useContext(appContext);
   
   const { setClickedSubcategory, setClickedCategory } = useCategory()
 

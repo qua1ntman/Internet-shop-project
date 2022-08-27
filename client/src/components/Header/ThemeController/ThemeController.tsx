@@ -3,11 +3,7 @@ import { appContext } from "../../../App";
 import "./ThemeController.scss";
 
 export const ThemeController = () => {
-  const { theme, setTheme, color } = useContext(appContext) as {
-    theme: string;
-    setTheme: React.Dispatch<SetStateAction<string>>;
-    color: string
-  };
+  const { theme, setTheme, color } = useContext(appContext);
 
   //Хендлер для смены темы и обновления значения 'theme' в localStorage
   const themeHandler = () => {

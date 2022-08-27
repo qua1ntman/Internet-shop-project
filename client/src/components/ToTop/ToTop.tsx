@@ -4,9 +4,7 @@ import { appContext } from "../../App";
 import "./ToTop.scss";
 
 export const ToTop = () => {
-  const { color } = useContext(appContext) as {
-    color: string;
-  };
+  const { color } = useContext(appContext);
 
   const scrollToTop = () => {
     window.scrollTo({

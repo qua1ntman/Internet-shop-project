@@ -11,9 +11,7 @@ import { appContext } from "../../App";
 export const Header = () => {
   const { openCart, cartQuantity } = useShoppingCart();
   
-  const { color } = useContext(appContext) as {
-    color: string;
-  };
+  const { color } = useContext(appContext);
 
   return (
     <header className="main-header">

@@ -8,10 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 
 export const Register = () => {
-  const { color, backgroundColor } = useContext(appContext) as {
-    color: string;
-    backgroundColor: string;
-  };
+  const { color, backgroundColor } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     firstName: "",

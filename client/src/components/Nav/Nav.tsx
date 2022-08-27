@@ -6,10 +6,7 @@ import { useCategory } from './../../contexts/CategoryContext';
 import { data } from "../../@types/data";
 
 export const Nav = () => {
-  const { color, backgroundColor } = useContext(appContext) as {
-    color: string;
-    backgroundColor: string;
-  };
+  const { color, backgroundColor } = useContext(appContext);
 
   const { clickedCategory, setClickedCategory } = useCategory()
 

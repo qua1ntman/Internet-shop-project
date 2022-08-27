@@ -8,7 +8,7 @@ import { useCategory } from "../../contexts/CategoryContext";
 
 export const Category = ({ categoryData }: { categoryData: ICategory }) => {
 
-  const { color } = useContext(appContext) as { color: string };
+  const { color } = useContext(appContext);
 
   const { 
     clickedSubcategory, 
@@ -18,6 +18,7 @@ export const Category = ({ categoryData }: { categoryData: ICategory }) => {
 
   useEffect(() => 
     setClickedSubcategory(categoryData.subCategories[0].name), 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [clickedCategory]
   )
   

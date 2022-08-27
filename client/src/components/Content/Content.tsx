@@ -8,10 +8,8 @@ import "./Content.scss";
 import { ToTop } from "../ToTop/ToTop";
 
 export const Content = () => {
-  
-  const { backgroundColor } = useContext(appContext) as {
-    backgroundColor: string;
-  };
+
+  const { backgroundColor } = useContext(appContext);
 
   return (
     <>
