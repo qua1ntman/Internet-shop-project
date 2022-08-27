@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.scss";
 import { appContext } from "../../App";
+import { useCategory } from './../../contexts/CategoryContext';
 import { data } from "../../@types/data";
 
 export const Nav = () => {
@@ -10,7 +11,7 @@ export const Nav = () => {
     backgroundColor: string;
   };
 
-  const [clickedCategory, setClickedCategory] = useState<string>(data[0].name);
+  const { clickedCategory, setClickedCategory } = useCategory()
 
   return (
     <nav className="main-nav" style={{ backgroundColor }}>
