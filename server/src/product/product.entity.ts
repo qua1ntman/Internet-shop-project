@@ -18,7 +18,7 @@ export class Product {
 
   @Column()
   @IsString()
-  title: string;
+  brand: string;
 
   @Column({ nullable: true })
   @IsString()
@@ -71,7 +71,7 @@ export class Product {
   @IsString()
   kind: string;
 
-  @Column({ nullable: true })
+  @Column('float', { nullable: true })
   @IsOptional()
   @IsNumber({ maxDecimalPlaces: 2 })
   discount: number;
