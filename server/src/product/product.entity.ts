@@ -75,4 +75,9 @@ export class Product {
   @IsOptional()
   @IsNumber({ maxDecimalPlaces: 2 })
   discount: number;
+
+  @Column('simple-array', { default: '' })
+  @IsOptional()
+  @IsString({ each: true })
+  size: string[];
 }
