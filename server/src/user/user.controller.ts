@@ -3,14 +3,19 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   NotFoundException,
   Param,
   Post,
+  Res,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import { User, UserLogin } from './user.entity';
 import { validateSync } from 'class-validator';
 import { UserService } from './user.service';
+import { GuardUser } from '../guard/guard.user';
+import { Response } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -30,6 +35,12 @@ export class UserController {
     const token = await this.service.login(user as User);
     if (token) return token;
     throw new UnauthorizedException('Incorrect email or password');
+  }
+
+  @Get('validate')
+  @UseGuards(GuardUser)
+  validateToken(@Res() res: Response) {
+    res.status(HttpStatus.OK).send();
   }
 
   @Get()
