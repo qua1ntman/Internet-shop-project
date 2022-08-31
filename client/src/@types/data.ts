@@ -3170,7 +3170,7 @@ export const data: ICategory[] = [
     ],
   },
   {
-    name: "child",
+    name: "children",
     subCategories: [
       {
         name: "switshirts",
