@@ -5,6 +5,7 @@ import { InputField } from "../../components/InputFIeld/InputField";
 import { Logo } from "../../components/Logo/Logo";
 import { changeOpasity } from "../../helpers/changeOpasity";
 import { isValidEmail } from "../../helpers/validators";
+import { postLogin } from "../../queries/authQueries";
 import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 
@@ -30,10 +31,16 @@ export const Login = () => {
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     console.log(formData);
+    postLogin(formData)
+      .then((res) => {
+        console.log(res.data)
+        localStorage.setItem('token', res.data.token)
+      })
     setFormData({
       email: "",
       password: "",
     });
+
     navigate("/");
   };
 
