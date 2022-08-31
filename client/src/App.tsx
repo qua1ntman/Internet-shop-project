@@ -15,6 +15,7 @@ import "./App.scss";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
+import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
   themeTextChanger,
@@ -25,6 +26,9 @@ import { ShoppingCartProvider } from "./pages/Basket/ShoppingCartContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { getCategories } from "./queries/categoryQueries";
 import { Loader } from "./components/Loader/Loader";
+import { Store } from './pages/Store/Store';
+import { data } from "./@types/data";
+
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const appContext = createContext(Object) as unknown as Context<{
@@ -44,6 +48,7 @@ if (localStorage.getItem("theme")
 }
 
 export const App = () => {
+
   const [chosenProduct, setChosenProduct] = useState<IProductData>();
 
   // Хук для изменения темы

@@ -9,6 +9,7 @@ import { ICategoryData } from "../../interfaces/dataInterface";
 export const Nav = () => {
   const { color, backgroundColor, categories } = useContext(appContext);
 
+
   const { 
     clickedCategory, 
     setClickedCategory, 
@@ -44,6 +45,7 @@ export const Nav = () => {
               style={{ color }}
               to={clickedCategory?.title === item.title ? "#" : item.title.toLowerCase()}
               onClick={() => handleCategory(item)}
+
             >
               {item.title}
             </Link>

@@ -20,8 +20,9 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
   const quantity = getItemQuantity(id);
 
   return (
+    
     <div className="item-container">
-      {/* <img src={imgUrl} alt={''}>Image</img> */}
+      <img src={imgUrl} alt={''} style={{ width: "125px", height: "75px", objectFit: "cover" }}></img>
       <div className="item-info">
         <p className="item-title">{name}</p>
         <p className="item-price">{formatCurrency(price)}</p>
@@ -60,3 +61,4 @@ export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
     </div>
   );
 }
+
