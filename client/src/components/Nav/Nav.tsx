@@ -16,6 +16,11 @@ export const Nav = () => {
     <nav className="main-nav" style={{ backgroundColor }}>
       <ul>
         <li>
+          <Link to='/about'>
+            About
+          </Link>
+        </li>
+        <li>
           <Link 
             style={{ color }}
             to='/main'
