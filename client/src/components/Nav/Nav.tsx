@@ -2,28 +2,50 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.scss";
 import { appContext } from "../../App";
-import { useCategory } from './../../contexts/CategoryContext';
-import { data } from "../../@types/data";
+import { useCategory } from "./../../contexts/CategoryContext";
+import { getSubcategory } from "../../queries/categoryQueries";
+import { ICategoryData } from "../../interfaces/dataInterface";
 
 export const Nav = () => {
-  const { color, backgroundColor } = useContext(appContext);
+  const { color, backgroundColor, categories } = useContext(appContext);
 
-  const { clickedCategory, setClickedCategory } = useCategory()
+  const { 
+    clickedCategory, 
+    setClickedCategory, 
+    setClickedSubcategory,
+  } = useCategory();
+
+  const handleCategory = (
+    item: ICategoryData
+  ) => {
+    setClickedCategory(item)
+    console.log(clickedCategory);
+    // e.preventDefault()
+    if (!item.subcategories[0]) return
+    getSubcategory(item.subcategories[0].id)
+      .then((res) => {
+        console.log('chose ', res.data.title);
+        setClickedSubcategory(res.data)
+      })
+      .catch((err: Error) => {
+        console.log(err.message)
+      })
+  }
 
   return (
     <nav className="main-nav" style={{ backgroundColor }}>
       <ul>
-        {data.map((item) => (
+        {categories!.map((item) => (
           <li
-            key={item.name}
-            className={clickedCategory === item.name ? "link-active" : ""}
+            key={item.title}
+            className={clickedCategory?.title === item.title ? "link-active" : ""}
           >
             <Link
               style={{ color }}
-              to={item.name === clickedCategory ? "#" : item.name}
-              onClick={() => setClickedCategory(item.name)}
+              to={clickedCategory?.title === item.title ? "#" : item.title.toLowerCase()}
+              onClick={() => handleCategory(item)}
             >
-              {`${item.name[0].toUpperCase()}${item.name.slice(1)}`}
+              {item.title}
             </Link>
           </li>
         ))}
