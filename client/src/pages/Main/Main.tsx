@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { appContext } from "../../App";
 
 export const Main = () => {
-  const { color } = useContext(appContext) as { color: string };
+  const { color } = useContext(appContext);
 
   return (
     <div className="main-page">

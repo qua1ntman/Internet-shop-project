@@ -1,5 +1,13 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { IsEmpty, IsInt, IsOptional, IsString, IsUrl } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmpty,
+  IsInt,
+  IsNumber,
+  IsOptional,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 import { Category } from '../category/category.entity';
 import { JoinTable } from 'typeorm';
 
@@ -35,4 +43,17 @@ export class Product {
 
   @IsInt({ each: true })
   categoryIds: number[];
+
+  @IsBoolean()
+  @Column({ default: false })
+  @IsOptional()
+  new: boolean;
+
+  @IsString()
+  @Column()
+  color: string;
+
+  @IsNumber({ maxDecimalPlaces: 2 })
+  @Column('float')
+  price: number;
 }

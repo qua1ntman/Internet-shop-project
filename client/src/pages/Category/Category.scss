@@ -1,7 +1,10 @@
 .category-data-container {
   display: flex;
   width: 100%;
-  padding: 20px auto;
+
+  @media screen and (max-width: 350px) {
+    flex-direction: column;
+  }
 }
 
 .subcategories {

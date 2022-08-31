@@ -10,5 +10,5 @@ export const About = () => {
         <img src={LogoImage} alt="logo" />
       </section>
     </div>
-  )
-}
+  );
+};

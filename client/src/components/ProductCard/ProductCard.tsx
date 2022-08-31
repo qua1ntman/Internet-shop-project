@@ -1,34 +1,52 @@
 import React, { useContext } from "react";
 import { appContext } from "../../App";
-import { IProduct } from "../../interfaces/dataInterface";
+import {  IProductData } from "../../interfaces/dataInterface";
 import "./ProductCard.scss";
-import { changeOpasity } from './../../helpers/changeOpasity';
+import { changeOpasity } from "./../../helpers/changeOpasity";
+import { formatCurrency } from "./../../helpers/formatCurrency";
+import { useNavigate } from "react-router-dom";
+import { useCategory } from "../../contexts/CategoryContext";
 
-export const ProductCard = ({ item }: { item: IProduct }) => {
+export const ProductCard = ({ item }: { item: IProductData }) => {
+  const navigate = useNavigate();
 
+  const { color, setChosenProduct } = useContext(appContext);
 
-  const { color } = useContext(appContext) as { color: string };
+  const { 
+    // setClickedCategory, 
+    clickedSubcategory
+  } = useCategory();
+
+  const handleProductPage = () => {
+    // setClickedCategory(null);
+    setChosenProduct(item);
+    navigate({
+      pathname: `/product/${item.id}`,
+    });
+  };
+
+  console.log(item)
 
   return (
-    <div 
-      className="product-card"
-    >
-      <img className="card-image" src={item.image[0]} alt={item.title} />
-      <span className="card-status" style={{ color: changeOpasity(color, .7) }}>
-        {item.status}
+    <div className="product-card" onClick={handleProductPage}>
+      <img className="card-image" src={item.images[0]} alt={clickedSubcategory!.title} />
+      <span
+        className="card-status"
+        style={{ color: changeOpasity(color, 0.7) }}
+      >
+        {item.new ? 'New' : 'Sale'}
       </span>
       <span className="card-brand" style={{ color }}>
         {item.brand.toUpperCase()}
       </span>
-      <span className="card-type" style={{ color: changeOpasity(color, .5) }}>
-        {
-          item.title.toUpperCase()
-        } | {
-          Array.isArray(item.kind) ? item.kind.join(', ').toLocaleUpperCase() : item.kind.toUpperCase()
-        }
+      <span className="card-type" style={{ color: changeOpasity(color, 0.5) }}>
+        {clickedSubcategory!.title.toUpperCase()} |{" "}
+        {Array.isArray(item.kind)
+          ? item.kind.join(", ").toLocaleUpperCase()
+          : item.kind.toUpperCase()}
       </span>
       <span className="card-price" style={{ color }}>
-        {item.price} $
+        {formatCurrency(item.price)}
       </span>
     </div>
   );

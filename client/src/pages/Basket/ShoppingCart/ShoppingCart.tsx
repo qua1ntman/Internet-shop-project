@@ -1,17 +1,17 @@
-import { useShoppingCart } from "../ShoppingCartContext"
-import { formatCurrency } from "../formatCurrency"
-import { CartItem } from "../CartItem"
-import storeItems from "../items.json"
-import React from "react"
-import { Drawer } from "@mui/material"
-import './ShoppingCart.scss'
+import { useShoppingCart } from "../ShoppingCartContext";
+import { CartItem } from "../CartItem";
+import storeItems from "../items.json";
+import React from "react";
+import { Drawer } from "@mui/material";
+import "./ShoppingCart.scss";
+import { formatCurrency } from "../../../helpers/formatCurrency";
 
 type ShoppingCartProps = {
-  isOpen: boolean
-}
+  isOpen: boolean;
+};
 
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
-  const { closeCart, cartItems } = useShoppingCart()
+  const { closeCart, cartItems } = useShoppingCart();
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>
       <h2 className="basket-header"> Your shopping list</h2>
@@ -46,5 +46,5 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
       </table>
       <button className="button-checkout">Checkout</button>
     </Drawer>
-  )
+  );
 }

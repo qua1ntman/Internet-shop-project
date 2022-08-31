@@ -1,10 +1,9 @@
 .main-header {
-  height: 70px;
+  height: max(60px, 10vh);
   display: flex;
   justify-content: space-around;
   width: 100%;
   align-items: center;
-  background-color: rgb(70 75 120);
   border-bottom-left-radius: 35px;
   border-bottom-right-radius: 35px;
 }
@@ -14,6 +13,9 @@
 .cart {
   color: white;
   font-size: 20px;
+  @media screen and (max-width: 1200px) {
+    font-size: 15px;
+  }
 }
 
 .cart {

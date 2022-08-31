@@ -1,16 +1,20 @@
 import React from "react";
 import { ProductCard } from "../ProductCard/ProductCard";
-import { IProduct } from "./../../interfaces/dataInterface";
-import './ProductCardContainer.scss'
+import "./ProductCardContainer.scss";
+import { useCategory } from './../../contexts/CategoryContext';
 
-export const ProductCardContainer = ({
-  products,
-}: {
-  products: IProduct[];
-}) => {
-  return (    
+export const ProductCardContainer = () => {
+
+  const { clickedSubcategory } = useCategory()
+
+  console.log('ProductCardContainer', clickedSubcategory);
+  if (!clickedSubcategory || clickedSubcategory.products?.length === 0) 
+    return <p>No products</p>
+
+
+  return (
     <div className="cards-container">
-      {products.map((item) => (
+      {clickedSubcategory.products?.map((item) => (
         <ProductCard key={item.id} item={item} />
       ))}
     </div>

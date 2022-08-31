@@ -3,6 +3,8 @@
 * {
   font-family: "Work Sans", sans-serif;
   font-weight: 300;
+  transition: color 0.2s ease-in-out;
+  transition: background-color 0.1s ease-in-out;
 }
 
 a {
@@ -10,7 +12,7 @@ a {
   font-size: 20px;
 }
 
-h1, 
+h1,
 h2 {
   text-align: center;
 }

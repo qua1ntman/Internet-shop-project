@@ -6,12 +6,10 @@ import { isValidEmail, isValidName } from "../../helpers/validators";
 import { TFormState } from "../../types/defaultObjType";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
+import { postRegister } from './../../queries/authQueries';
 
 export const Register = () => {
-  const { color, backgroundColor } = useContext(appContext) as {
-    color: string;
-    backgroundColor: string;
-  };
+  const { color, backgroundColor } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     firstName: "",
@@ -61,6 +59,13 @@ export const Register = () => {
       phone: formData.phone,
       password: formData.password,
     };
+
+    postRegister(toServerData)
+      .then((res) => {
+        console.log(res.data)
+        localStorage.setItem('token', res.data.token)
+      })
+
     console.log(toServerData);
     setFormData({
       firstName: "",
@@ -73,7 +78,7 @@ export const Register = () => {
     navigate("/");
   };
 
-  console.log(isFormValid);
+  // console.log(isFormValid);
 
   return (
     <div className="register-container">

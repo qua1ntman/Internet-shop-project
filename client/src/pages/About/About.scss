@@ -5,11 +5,11 @@
   gap: 20px;
   height: 100%;
   width: 100%;
-  & > h1, p {
+  & > h1,
+  p {
     max-width: 30%;
   }
 }
-
 .about-welcome {
   min-width: 100%;
   max-width: 100%;
