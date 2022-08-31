@@ -1,26 +1,26 @@
 [
   {
-    "id": 1,
+    "id": 1000,
     "name": "Book",
     "price": 10.99,
-    "imgUrl": "./assets/images/book.jpg"
+    "imgUrl": "https://st2.depositphotos.com/1105977/5461/i/600/depositphotos_54615585-stock-photo-old-books-on-wooden-table.jpg"
   },
   {
-    "id": 2,
+    "id": 1001,
     "name": "Computer",
     "price": 1199,
-    "imgUrl": "/imgs/computer.jpg"
+    "imgUrl": "https://www.ixbt.com/img/x780x600/r30/00/02/18/73/AppleiMacgets2xmoreperformance03192019.jpg"
   },
   {
-    "id": 3,
+    "id": 1002,
     "name": "Banana",
     "price": 1.05,
-    "imgUrl": "../src/assets/images/banana.jpg"
+    "imgUrl": "https://www.gastronom.ru/binfiles/images/20151029/bddcbbce.jpg"
   },
   {
-    "id": 4,
+    "id": 1003,
     "name": "Car",
     "price": 14000,
-    "imgUrl": "/imgs/car.jpg"
+    "imgUrl": "https://dailystorm.ru/media/images/2020/09/29/843a1336-4b8d-412c-a97d-d1369d440730.jpg"
   }
 ]
