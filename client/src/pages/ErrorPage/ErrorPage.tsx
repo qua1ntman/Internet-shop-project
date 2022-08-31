@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { appContext } from "../../App";
 
 export const ErrorPage = () => {
-  
   const { color } = useContext(appContext);
 
   return (

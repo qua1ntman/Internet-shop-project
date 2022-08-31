@@ -5,7 +5,6 @@ import "./Footer.scss";
 import { appContext } from "../../App";
 
 export const Footer = () => {
-
   const { color } = useContext(appContext);
 
   return (
@@ -23,7 +22,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
-          style={{ color }} 
+          style={{ color }}
         >
           Mikhail
         </a>
@@ -32,7 +31,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
-          style={{ color }} 
+          style={{ color }}
         >
           Olga
         </a>
@@ -41,7 +40,7 @@ export const Footer = () => {
           className="dev"
           rel="noreferrer"
           target={"_blank"}
-          style={{ color }} 
+          style={{ color }}
         >
           Iskak
         </a>

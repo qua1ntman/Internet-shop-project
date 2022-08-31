@@ -10,7 +10,7 @@ import { appContext } from "../../App";
 
 export const Header = () => {
   const { openCart, cartQuantity } = useShoppingCart();
-  
+
   const { color } = useContext(appContext);
 
   return (
@@ -20,18 +20,10 @@ export const Header = () => {
       <Search />
       <ThemeController />
       <div className="lang"></div>
-      <Link 
-        style={{ color }} 
-        className="login" 
-        to="/login"
-      >
+      <Link style={{ color }} className="login" to="/login">
         {localStorage.getItem("token") ? "Exit" : "Log in"}
       </Link>
-      <div 
-        className="cart" 
-        onClick={openCart}
-        style={{ color }}
-      >
+      <div className="cart" onClick={openCart} style={{ color }}>
         Cart
         {cartQuantity > 0 && (
           <span className="badge-circle">{cartQuantity}</span>
