@@ -39,10 +39,9 @@ export class UserService {
 
   private generateToken(user: User) {
     if (!user) return null;
+
     return {
-      token: this.jwtService.sign(<JwtPayload>{
-        role: user.role,
-      }),
+      token: this.jwtService.sign(<JwtPayload>{ ...user, password: undefined }),
     };
   }
 

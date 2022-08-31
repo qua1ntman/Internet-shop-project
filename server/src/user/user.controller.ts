@@ -8,7 +8,7 @@ import {
   Post,
   UnauthorizedException,
 } from '@nestjs/common';
-import { User } from './user.entity';
+import { User, UserLogin } from './user.entity';
 import { validateSync } from 'class-validator';
 import { UserService } from './user.service';
 
@@ -25,8 +25,9 @@ export class UserController {
   }
 
   @Post('login')
-  async login(@Body() user: User) {
-    const token = await this.service.login(user);
+  async login(@Body() user: UserLogin) {
+    validateSync(user);
+    const token = await this.service.login(user as User);
     if (token) return token;
     throw new UnauthorizedException('Incorrect email or password');
   }

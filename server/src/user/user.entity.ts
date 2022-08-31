@@ -32,3 +32,11 @@ export class User {
   @IsEmpty()
   role: Role;
 }
+
+export class UserLogin {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  password: string;
+}
