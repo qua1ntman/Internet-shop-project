@@ -1,9 +1,12 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, DefinePlugin, ProvidePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import dotenv from 'dotenv'
+
+dotenv.config();
 
 const config: Configuration = {
   mode: 'production',
@@ -58,6 +61,9 @@ const config: Configuration = {
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       favicon: './src/favicon.ico'
