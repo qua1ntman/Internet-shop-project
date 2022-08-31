@@ -1,58 +1,95 @@
-import React, { useState } from 'react'
-import { IProduct } from './../../interfaces/dataInterface';
-import './Product.scss'
+import React, { useState } from "react";
+import { IProductData } from "./../../interfaces/dataInterface";
+import "./Product.scss";
+import { useContext } from "react";
+import { appContext } from "./../../App";
+import { useCategory } from './../../contexts/CategoryContext';
 
-export const Product = ({ product }: {product: IProduct | undefined}) => {
+export const Product = ({ product }: { product: IProductData | undefined }) => {
 
-  const [bigImg, setBigImg] = useState(product?.image[0])
+  const [bigImg, setBigImg] = useState(product!.images[0]);
 
-  console.dir(product);
+  const { clickedSubcategory } = useCategory()
+
+  const { theme, color } = useContext(appContext);
+
+  // console.dir(product);
+
   if (product) {
     return (
-      <div className='product-page-container'>
-        <div className='product-images-container'>
+      <div className="product-page-container">
+        <div className="product-images-container">
           <div className="product-slider">
-            {product.image.map((img, i) => {
-              return <img onClick={() => setBigImg(img)} className='slider-img' key={i} src={img} alt={product.title} />
+            {product.images.map((img, i) => {
+              return (
+                <img
+                  onClick={() => setBigImg(img)}
+                  className="slider-img"
+                  key={i}
+                  src={img}
+                  alt={clickedSubcategory!.title}
+                />
+              );
             })}
           </div>
           <div className="big-image">
-            <img src={bigImg} alt={product.title} />
+            <img src={bigImg} alt={clickedSubcategory!.title} />
           </div>
         </div>
-        <div className='product-info-container'>
+        <div className="product-info-container">
           <div className="product-sizes">
-            <label htmlFor="size">Size: </label>
-            <select name="size" id="size">
-              {product.size.map((item, i) => {
-                if (i === 0) return (
-                  <option key={i} value={item} selected>{item}</option>
-                )
-                return <option key={i} value={item}>{item}</option>
+            <label htmlFor="size" style={{ color }}>
+              Size:{" "}
+            </label>
+            <select name="size" id="size" defaultValue={product.size[0]}>
+              {product.size.map((item: string | number, i: number) => {
+                return (
+                  <option key={i} value={item}>
+                    {item}
+                  </option>
+                );
               })}
             </select>
           </div>
           <div className="product-description">
-            <div className='product-description-name'>
-              <span>Material:</span>
-              <span>Color:</span>
-              <span>Collection:</span>
-              <span>Brands:</span>
-              <span>New:</span>
+            <div className="product-description-name">
+              {["Material:", "Color:", "Collection:", "Brands:", "New:"].map(
+                (x, i) => {
+                  return (
+                    <span style={{ color }} key={i}>
+                      {x}
+                    </span>
+                  );
+                }
+              )}
             </div>
-            <div className='product-description-value'>
-              <span>{product.material.join(', ')}</span>
-              <span>{product.color}</span>
-              <span>{product.collection}</span>
-              <span>{product.brand}</span>
-              <span>{product.kind ? 'Yes' : 'No'}</span>
-              </div>
+            <div className="product-description-value">
+              {[
+                Array.isArray(product.material) ? product.material.join(", ") : product.material,
+                product.color,
+                product.collection,
+                product.brand,
+                `${product.kind ? "Yes" : "No"}`,
+              ].map((y, i) => {
+                return (
+                  <span style={{ color }} key={i}>
+                    {y}
+                  </span>
+                );
+              })}
             </div>
+          </div>
+          <button
+            className="default-btn add-to-cart"
+            style={{
+              color: theme === "light" ? "white" : "black",
+              backgroundColor: color,
+            }}
+          >
+            ADD TO CARD
+          </button>
         </div>
       </div>
-    )
-  } else return (
-    <div>No no no</div>
-  )
-  
-}
+    );
+  } else return <div>No no no</div>;
+};
