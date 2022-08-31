@@ -11,7 +11,12 @@ import { appContext } from "../../App";
 export const Header = () => {
   const { openCart, cartQuantity } = useShoppingCart();
 
-  const { color } = useContext(appContext);
+  const { color, token, setToken } = useContext(appContext);
+
+  const handleLogin = () => {
+    localStorage.removeItem('token')
+    setToken('')
+  }
 
   return (
     <header className="main-header">
@@ -20,9 +25,16 @@ export const Header = () => {
       <Search />
       <ThemeController />
       <div className="lang"></div>
-      <Link style={{ color }} className="login" to="/login">
-        {localStorage.getItem("token") ? "Exit" : "Log in"}
-      </Link>
+      {token && 
+        <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
+          Log out
+        </Link> 
+      }
+      {!token && 
+        <Link style={{ color }} className="login" to="/login">
+          Log in
+        </Link> 
+      }
       <div className="cart" onClick={openCart} style={{ color }}>
         Cart
         {cartQuantity > 0 && (
