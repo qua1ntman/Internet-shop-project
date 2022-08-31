@@ -14,25 +14,36 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
   const { closeCart, cartItems } = useShoppingCart()
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>
-      <h2> Your shopping list</h2>
+      <h2 className="basket-header"> Your shopping list</h2>
       <span className="back" onClick={closeCart}>Х</span>
-      <div className="cart-container">
-        <div className="header-cart">
-          <span>Name</span>
-          <span>Price</span>
-          <span>Delete</span>
-      </div>
+      <table className="cart-container">
+        <thead>
+          <tr className="header-cart">
+            <th>Image</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
         {cartItems.map(item => (
           <CartItem key={item.id} {...item} />
         ))}
-        Total{' '}
-        {formatCurrency(
-          cartItems.reduce((total, cartItem) => {
-            const item = storeItems.find(i => i.id === cartItem.id)
-            return total + (item?.price || 0) * cartItem.quantity
-          }, 0)
-        )}
-      </div>
+        <tfoot>
+          <tr>
+            <td>
+              Total{' '}
+                {formatCurrency(
+                cartItems.reduce((total, cartItem) => {
+                  const item = storeItems.find(i => i.id === cartItem.id)
+                  return total + (item?.price || 0) * cartItem.quantity
+                }, 0)
+              )}
+            </td>
+          </tr>
+        </tfoot>
+      </table>
       <button className="button-checkout">Checkout</button>
     </Drawer>
   )
