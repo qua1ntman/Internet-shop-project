@@ -1,22 +1,31 @@
-import React, { createContext, useContext, ReactNode, useState } from "react"
-import { data } from "../@types/data"
+import React, { createContext, useContext, ReactNode, useState } from "react";
+import { ICategoryData, ISubCategoryData } from "../interfaces/dataInterface";
 
-const CategoryContext = createContext({} as {
-  clickedSubcategory: string, 
-  setClickedSubcategory: (value: React.SetStateAction<string>) => void,
-  clickedCategory: string,
-  setClickedCategory: (value: React.SetStateAction<string>) => void
-})
+const CategoryContext = createContext(
+  {} as {
+    clickedSubcategory: ISubCategoryData | null;
+    setClickedSubcategory: 
+      (value: React.SetStateAction<ISubCategoryData | null>) => void;
+    clickedCategory: ICategoryData | null;
+    setClickedCategory: 
+      (value: React.SetStateAction<ICategoryData | null>) => void;
+  }
+);
 
 export const useCategory = () => {
-  return useContext(CategoryContext)
-}
+  return useContext(CategoryContext);
+};
 
-export const CategoryProvider = ({ children }: {children: ReactNode}) => {
-  
-  const [clickedSubcategory, setClickedSubcategory] = useState<string>('');  
-  
-  const [clickedCategory, setClickedCategory] = useState<string>(data[0].name);
+export const CategoryProvider = ({ children }: { children: ReactNode }) => {
+  const [
+    clickedSubcategory, 
+    setClickedSubcategory
+  ] = useState<ISubCategoryData | null>(null);
+
+  const [
+    clickedCategory, 
+    setClickedCategory
+  ] = useState<ICategoryData | null>(null);
 
   return (
     <CategoryContext.Provider
@@ -24,10 +33,10 @@ export const CategoryProvider = ({ children }: {children: ReactNode}) => {
         clickedSubcategory,
         setClickedSubcategory,
         clickedCategory,
-        setClickedCategory
+        setClickedCategory,
       }}
     >
       {children}
     </CategoryContext.Provider>
-  )
-}
+  );
+};
