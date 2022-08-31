@@ -1,12 +1,9 @@
 .logo {
   height: 50px;
   width: auto;
-  & * {
-    height: 100%;
-    width: 100%;
-  }
   & img {
     border-radius: 5px;
+    height: 100%;
   }
   @media screen and (max-width: 1200px) {
     height: 40px;
