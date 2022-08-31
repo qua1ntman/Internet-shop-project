@@ -1,7 +1,7 @@
 import { useShoppingCart } from "./ShoppingCartContext";
 import storeItems from "./items.json";
-import { formatCurrency } from "./formatCurrency";
 import React from "react";
+import { formatCurrency } from "../../helpers/formatCurrency";
 
 type CartItemProps = {
   id: number;
