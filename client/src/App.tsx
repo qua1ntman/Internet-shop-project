@@ -10,7 +10,8 @@ import { Category } from "./pages/Category/Category";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
-import { Main } from "./pages/Main/Main";
+// import { Main } from "./pages/Main/Main";
+import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
   themeTextChanger,
@@ -50,9 +51,14 @@ export const App = () => {
   return (
     <ShoppingCartProvider>
       <Router>
-        <appContext.Provider value={{ theme, setTheme, color, backgroundColor }}>
+        <appContext.Provider value={{ 
+          theme, 
+          setTheme, 
+          color, 
+          backgroundColor }}>
           <Routes>
             <Route path={"/"} element={<Content />}>
+              <Route path="about" element={<About />} />
               <Route path={"/"} element={<Navigate to={"main"} />} />
               <Route path={"main"} element={<Store />} />
               {data.map((item: ICategory) => {
@@ -99,6 +105,7 @@ export const App = () => {
                   </Route>
                 );
               })}
+              
               <Route path={"*"} element={<ErrorPage />} />
             </Route>
             <Route path={"/login"} element={<Login />} />
