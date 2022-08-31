@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 import { ThemeController } from "./ThemeController/ThemeController";
 import { Logo } from "../Logo/Logo";
-
 import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
 import { appContext } from "../../App";
 
@@ -21,7 +20,6 @@ export const Header = () => {
   return (
     <header className="main-header">
       <Logo />
-
       <Search />
       <ThemeController />
       <div className="lang"></div>
