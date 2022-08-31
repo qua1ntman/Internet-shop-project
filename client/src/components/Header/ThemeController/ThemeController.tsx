@@ -1,4 +1,4 @@
-import React, { SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
 import { appContext } from "../../../App";
 import "./ThemeController.scss";
 
@@ -17,17 +17,17 @@ export const ThemeController = () => {
         : theme
     );
     let bodyBack = document.body as HTMLBodyElement;
-    theme === "light" ? bodyBack.classList.add('dark') : bodyBack.classList.remove('dark')
+    theme === "light"
+      ? bodyBack.classList.add("dark")
+      : bodyBack.classList.remove("dark");
     console.log(theme);
-    
   };
 
   return (
     <div className="theme-container">
-      <span 
-        className="theme-title"
-        style={{ color }}
-      >Theme: {theme}</span>
+      <span className="theme-title" style={{ color }}>
+        Theme: {theme}
+      </span>
       <button
         className="theme"
         onClick={themeHandler}
@@ -36,12 +36,14 @@ export const ThemeController = () => {
             ? {
                 left: "1px",
                 right: "",
-                background: "linear-gradient(0.25turn, #6a6a77, #54635e, #4d6853)",
+                background:
+                  "linear-gradient(0.25turn, #6a6a77, #54635e, #4d6853)",
               }
-              : {
+            : {
                 left: "",
                 right: "1px",
-                background: "linear-gradient(0.25turn, #d9d9f3, #ceefe4, #9dd3a8)",
+                background:
+                  "linear-gradient(0.25turn, #d9d9f3, #ceefe4, #9dd3a8)",
               }
         }
       >
@@ -51,12 +53,14 @@ export const ThemeController = () => {
               ? {
                   left: "1px",
                   right: "",
-                  background: "linear-gradient(0.25turn, #d9d9f3, #ceefe4, #9dd3a8)",
+                  background:
+                    "linear-gradient(0.25turn, #d9d9f3, #ceefe4, #9dd3a8)",
                 }
-                : {
+              : {
                   left: "",
                   right: "1px",
-                  background: "linear-gradient(0.25turn, #6a6a77, #54635e, #4d6853)",
+                  background:
+                    "linear-gradient(0.25turn, #6a6a77, #54635e, #4d6853)",
                 }
           }
         ></span>
