@@ -10,7 +10,7 @@ import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 
 export const Login = () => {
-  const { color, backgroundColor } = useContext(appContext);
+  const { color, backgroundColor, setToken } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     email: "",
@@ -34,6 +34,7 @@ export const Login = () => {
     postLogin(formData)
       .then((res) => {
         console.log(res.data)
+        setToken(res.data.token)
         localStorage.setItem('token', res.data.token)
       })
     setFormData({

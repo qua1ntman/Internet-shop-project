@@ -34,6 +34,8 @@ export const appContext = createContext(Object) as unknown as Context<{
   backgroundColor: string;
   setChosenProduct: Dispatch<SetStateAction<IProductData | undefined>>;
   categories: ICategoryData[] | undefined
+  token: string,
+  setToken: Dispatch<SetStateAction<string>>
 }>;
 
 // Установка body backgroundColor в зависимости от темы
@@ -45,6 +47,8 @@ if (localStorage.getItem("theme")
 
 export const App = () => {
   const [chosenProduct, setChosenProduct] = useState<IProductData>();
+
+  const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
 
   // Хук для изменения темы
   const [theme, setTheme] = useState<string>(
@@ -82,13 +86,11 @@ export const App = () => {
               backgroundColor,
               setChosenProduct,
               categories,
+              token,
+              setToken
             }}
           >
             <Routes>
-              {/* category
-
-              */}
-
               <Route 
                 path={"/*"} 
                 element={<Content 
