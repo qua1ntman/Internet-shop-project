@@ -1,5 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { IsEmail, IsEmpty, IsMobilePhone, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsEmpty,
+  IsMobilePhone,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 import { Role } from '../Role';
 
 @Entity()
@@ -31,6 +38,11 @@ export class User {
   @Column({ default: Role.USER })
   @IsEmpty()
   role: Role;
+
+  @Column({ default: false })
+  @IsOptional()
+  @IsBoolean()
+  subscribed: boolean;
 }
 
 export class UserLogin {
