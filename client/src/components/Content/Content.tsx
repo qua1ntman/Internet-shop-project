@@ -14,6 +14,7 @@ import { Store } from "../../pages/Store/Store";
 import { useEffect } from "react";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { useCategory } from "../../contexts/CategoryContext";
+import { About } from "../../pages/About/About";
 
 export const Content = ({ categories, chosenProduct }: {
   categories: ICategoryData[], 
@@ -60,6 +61,7 @@ export const Content = ({ categories, chosenProduct }: {
                 />
               );
             })}
+            <Route path={"about"} element={<About/>} />
             <Route
               path={`/product/${chosenProduct?.id}`}
               element={<Product product={chosenProduct} />}
