@@ -2,10 +2,13 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Headers,
   HttpStatus,
   NotFoundException,
   Param,
+  Patch,
   Post,
   Res,
   UnauthorizedException,
@@ -61,5 +64,23 @@ export class UserController {
     const user = await this.service.findByEmail(email);
     if (user) return user;
     throw new NotFoundException();
+  }
+
+  @UseGuards(GuardUser)
+  @Post('bot')
+  botAdd(@Headers('Authorization') token: string) {
+    return this.service.botAdd(token.split(' ')[1]);
+  }
+
+  @UseGuards(GuardUser)
+  @Delete('bot')
+  botDisable(@Headers('Authorization') token: string) {
+    return this.service.botDisable(token.split(' ')[1]);
+  }
+
+  @UseGuards(GuardUser)
+  @Patch('bot')
+  botEnable(@Headers('Authorization') token: string) {
+    return this.service.botEnable(token.split(' ')[1]);
   }
 }

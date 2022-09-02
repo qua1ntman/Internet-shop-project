@@ -18,7 +18,21 @@ export class ProductService {
   }
 
   async add(product: Product) {
-    // TODO
+    const subcategories = await Promise.all(
+      product.subcategoryIds.map((id) => this.subcategoryService.findById(id)),
+    );
+
+    if (subcategories.includes(null))
+      return subcategories.filter((sc) => sc === null);
+
+    product.subcategoryIds = undefined;
+    await this.repo.save(product);
+    subcategories.forEach((subcategory) => {
+      subcategory.products.push(product);
+      this.subcategoryService.add(subcategory);
+    });
+
+    return product;
   }
 
   findById(id: number) {

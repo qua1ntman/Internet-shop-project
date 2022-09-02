@@ -13,10 +13,14 @@ import { ProductService } from './product.service';
 import { GuardAdmin } from '../guard/guard.admin';
 import { validateSync } from 'class-validator';
 import { Product } from './product.entity';
+import { UserService } from '../user/user.service';
 
 @Controller('product')
 export class ProductController {
-  constructor(private service: ProductService) {}
+  constructor(
+    private service: ProductService,
+    private userService: UserService,
+  ) {}
 
   @Get()
   findAll() {
@@ -30,8 +34,10 @@ export class ProductController {
     const result = await this.service.add(product);
     if (Array.isArray(result))
       throw new BadRequestException(
-        `Unknown category ids [${result.join(', ')}]`,
+        `Unknown subcategory ids [${result.join(', ')}]`,
       );
+
+    await this.userService.notifyBot(product);
     return result;
   }
 

@@ -44,7 +44,8 @@ export class Product {
   new: boolean;
 
   @IsString()
-  @Column()
+  @Column({ default: '' })
+  @IsOptional()
   color: string;
 
   @IsOptional()
