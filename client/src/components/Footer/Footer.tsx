@@ -3,6 +3,7 @@ import DOMPurify from "dompurify";
 import RSLogo from "../../assets/svg/rs_school_js.svg";
 import "./Footer.scss";
 import { appContext } from "../../App";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   const { color } = useContext(appContext);
@@ -16,6 +17,9 @@ export const Footer = () => {
         className="rs-logo"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(RSLogo) }}
       ></a>
+      <Link to="/about">
+        About us
+      </Link>
       <div className="devs-links">
         <a
           href="https://github.com/qua1ntman"

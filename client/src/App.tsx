@@ -15,6 +15,8 @@ import "./App.scss";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
+
+// import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
   themeTextChanger,
@@ -25,7 +27,10 @@ import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { getCategories } from "./queries/categoryQueries";
 import { Loader } from "./components/Loader/Loader";
+// import { Store } from './pages/Store/Store';
+// import { data } from "./@types/data";
 import { localStorageStateUpdator } from "./helpers/localStorageStateUpdator";
+
 
 
 // Контекст для пропсов, в данном случае для useState хука внутри App

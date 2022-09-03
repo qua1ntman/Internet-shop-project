@@ -1,5 +1,6 @@
 import { useShoppingCart } from "../../contexts/ShoppingCartContext";
 import storeItems from "./items.json";
+import { formatCurrency } from "../../helpers/formatCurrency";
 import React from "react";
 import { formatCurrency } from "../../helpers/formatCurrency";
 

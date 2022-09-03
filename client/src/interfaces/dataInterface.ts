@@ -58,3 +58,20 @@ export interface IProductData {
   discount: number
   size: number[] | string[]
 }
+
+export interface ITeamItem {
+  name: string;
+  position: string;
+  activity: string;
+  target: string;
+};
+
+export interface IProject {
+  functionality: string;
+  text: string;
+}
+
+export interface ITechnologyItem {
+  technology: string;
+  description: string;
+}
