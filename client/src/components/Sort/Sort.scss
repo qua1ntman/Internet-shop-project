@@ -1,0 +1,10 @@
+.sort-container {
+  display: flex;
+  height: 50px;
+  gap: 20px;
+  & > div {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

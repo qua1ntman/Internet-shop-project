@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext, ReactNode, useContext, useState } from "react";
-import { ShoppingCart } from "./ShoppingCart/ShoppingCart";
-import { useLocalStorage } from "./useLocalStorage";
+import { ShoppingCart } from "../pages/Basket/ShoppingCart/ShoppingCart";
+import { useLocalStorage } from "../pages/Basket/useLocalStorage";
 
 type ShoppingCartProviderProps = {
   children: ReactNode;
@@ -47,7 +47,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   }
   function increaseCartQuantity(id: number) {
     setCartItems((currItems) => {
-      if (currItems.find((item) => item.id === id) == null) {
+      if (!currItems.find((item) => item.id === id)) {
         return [...currItems, { id, quantity: 1 }];
       } else {
         return currItems.map((item) => {
