@@ -26,7 +26,7 @@ export const ThemeController = () => {
   return (
     <div className="theme-container">
       <span className="theme-title" style={{ color }}>
-        Theme: {theme}
+        Theme
       </span>
       <button
         className="theme"

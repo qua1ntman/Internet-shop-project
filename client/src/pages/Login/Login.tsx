@@ -10,6 +10,7 @@ import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 
 export const Login = () => {
+  
   const { color, backgroundColor, setToken } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
@@ -23,7 +24,6 @@ export const Login = () => {
     setIsFormValid(
       isValidEmail(formData.email) && formData.password.length > 0
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   let navigate = useNavigate();
@@ -36,6 +36,9 @@ export const Login = () => {
         console.log(res.data)
         setToken(res.data.token)
         localStorage.setItem('token', res.data.token)
+      })
+      .catch((err) => {
+        console.log(err);
       })
     setFormData({
       email: "",

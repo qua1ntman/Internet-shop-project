@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 import { ThemeController } from "./ThemeController/ThemeController";
 import { Logo } from "../Logo/Logo";
-import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
+import { useShoppingCart } from "../../contexts/ShoppingCartContext";
 import { appContext } from "../../App";
 
 export const Header = () => {

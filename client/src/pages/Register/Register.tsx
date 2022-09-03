@@ -53,8 +53,8 @@ export const Register = () => {
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const toServerData = {
-      firstName: formData.firstName,
-      secondName: formData.secondName,
+      name: formData.firstName,
+      surname: formData.secondName,
       email: formData.email,
       phone: formData.phone,
       password: formData.password,
@@ -64,6 +64,9 @@ export const Register = () => {
       .then((res) => {
         console.log(res.data)
         localStorage.setItem('token', res.data.token)
+      })
+      .catch((err) => {
+        console.log(err);
       })
 
     console.log(toServerData);
