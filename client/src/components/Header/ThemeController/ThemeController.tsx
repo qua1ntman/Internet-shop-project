@@ -20,7 +20,6 @@ export const ThemeController = () => {
     theme === "light"
       ? bodyBack.classList.add("dark")
       : bodyBack.classList.remove("dark");
-    console.log(theme);
   };
 
   return (

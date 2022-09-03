@@ -3,12 +3,14 @@ import { ICategoryData, ISubCategoryData } from "../interfaces/dataInterface";
 
 const CategoryContext = createContext(
   {} as {
-    clickedSubcategory: ISubCategoryData | null;
+    clickedSubcategory: ISubCategoryData;
     setClickedSubcategory: 
-      (value: React.SetStateAction<ISubCategoryData | null>) => void;
-    clickedCategory: ICategoryData | null;
+      (value: React.SetStateAction<ISubCategoryData>) => void;
+    clickedCategory: ICategoryData;
     setClickedCategory: 
-      (value: React.SetStateAction<ICategoryData | null>) => void;
+      (value: React.SetStateAction<ICategoryData>) => void;
+    sort: string;
+    setSort: (value: React.SetStateAction<string>) => void;
   }
 );
 
@@ -20,13 +22,15 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
   const [
     clickedSubcategory, 
     setClickedSubcategory
-  ] = useState<ISubCategoryData | null>(null);
+  ] = useState<ISubCategoryData>({} as ISubCategoryData);
 
   const [
     clickedCategory, 
     setClickedCategory
-  ] = useState<ICategoryData | null>(null);
+  ] = useState<ICategoryData>(JSON.parse(localStorage.getItem('category')!) || {} as ICategoryData);
 
+  const [sort, setSort] = useState<string>(localStorage.getItem('sort') || '')
+  
   return (
     <CategoryContext.Provider
       value={{
@@ -34,6 +38,8 @@ export const CategoryProvider = ({ children }: { children: ReactNode }) => {
         setClickedSubcategory,
         clickedCategory,
         setClickedCategory,
+        sort,
+        setSort
       }}
     >
       {children}

@@ -7,7 +7,7 @@
 }
 
 main {
-  min-height: calc(100vh - 40px - 60px - 70px);
+  min-height: calc(100vh - 40px - max(60px, 10vh) - max(60px, 10vh));
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 }

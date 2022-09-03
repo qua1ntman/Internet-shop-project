@@ -15,19 +15,17 @@ import "./App.scss";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
-// import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
   themeTextChanger,
   themeBackChanger,
 } from "./helpers/themeStyleChanger";
 import { ICategoryData, IProductData } from "./interfaces/dataInterface";
-import { ShoppingCartProvider } from "./pages/Basket/ShoppingCartContext";
+import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { getCategories } from "./queries/categoryQueries";
 import { Loader } from "./components/Loader/Loader";
-// import { Store } from './pages/Store/Store';
-// import { data } from "./@types/data";
+import { localStorageStateUpdator } from "./helpers/localStorageStateUpdator";
 
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
@@ -36,8 +34,8 @@ export const appContext = createContext(Object) as unknown as Context<{
   setTheme: Dispatch<SetStateAction<string>>;
   color: string;
   backgroundColor: string;
-  setChosenProduct: Dispatch<SetStateAction<IProductData | undefined>>;
-  categories: ICategoryData[] | undefined
+  setChosenProduct: Dispatch<SetStateAction<IProductData>>;
+  categories: ICategoryData[]
   token: string,
   setToken: Dispatch<SetStateAction<string>>
 }>;
@@ -51,7 +49,13 @@ if (localStorage.getItem("theme")
 
 export const App = () => {
 
-  const [chosenProduct, setChosenProduct] = useState<IProductData>();
+  const [
+    chosenProduct, 
+    setChosenProduct
+  ] = useState<IProductData>(
+    localStorage.getItem('product')
+    ? JSON.parse(localStorage.getItem('product')!)
+    : {} as IProductData);
 
   const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
 
@@ -60,19 +64,26 @@ export const App = () => {
     localStorage.getItem("theme") || "light"
   );
 
-  const [categories, setCategories] = useState<ICategoryData[]>();
+  const [
+    categories, 
+    setCategories
+  ] = useState<ICategoryData[]>(
+    localStorage.getItem('categories') 
+    ? JSON.parse(localStorage.getItem('categories')!) 
+    : [] as ICategoryData[]);
 
   useEffect(() => {
     getCategories()
       .then((res) => {
         const categoryData: ICategoryData[] = res.data;
-        console.log(categoryData);
-        setCategories(categoryData);
+        localStorageStateUpdator(setCategories, categoryData, 'categories')
       })
       .catch((e: Error) => {
         console.log(e.message);
-      });
-  }, [setCategories]);
+      }); 
+  }, []);
+
+
 
   let { color } = themeTextChanger(theme);
   let { backgroundColor } = themeBackChanger(theme);

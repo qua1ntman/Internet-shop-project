@@ -7,9 +7,10 @@ import { TFormState } from "../../types/defaultObjType";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 import { postRegister } from './../../queries/authQueries';
+import { localStorageStateUpdator } from "../../helpers/localStorageStateUpdator";
 
 export const Register = () => {
-  const { color, backgroundColor } = useContext(appContext);
+  const { color, backgroundColor, setToken } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     firstName: "",
@@ -62,14 +63,12 @@ export const Register = () => {
 
     postRegister(toServerData)
       .then((res) => {
-        console.log(res.data)
-        localStorage.setItem('token', res.data.token)
+        localStorageStateUpdator(setToken, res.data.token, 'token')
       })
       .catch((err) => {
         console.log(err);
       })
 
-    console.log(toServerData);
     setFormData({
       firstName: "",
       secondName: "",

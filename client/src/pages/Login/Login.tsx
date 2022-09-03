@@ -8,6 +8,7 @@ import { isValidEmail } from "../../helpers/validators";
 import { postLogin } from "../../queries/authQueries";
 import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
+import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const Login = () => {
   
@@ -30,12 +31,9 @@ export const Login = () => {
 
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(formData);
     postLogin(formData)
       .then((res) => {
-        console.log(res.data)
-        setToken(res.data.token)
-        localStorage.setItem('token', res.data.token)
+        localStorageStateUpdator(setToken, res.data.token, 'token')
       })
       .catch((err) => {
         console.log(err);
