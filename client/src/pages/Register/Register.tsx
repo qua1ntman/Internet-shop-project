@@ -81,8 +81,6 @@ export const Register = () => {
     navigate("/");
   };
 
-  // console.log(isFormValid);
-
   return (
     <div className="register-container">
       <div className="register-content">

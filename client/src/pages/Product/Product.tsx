@@ -13,7 +13,15 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
 
   const { theme, color } = useContext(appContext);
 
-  // console.dir(product);
+  const handleCatd = () => {
+    
+  }
+
+  product = product 
+    ? product 
+    : localStorage.getItem('product') 
+      ? JSON.parse(localStorage.getItem('product')!) 
+      : undefined
 
   if (product) {
     return (
@@ -85,6 +93,7 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
               color: theme === "light" ? "white" : "black",
               backgroundColor: color,
             }}
+            onClick={handleCatd}
           >
             ADD TO CARD
           </button>
