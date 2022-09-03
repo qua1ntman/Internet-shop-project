@@ -20,13 +20,12 @@ export const ThemeController = () => {
     theme === "light"
       ? bodyBack.classList.add("dark")
       : bodyBack.classList.remove("dark");
-    console.log(theme);
   };
 
   return (
     <div className="theme-container">
       <span className="theme-title" style={{ color }}>
-        Theme: {theme}
+        Theme
       </span>
       <button
         className="theme"

@@ -6,6 +6,7 @@ import { changeOpasity } from "./../../helpers/changeOpasity";
 import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
+import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
   const navigate = useNavigate();
@@ -13,19 +14,16 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
   const { color, setChosenProduct } = useContext(appContext);
 
   const { 
-    // setClickedCategory, 
+
     clickedSubcategory
   } = useCategory();
 
   const handleProductPage = () => {
-    // setClickedCategory(null);
-    setChosenProduct(item);
+    localStorageStateUpdator(setChosenProduct, item, 'product')
     navigate({
       pathname: `/product/${item.id}`,
     });
   };
-
-  console.log(item)
 
   return (
     <div className="product-card" onClick={handleProductPage}>

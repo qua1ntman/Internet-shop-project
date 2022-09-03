@@ -16,30 +16,13 @@ import { getSubcategory } from "../../queries/categoryQueries";
 import { useCategory } from "../../contexts/CategoryContext";
 import { About } from "../../pages/About/About";
 
+
 export const Content = ({ categories, chosenProduct }: {
   categories: ICategoryData[], 
   chosenProduct: IProductData | undefined
 }) => {
   
   const { backgroundColor } = useContext(appContext);
-
-  const { 
-    setClickedSubcategory, 
-    clickedCategory,
-  } = useCategory();
-
-  useEffect(() => {
-    console.log(123);
-    if (clickedCategory && clickedCategory!.subcategories.length > 0) {
-      getSubcategory(clickedCategory!.subcategories[0].id)
-        .then((res) => {
-          setClickedSubcategory(res.data)
-        })
-        .catch((e: Error) => {
-          console.log(e.message)
-        })
-    }
-  }, [clickedCategory, setClickedSubcategory])
 
   return (
     <>
@@ -55,7 +38,7 @@ export const Content = ({ categories, chosenProduct }: {
             {categories.map((item: ICategoryData) => {
               return (
                 <Route
-                  key={item.title}
+                  key={item.id}
                   path={`${item.title}/*`}
                   element={<Category />}
                 />

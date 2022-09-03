@@ -11,16 +11,5 @@ export const getSubcategory = async (id: number) => {
 };
 
 export const getProduct = async () => {
-  console.log(process.env.SERVER_URL);
-  axios
-    .get(`${url}/product`)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((e: Error) => {
-      console.log(e.message);
-    })
-    .finally(() => {
-      console.log("finally");
-    });
+  return axios.get(`${url}/product`)
 };
