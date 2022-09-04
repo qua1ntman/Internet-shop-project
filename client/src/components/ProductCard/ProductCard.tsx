@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { appContext } from "../../App";
 import {  IProductData } from "../../interfaces/dataInterface";
 import "./ProductCard.scss";
@@ -6,11 +6,25 @@ import { changeOpasity } from "./../../helpers/changeOpasity";
 import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
+import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
+  
   const navigate = useNavigate();
 
   const { color, setChosenProduct } = useContext(appContext);
+
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
+  const { increaseCartQuantity } = useShoppingCart();
 
   const { 
     // setClickedCategory, 
@@ -28,7 +42,7 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
   console.log(item)
 
   return (
-    <div className="product-card" onClick={handleProductPage}>
+    <div className="product-card" onClick={handleProductPage} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
       <img className="card-image" src={item.images[0]} alt={clickedSubcategory!.title} />
       <span
         className="card-status"
@@ -48,6 +62,17 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
       <span className="card-price" style={{ color }}>
         {formatCurrency(item.price)}
       </span>
+      <div className="card-hover">
+        {isHovering && (
+          <><img src={item.images[1]} alt={clickedSubcategory!.title} />
+          <ul className="item-size">
+            {item.size.map((size) => (
+            <li key={size}>{size}</li>
+            ))}
+          </ul>
+          <button className="button-add" onClick={() => increaseCartQuantity(item.id)}>Add to cart</button></>
+        )}
+      </div>
     </div>
   );
 };
