@@ -16,7 +16,7 @@ export const Nav = () => {
     clickedCategory, 
     setClickedCategory, 
     setClickedSubcategory,
-    clickedSubcategory,
+    // clickedSubcategory,
   } = useCategory();
 
   const handleCategory = (
