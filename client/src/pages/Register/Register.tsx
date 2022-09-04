@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState, MouseEvent } from "react";
-import { appContext } from "../../App";
+import React, { useEffect, useState, MouseEvent } from "react";
 import { InputField } from "../../components/InputFIeld/InputField";
 import { changeOpasity } from "../../helpers/changeOpasity";
 import { isValidEmail, isValidName } from "../../helpers/validators";
@@ -8,9 +7,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 import { postRegister } from './../../queries/authQueries';
 import { localStorageStateUpdator } from "../../helpers/localStorageStateUpdator";
+import jwt_decode from 'jwt-decode'
+import { useApp } from "../../contexts/AppContext";
 
 export const Register = () => {
-  const { color, backgroundColor, setToken } = useContext(appContext);
+  const { 
+    color, 
+    backgroundColor, 
+    setToken, 
+    setDecodedToken
+  } = useApp();
 
   const [formData, setFormData] = useState<TFormState>({
     firstName: "",
@@ -64,6 +70,7 @@ export const Register = () => {
     postRegister(toServerData)
       .then((res) => {
         localStorageStateUpdator(setToken, res.data.token, 'token')
+        setDecodedToken(jwt_decode(res.data.token))
       })
       .catch((err) => {
         console.log(err);

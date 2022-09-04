@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { appContext } from "../../App";
+import React from "react";
+import { useApp } from "../../contexts/AppContext";
 
 export const Cart = () => {
-  const { backgroundColor } = useContext(appContext) as {
+  const { backgroundColor } = useApp() as {
     backgroundColor: string;
   };
 

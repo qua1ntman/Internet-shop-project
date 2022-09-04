@@ -1,14 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Nav.scss";
-import { appContext } from "../../App";
 import { useCategory } from "./../../contexts/CategoryContext";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { ICategoryData } from "../../interfaces/dataInterface";
 import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { useApp } from "../../contexts/AppContext";
 
 export const Nav = () => {
-  const { color, backgroundColor, categories } = useContext(appContext);
+  const { color, backgroundColor, categories } = useApp();
 
   const navigate = useNavigate()
 
@@ -16,7 +16,6 @@ export const Nav = () => {
     clickedCategory, 
     setClickedCategory, 
     setClickedSubcategory,
-    clickedSubcategory,
   } = useCategory();
 
   const handleCategory = (
@@ -27,7 +26,7 @@ export const Nav = () => {
     getSubcategory(item.subcategories[0].id)
       .then((res) => {
         localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
-        navigate(clickedCategory?.title === item.title ? "#" : item.title.toLowerCase())
+        navigate(item.title.toLowerCase())
       })
       .catch((err: Error) => {
         console.log(err.message)

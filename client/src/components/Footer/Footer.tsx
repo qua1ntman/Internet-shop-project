@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import DOMPurify from "dompurify";
 import RSLogo from "../../assets/svg/rs_school_js.svg";
 import "./Footer.scss";
-import { appContext } from "../../App";
 import { Link } from "react-router-dom";
+import { useApp } from "../../contexts/AppContext";
 
 export const Footer = () => {
-  const { color } = useContext(appContext);
+
+  const { color } = useApp();
 
   return (
     <footer>
@@ -17,7 +18,10 @@ export const Footer = () => {
         className="rs-logo"
         dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(RSLogo) }}
       ></a>
-      <Link to="/about">
+      <Link 
+        to="/about"
+        style={{ color }}
+      >
         About us
       </Link>
       <div className="devs-links">

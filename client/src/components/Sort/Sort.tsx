@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
-import { appContext } from '../../App';
+import React from 'react'
 import { localStorageStateUpdator } from '../../helpers/localStorageStateUpdator';
 import { ISubCategoryData } from '../../interfaces/dataInterface';
 import { useCategory } from './../../contexts/CategoryContext';
 import './Sort.scss'
 import { productSorter } from './../../helpers/sorter';
+import { useApp } from '../../contexts/AppContext';
 
 export const Sort = () => {
 
@@ -15,7 +15,7 @@ export const Sort = () => {
     setSort
   } = useCategory()
 
-  const { color } = useContext(appContext);
+  const { color } = useApp();
 
   const handlePriceSort = () => {
     let data: string = sort === 'ᐁ' ? 'ᐃ' : sort === 'ᐃ' ? 'ᐁ' : 'ᐃ'
