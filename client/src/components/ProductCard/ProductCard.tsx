@@ -7,7 +7,6 @@ import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
 import { useShoppingCart } from "../../contexts/ShoppingCartContext";
-// import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
 import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
