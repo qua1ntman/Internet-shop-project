@@ -1,28 +1,22 @@
-import React, { useContext } from "react";
-import { appContext } from "../../App";
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { Nav } from "../Nav/Nav";
 import "./Content.scss";
 import { ToTop } from "../ToTop/ToTop";
-import { ICategoryData, IProductData } from "../../interfaces/dataInterface";
+import { ICategoryData } from "../../interfaces/dataInterface";
 import { Category } from "../../pages/Category/Category";
 import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { Product } from "../../pages/Product/Product";
 import { Store } from "../../pages/Store/Store";
-// import { useEffect } from "react";
-// import { getSubcategory } from "../../queries/categoryQueries";
-// import { useCategory } from "../../contexts/CategoryContext";
 import { About } from "../../pages/About/About";
+import { useApp } from "../../contexts/AppContext";
 
 
-export const Content = ({ categories, chosenProduct }: {
-  categories: ICategoryData[], 
-  chosenProduct: IProductData | undefined
-}) => {
+export const Content = () => {
   
-  const { backgroundColor } = useContext(appContext);
+  const { backgroundColor, categories, chosenProduct } = useApp();
 
   return (
     <>

@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { appContext } from "../../App";
+import { useApp } from "../../contexts/AppContext";
 import "./ToTop.scss";
 
 export const ToTop = () => {
-  const { color } = useContext(appContext);
+
+  const { color } = useApp();
 
   const scrollToTop = () => {
     window.scrollTo({

@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { appContext } from "../../App";
 
 export const Main = () => {
-  const { color } = useContext(appContext);
+  // const { color } = useApp();
 
   return (
     <div className="main-page">
-      <h1 style={{ color }}>Main</h1>
+      {/* <h1 style={{ color }}>Main</h1> */}
     </div>
   );
 };

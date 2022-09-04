@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
-import { appContext } from "../../App";
 import "./Category.scss";
 import { useCategory } from "../../contexts/CategoryContext";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { ProductCardContainer } from "../../components/ProductCardContainer/ProductCardContainer";
 import { Loader } from "../../components/Loader/Loader";
 import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { useApp } from "../../contexts/AppContext";
 
 export const Category = () => {
-  const { color } = useContext(appContext);
+  const { color } = useApp();
 
   const { 
     setClickedSubcategory, 
@@ -76,29 +76,16 @@ export const Category = () => {
             })}
           </div>
           <Routes>
-            {clickedCategory!.subcategories.map((subcategory, i) => {
-              if (i === 0) {
-                return (
-                  <>
-                    <Route
-                      key={"base"}
-                      path={'/'}
-                      element={
-                        <Navigate 
-                          to={subcategory.title.toLowerCase()} 
-                        />
-                      }
-                    />
-                    <Route
-                      key={subcategory.title}
-                      path={subcategory.title.toLowerCase()}
-                      element={
-                        <ProductCardContainer />
-                      }
-                    />
-                  </>
-                );
+            <Route
+              key={"base"}
+              path={'/'}
+              element={
+                <Navigate 
+                  to={clickedCategory!.subcategories[0].title.toLowerCase()} 
+                />
               }
+            />
+            {clickedCategory!.subcategories.map((subcategory) => {
               return (
                 <Route
                   key={subcategory.title}

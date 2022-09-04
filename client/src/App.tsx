@@ -19,18 +19,16 @@ import { Content } from "./components/Content/Content";
 // import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
-  themeTextChanger,
-  themeBackChanger,
+  setBackgroundColor,
 } from "./helpers/themeStyleChanger";
 import { ICategoryData, IProductData } from "./interfaces/dataInterface";
 import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { getCategories } from "./queries/categoryQueries";
 import { Loader } from "./components/Loader/Loader";
-// import { Store } from './pages/Store/Store';
-// import { data } from "./@types/data";
 import { localStorageStateUpdator } from "./helpers/localStorageStateUpdator";
-
+import { IDecodedToken } from "./interfaces/decodedToken";
+import { AppProvider } from "./contexts/AppContext";
 
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
@@ -43,31 +41,44 @@ export const appContext = createContext(Object) as unknown as Context<{
   categories: ICategoryData[]
   token: string,
   setToken: Dispatch<SetStateAction<string>>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  decodedToken: IDecodedToken
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setDecodedToken: Dispatch<SetStateAction<IDecodedToken>>
 }>;
 
 // Установка body backgroundColor в зависимости от темы
-if (localStorage.getItem("theme") 
-  && localStorage.getItem("theme") === "dark"
-  ) {
-    document.body.classList.add("dark");
-}
+setBackgroundColor()
 
 export const App = () => {
 
-  const [
-    chosenProduct, 
-    setChosenProduct
-  ] = useState<IProductData>(
-    localStorage.getItem('product')
-    ? JSON.parse(localStorage.getItem('product')!)
-    : {} as IProductData);
+  // const [
+  //   chosenProduct, 
+  //   setChosenProduct
+  // ] = useState<IProductData>(
+  //   localStorage.getItem('product')
+  //   ? JSON.parse(localStorage.getItem('product')!)
+  //   : {} as IProductData);
 
-  const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
+  // const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // const [
+  //   decodedToken, 
+  //   setDecodedToken
+  // ] = useState<IDecodedToken>(
+  //   localStorage.getItem('token') 
+  //     ? jwt_decode(localStorage.getItem('token')!) 
+  //     : {} as IDecodedToken
+  // )
+  
+  // useEffect(() => {
+  //   console.log(decodedToken);
+  // }, [decodedToken])
 
   // Хук для изменения темы
-  const [theme, setTheme] = useState<string>(
-    localStorage.getItem("theme") || "light"
-  );
+  // const [theme, setTheme] = useState<string>(
+  //   localStorage.getItem("theme") || "light"
+  // );
 
   const [
     categories, 
@@ -90,41 +101,35 @@ export const App = () => {
 
 
 
-  let { color } = themeTextChanger(theme);
-  let { backgroundColor } = themeBackChanger(theme);
+  // let { color } = themeTextChanger(theme);
+  // let { backgroundColor } = themeBackChanger(theme);
 
   if (!categories || categories.length === 0) return <Loader/>
 
   return (
     <ShoppingCartProvider>
       <CategoryProvider>
-        <Router>
-          <appContext.Provider
-            value={{
-              theme,
-              setTheme,
-              color,
-              backgroundColor,
-              setChosenProduct,
-              categories,
-              token,
-              setToken
-            }}
-          >
-            <Routes>
-              <Route 
-                path={"/*"} 
-                element={<Content 
-                  categories={categories} 
-                  chosenProduct={chosenProduct}
-                />} 
-              />
-              <Route path={"login"} element={<Login />} />
-              <Route path={"register"} element={<Register />} />
-              <Route path={"*"} element={<ErrorPage />} />
-            </Routes>
-          </appContext.Provider>
-        </Router>
+        <AppProvider 
+          props= {{ 
+            categories, 
+            setCategories
+          }}
+        >
+          <Router>
+              <Routes>
+                <Route 
+                  path={"/*"} 
+                  element={<Content 
+                    // categories={categories} 
+                    // chosenProduct={chosenProduct}
+                  />} 
+                />
+                <Route path={"login"} element={<Login />} />
+                <Route path={"register"} element={<Register />} />
+                <Route path={"*"} element={<ErrorPage />} />
+              </Routes>
+          </Router>
+        </AppProvider>
       </CategoryProvider>
     </ShoppingCartProvider>
   );
