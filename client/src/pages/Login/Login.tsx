@@ -8,9 +8,11 @@ import { isValidEmail } from "../../helpers/validators";
 import { postLogin } from "../../queries/authQueries";
 import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
+import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const Login = () => {
-  const { color, backgroundColor } = useContext(appContext);
+  
+  const { color, backgroundColor, setToken } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     email: "",
@@ -23,18 +25,18 @@ export const Login = () => {
     setIsFormValid(
       isValidEmail(formData.email) && formData.password.length > 0
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData]);
 
   let navigate = useNavigate();
 
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log(formData);
     postLogin(formData)
       .then((res) => {
-        console.log(res.data)
-        localStorage.setItem('token', res.data.token)
+        localStorageStateUpdator(setToken, res.data.token, 'token')
+      })
+      .catch((err) => {
+        console.log(err);
       })
     setFormData({
       email: "",

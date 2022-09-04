@@ -7,7 +7,6 @@ export const Search = () => {
   const searchInputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const searchController = async () => {
-    console.log(searchInputRef.current.value);
     await getCategories();
     searchInputRef.current.value = "";
   };

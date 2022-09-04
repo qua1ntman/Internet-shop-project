@@ -1,4 +1,4 @@
-import { useShoppingCart } from "../ShoppingCartContext";
+import { useShoppingCart } from "../../../contexts/ShoppingCartContext";
 import { CartItem } from "../CartItem";
 import storeItems from "../items.json";
 import React from "react";

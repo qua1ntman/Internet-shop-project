@@ -7,9 +7,10 @@ import { TFormState } from "../../types/defaultObjType";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 import { postRegister } from './../../queries/authQueries';
+import { localStorageStateUpdator } from "../../helpers/localStorageStateUpdator";
 
 export const Register = () => {
-  const { color, backgroundColor } = useContext(appContext);
+  const { color, backgroundColor, setToken } = useContext(appContext);
 
   const [formData, setFormData] = useState<TFormState>({
     firstName: "",
@@ -53,8 +54,8 @@ export const Register = () => {
   const handleForm = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const toServerData = {
-      firstName: formData.firstName,
-      secondName: formData.secondName,
+      name: formData.firstName,
+      surname: formData.secondName,
       email: formData.email,
       phone: formData.phone,
       password: formData.password,
@@ -62,11 +63,12 @@ export const Register = () => {
 
     postRegister(toServerData)
       .then((res) => {
-        console.log(res.data)
-        localStorage.setItem('token', res.data.token)
+        localStorageStateUpdator(setToken, res.data.token, 'token')
+      })
+      .catch((err) => {
+        console.log(err);
       })
 
-    console.log(toServerData);
     setFormData({
       firstName: "",
       secondName: "",
@@ -77,8 +79,6 @@ export const Register = () => {
     });
     navigate("/");
   };
-
-  // console.log(isFormValid);
 
   return (
     <div className="register-container">

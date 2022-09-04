@@ -1,4 +1,4 @@
-import { useShoppingCart } from "./ShoppingCartContext";
+import { useShoppingCart } from "../../contexts/ShoppingCartContext";
 import storeItems from "./items.json";
 import { formatCurrency } from "../../helpers/formatCurrency";
 import React from "react";
@@ -19,8 +19,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
   const quant = getItemQuantity(id);
 
   const item = storeItems.find((i) => i.id === id);
-  
-  if (item == null) return null;
+  if (!item) return null;
 
   return (
     <tbody>

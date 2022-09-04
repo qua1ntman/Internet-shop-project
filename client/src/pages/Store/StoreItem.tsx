@@ -1,6 +1,6 @@
 import React from "react";
 import { formatCurrency } from "../../helpers/formatCurrency";
-import { useShoppingCart } from "../Basket/ShoppingCartContext";
+import { useShoppingCart } from "../../contexts/ShoppingCartContext";
 import "./StoreItem.scss";
 
 type StoreItemProps = {

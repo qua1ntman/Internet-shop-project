@@ -6,7 +6,9 @@ import { changeOpasity } from "./../../helpers/changeOpasity";
 import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
-import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
+import { useShoppingCart } from "../../contexts/ShoppingCartContext";
+// import { useShoppingCart } from "../../pages/Basket/ShoppingCartContext";
+import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
   
@@ -27,19 +29,16 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
   const { increaseCartQuantity } = useShoppingCart();
 
   const { 
-    // setClickedCategory, 
+
     clickedSubcategory
   } = useCategory();
 
   const handleProductPage = () => {
-    // setClickedCategory(null);
-    setChosenProduct(item);
+    localStorageStateUpdator(setChosenProduct, item, 'product')
     navigate({
       pathname: `/product/${item.id}`,
     });
   };
-
-  console.log(item)
 
   return (
     <div className="product-card" onClick={handleProductPage} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { appContext } from "../../App";
 import "./Category.scss";
@@ -6,6 +6,7 @@ import { useCategory } from "../../contexts/CategoryContext";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { ProductCardContainer } from "../../components/ProductCardContainer/ProductCardContainer";
 import { Loader } from "../../components/Loader/Loader";
+import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 
 export const Category = () => {
   const { color } = useContext(appContext);
@@ -13,30 +14,47 @@ export const Category = () => {
   const { 
     setClickedSubcategory, 
     clickedCategory,
-    clickedSubcategory
+    clickedSubcategory,
+    setSort
   } = useCategory();
+
+  useEffect(() => {
+    if (
+      JSON.stringify(clickedCategory) !== '{}' 
+      && clickedCategory!.subcategories.length > 0
+    ) {
+      if (localStorage.getItem('subcategory') && JSON.stringify(clickedSubcategory) === '{}') {
+        setClickedSubcategory(JSON.parse(localStorage.getItem('subcategory')!))
+      } else {
+        getSubcategory(JSON.parse(localStorage.getItem('subcategory')!).id)
+          .then((res) => {
+            localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+          })
+          .catch((e: Error) => {
+            console.log(e.message)
+          })
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
 
   const handleSubcategoryChange = (id: number) => {
     getSubcategory(id)
       .then((res) => {
-        setClickedSubcategory(res.data)
+        localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
       })
       .catch((e: Error) => {
         console.log(e.message)
       })
+    let emptySort = ''
+    localStorageStateUpdator(setSort, emptySort, 'sort')
   }
   
-  const isDataExist = () => {
-    console.log('clickedCategory', clickedCategory);
-    console.log('clickedSubcategory', clickedSubcategory);
-    console.log('clickedCategory!.subcategories.length > 0', clickedCategory!.subcategories.length > 0);
-    
-    return clickedCategory && clickedSubcategory 
+  const isDataExist = () => {    
+    return JSON.stringify(clickedCategory) !== "{}" && JSON.stringify(clickedSubcategory) !== "{}" 
       && clickedCategory!.subcategories.length > 0
   }
-
-  console.log(clickedCategory);
-  
 
   return (
     <div className="category-data-container">
@@ -48,7 +66,7 @@ export const Category = () => {
               return (
                 <Link
                   className={clickedSubcategory!.title === 
-                    item.title ? "link-active" : ""}
+                  item.title ? "link-active" : ""}
                   style={{ color }}
                   key={item.id}
                   to={item.title === clickedSubcategory!.title ? "#" : item.title.toLowerCase()}
@@ -75,9 +93,7 @@ export const Category = () => {
                       key={subcategory.title}
                       path={subcategory.title.toLowerCase()}
                       element={
-                        <ProductCardContainer
-                          // products={subcategory.products}
-                        />
+                        <ProductCardContainer />
                       }
                     />
                   </>
@@ -88,9 +104,7 @@ export const Category = () => {
                   key={subcategory.title}
                   path={subcategory.title.toLowerCase()}
                   element={
-                    <ProductCardContainer
-                      // products={subcategory.products}
-                    />
+                    <ProductCardContainer />
                   }
                 />
               );
