@@ -11,3 +11,11 @@ export function themeBackChanger(theme: string): { backgroundColor: string } {
     ? { backgroundColor: "rgba(243, 239, 229, .7)" }
     : { backgroundColor: "rgba(56, 54, 68, .5)" };
 }
+
+export const setBackgroundColor = () => {
+  if (localStorage.getItem("theme") 
+    && localStorage.getItem("theme") === "dark"
+    ) {
+      document.body.classList.add("dark");
+  }
+}

@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
-import { appContext } from "../../../App";
+import React from "react";
+import { useApp } from "../../../contexts/AppContext";
 import "./ThemeController.scss";
 
 export const ThemeController = () => {
-  const { theme, setTheme, color } = useContext(appContext);
+  
+  const { theme, setTheme, color } = useApp();
 
   //Хендлер для смены темы и обновления значения 'theme' в localStorage
   const themeHandler = () => {

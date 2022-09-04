@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import ImageWelcome from "../../assets/images/team.jpg";
 import { TeamItem } from "../../components/Team/TeamItem";
 import { team } from "../../@types/team";
@@ -7,10 +7,11 @@ import { project } from "../../@types/project";
 import { ProjectItem } from "../../components/Project/Project";
 import { TechnologyItem } from "../../components/Technology/TechnologyItem";
 import { technology } from "../../@types/technology";
-import { appContext } from "../../App";
+import { useApp } from "../../contexts/AppContext";
 
 export const About = () => {
-  const { color } = useContext(appContext);
+
+  const { color } = useApp();
 
   return (
     <div className='about'>

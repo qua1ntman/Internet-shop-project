@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
-import { appContext } from "../../App";
+import React from "react";
+import { useApp } from "../../contexts/AppContext";
 
 export const ErrorPage = () => {
-  const { color } = useContext(appContext);
+  const { color } = useApp();
 
   return (
     <div style={{ color }} className="error-page">

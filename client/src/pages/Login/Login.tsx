@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState, MouseEvent } from "react";
+import React, { useEffect, useState, MouseEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { appContext } from "../../App";
 import { InputField } from "../../components/InputFIeld/InputField";
 import { Logo } from "../../components/Logo/Logo";
 import { changeOpasity } from "../../helpers/changeOpasity";
@@ -9,10 +8,17 @@ import { postLogin } from "../../queries/authQueries";
 import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
 import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import jwt_decode from 'jwt-decode';
+import { useApp } from "../../contexts/AppContext";
 
 export const Login = () => {
   
-  const { color, backgroundColor, setToken } = useContext(appContext);
+  const { 
+    color, 
+    backgroundColor, 
+    setToken, 
+    setDecodedToken
+  } = useApp();
 
   const [formData, setFormData] = useState<TFormState>({
     email: "",
@@ -34,6 +40,7 @@ export const Login = () => {
     postLogin(formData)
       .then((res) => {
         localStorageStateUpdator(setToken, res.data.token, 'token')
+        setDecodedToken(jwt_decode(res.data.token))
       })
       .catch((err) => {
         console.log(err);

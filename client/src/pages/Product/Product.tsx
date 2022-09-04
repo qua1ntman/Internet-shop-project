@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { IProductData } from "./../../interfaces/dataInterface";
 import "./Product.scss";
-import { useContext } from "react";
-import { appContext } from "./../../App";
 import { useCategory } from './../../contexts/CategoryContext';
+import { useApp } from "../../contexts/AppContext";
 
 export const Product = ({ product }: { product: IProductData | undefined }) => {
 
@@ -11,7 +10,7 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
 
   const { clickedSubcategory } = useCategory()
 
-  const { theme, color } = useContext(appContext);
+  const { theme, color } = useApp();
 
   const handleCatd = () => {
     

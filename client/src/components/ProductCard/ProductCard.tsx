@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { appContext } from "../../App";
+import React from "react";
 import {  IProductData } from "../../interfaces/dataInterface";
 import "./ProductCard.scss";
 import { changeOpasity } from "./../../helpers/changeOpasity";
@@ -7,11 +6,12 @@ import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
 import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { useApp } from "../../contexts/AppContext";
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
   const navigate = useNavigate();
 
-  const { color, setChosenProduct } = useContext(appContext);
+  const { color, setChosenProduct } = useApp();
 
   const { 
 

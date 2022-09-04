@@ -1,16 +1,16 @@
-import React, { createContext, useContext, ReactNode, useState } from "react";
+import React, { createContext, useContext, ReactNode, useState, SetStateAction } from "react";
 import { ICategoryData, ISubCategoryData } from "../interfaces/dataInterface";
 
 const CategoryContext = createContext(
   {} as {
     clickedSubcategory: ISubCategoryData;
     setClickedSubcategory: 
-      (value: React.SetStateAction<ISubCategoryData>) => void;
+      (value: SetStateAction<ISubCategoryData>) => void;
     clickedCategory: ICategoryData;
     setClickedCategory: 
-      (value: React.SetStateAction<ICategoryData>) => void;
+      (value: SetStateAction<ICategoryData>) => void;
     sort: string;
-    setSort: (value: React.SetStateAction<string>) => void;
+    setSort: (value: SetStateAction<string>) => void;
   }
 );
 
