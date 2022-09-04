@@ -12,6 +12,7 @@ type ShoppingCartProps = {
 
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
   const { closeCart, cartItems } = useShoppingCart();
+
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>
       <h2 className="basket-header"> Your shopping list</h2>
