@@ -27,8 +27,7 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
 
   const { increaseCartQuantity } = useShoppingCart();
 
-  const { 
-
+  const {
     clickedSubcategory
   } = useCategory();
 
