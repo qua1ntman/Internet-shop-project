@@ -11,9 +11,16 @@
 a,
 .link-like {
   text-decoration: none;
-  color: black;
+  font-size: 1.2rem;
   &:hover {
     text-decoration: underline;
+  }
+  @media screen and (min-width: 769px) and (max-width: 1280px) {
+    
+  }
+  
+  @media screen and (min-width: 350px) and (max-width: 768px) {
+    font-size: 1rem;
   }
 }
 
@@ -42,11 +49,17 @@ body {
 #root {
   margin: auto;
   width: max(85vw, 320px);
+  @media screen and (min-width: 320px) and (max-width: 768px) {
+    width: 100vw;
+  }
 }
 
 .default-btn {
   border: none;
   padding: 10px;
+  width: 150px;
+  margin: 20px auto;
+  border-radius: 10px;
   &:hover {
     cursor: pointer;
   }
@@ -55,11 +68,5 @@ body {
 .default-btn:disabled {
   &:hover {
     cursor: default;
-  }
-}
-
-@media screen and (min-width: 320px) and (max-width: 768px) {
-  #root {
-    width: 100vw;
   }
 }

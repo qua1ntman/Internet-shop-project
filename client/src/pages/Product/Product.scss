@@ -52,3 +52,26 @@
   display: flex;
   flex-direction: column;
 }
+
+@media screen and (min-width: 350px) and (max-width: 768px) {
+  .product-page-container {
+    flex-direction: column;
+    width: 100%;
+  }
+  .product-images-container {
+    margin: 0 auto;
+    width: 100%;
+  }
+  .product-info-container {
+    margin-top: 50px;
+    width: 100%;
+  }
+  .product-description {
+    align-items: center;
+    justify-content: center;
+  }
+  .product-sizes {
+    display: flex;
+    justify-content: center;
+  }
+}

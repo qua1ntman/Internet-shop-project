@@ -5,7 +5,7 @@
   gap: 20px;
   height: 100%;
   width: 100%;
-  font-size: 20px;
+  font-size: 1.2rem;
 }
 .about-welcome {
   min-width: 100%;
@@ -30,10 +30,8 @@
       max-width: 36%;
       margin: 0 auto;
       padding: 40px 20px;
-      font-size: 22px;
       text-align: center;
-      font-size: 1.5vw;
-      // background: linear-gradient(0.25turn, #d9d9f3, #ceefe4, #9dd3a8);
+      font-size: 1.5rem;
     }
 }
 .about-team {
@@ -41,6 +39,7 @@
     min-width: 80%;
     max-width: 80%;
     margin: 0 auto;
+    font-size: 1.1rem;
   }
 }
 
@@ -56,15 +55,23 @@
   h2 {
     font-weight: 600;
     margin-bottom: 20px;
+    font-size: 1.4rem;
   }
 }
 
 .project-info {
+  p {
+    font-size: 1.1rem;
+  }
   h4 {
     font-style: oblique;
     text-align: center;
     margin-top: 15px;
     margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+  ul {
+    font-size: 1.1rem;
   }
 }
 
@@ -75,4 +82,39 @@
   margin: 0 auto;
 }
 
+.technology-item {
+  font-size: 1.1rem;
+}
 
+@media screen and (min-width: 1000px) and (max-width: 1280px) {
+  .about-welcome {
+    p {
+      font-size: 1.2rem;
+    }
+  }
+}
+@media screen and (min-width: 880px) and (max-width: 1001px) {
+  .about-welcome {
+    p {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 881px) {
+  .about-welcome {
+    img {
+      display: none;
+    }
+    p {
+      position: static;
+      top: 0%;
+      min-width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+  }
+}
