@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
-import { appContext } from "../../App";
+import React from "react";
 
 export const Main = () => {
   // const { color } = useApp();
 
   return (
     <div className="main-page">
-      {/* <h1 style={{ color }}>Main</h1> */}
+      {/* <h1 >Main</h1> */}
     </div>
   );
 };
