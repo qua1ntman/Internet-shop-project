@@ -15,8 +15,6 @@ import "./App.scss";
 import { Login } from "./pages/Login/Login";
 import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { Content } from "./components/Content/Content";
-
-// import { About } from "./pages/About/About";
 import { Register } from "./pages/Register/Register";
 import {
   setBackgroundColor,

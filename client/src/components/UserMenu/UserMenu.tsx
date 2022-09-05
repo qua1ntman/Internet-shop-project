@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -41,14 +42,10 @@ export default function PositionedMenu() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Link>
       </Menu>
     </div>
   );
 }
-
-        // <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
-        //   <StyledMenuItem>
-        //     Log out
-        //   </StyledMenuItem>
-        // </Link> 
