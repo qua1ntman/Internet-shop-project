@@ -1,124 +1,54 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-// import Button from '@material-ui/core/Button';
-import Menu, { MenuProps } from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-// import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-import { Link } from 'react-router-dom';
-import { IDecodedToken } from '../../interfaces/decodedToken';
-import './UserMenu.scss'
-import { useApp } from '../../contexts/AppContext';
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
-
-const StyledMenu = withStyles({
-  paper: {
-    color: localStorage.getItem('theme') 
-      ? localStorage.getItem('theme') === 'dark' 
-        ? "rgba(255, 255, 255, 1)" 
-        : "rgba(56, 54, 68, 1)" 
-      : "rgba(56, 54, 68, 1)",
-    backgroundColor: localStorage.getItem('theme') 
-      ? localStorage.getItem('theme') === 'dark' 
-        ? 'rgba(56, 54, 68, .5)' 
-        : 'rgba(243, 239, 229, .7)' 
-      : 'rgba(243, 239, 229, .7)'
-  },
-})((props: MenuProps) => (
-  <Menu
-    elevation={0}
-    getContentAnchorEl={null}
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
-    }}
-    transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
-    }}
-    {...props}
-  />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    '&:focus': {
-      backgroundColor: theme.palette.common.black,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
-}))(MenuItem);
-
-export default function UserMenu() {
+export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
+  const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const { 
-    color, 
-    setToken, 
-    decodedToken, 
-    setDecodedToken, 
-    backgroundColor
-  } = useApp();
-
-  const handleLogin = () => {
-    localStorage.removeItem('token')
-    setToken('')
-    setDecodedToken({} as IDecodedToken)
-  }
-
   return (
     <div>
-      <button
-        aria-controls="customized-menu"
+      <Button
+        id="demo-positioned-button"
+        aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
-        // variant="contained"
-        color="primary"
+        aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        className='default-btn menu-btn'
-        style={{ color, backgroundColor }}
       >
-        Menu
-      </button>
-      <StyledMenu
-        id="customized-menu"
+        Dashboard
+      </Button>
+      <Menu
+        id="demo-positioned-menu"
+        aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
+        open={open}
         onClose={handleClose}
-        className='menu-head'
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
       >
-        Hello, {decodedToken.name}!
-        <StyledMenuItem>
-          <ListItemIcon>
-            <SendIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Sent mail" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemIcon>
-            <InboxIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </StyledMenuItem>
-        <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
-          <StyledMenuItem>
-            Log out
-          </StyledMenuItem>
-        </Link> 
-      </StyledMenu>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
     </div>
   );
 }
+
+        // <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
+        //   <StyledMenuItem>
+        //     Log out
+        //   </StyledMenuItem>
+        // </Link> 
