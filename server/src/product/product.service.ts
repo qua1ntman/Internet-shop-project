@@ -9,12 +9,51 @@ export class ProductService {
   constructor(
     @InjectRepository(Product)
     private repo: Repository<Product>,
-
     private subcategoryService: SubcategoryService,
   ) {}
 
-  findAll() {
-    return this.repo.find();
+  async findAll(
+    brand: string,
+    collection: string,
+    subcategory: string,
+    page: number,
+  ) {
+    const perPage = 10;
+    const skip = (page - 1) * perPage;
+    const take = perPage;
+
+    if (subcategory) {
+      const subcategories = await this.subcategoryService.repo.find({
+        where: {
+          title: subcategory,
+        },
+        relations: {
+          products: true,
+        },
+      });
+
+      let products = subcategories
+        .map((subcategory) => subcategory.products)
+        .flat();
+
+      if (brand)
+        products = products.filter((product) => product.brand === brand);
+      if (collection)
+        products = products.filter(
+          (product) => product.collection === collection,
+        );
+
+      return products.slice(skip, skip + take);
+    }
+
+    return this.repo.find({
+      where: {
+        brand,
+        collection,
+      },
+      skip,
+      take,
+    });
   }
 
   async add(product: Product) {

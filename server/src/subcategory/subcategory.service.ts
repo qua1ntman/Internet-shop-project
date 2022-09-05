@@ -7,7 +7,7 @@ import { Subcategory } from './subcategory.entity';
 export class SubcategoryService {
   constructor(
     @InjectRepository(Subcategory)
-    private repo: Repository<Subcategory>,
+    public repo: Repository<Subcategory>,
   ) {}
 
   findAll() {

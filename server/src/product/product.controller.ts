@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
@@ -23,8 +24,13 @@ export class ProductController {
   ) {}
 
   @Get()
-  findAll() {
-    return this.service.findAll();
+  findAll(
+    @Query('brand') brand: string,
+    @Query('collection') collection: string,
+    @Query('subcategory') subcategory: string,
+    @Query('page') page: number,
+  ) {
+    return this.service.findAll(brand, collection, subcategory, page);
   }
 
   @Post()
