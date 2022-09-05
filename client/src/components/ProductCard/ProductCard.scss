@@ -56,16 +56,8 @@
   }
 }
 
-.button-add {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 150px;
-  height: 45px;
-  background-color: black;
-  color: white;
-  margin: 10px auto;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
+.image-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

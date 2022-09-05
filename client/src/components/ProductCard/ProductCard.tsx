@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {  IProductData } from "../../interfaces/dataInterface";
 import "./ProductCard.scss";
 import { changeOpasity } from "./../../helpers/changeOpasity";
@@ -23,7 +23,7 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
     setIsHovering(false);
   };
 
-  const { increaseCartQuantity } = useShoppingCart();
+  // const { increaseCartQuantity } = useShoppingCart();
 
   const {
     clickedSubcategory
@@ -38,7 +38,7 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
   };
 
   return (
-    <div className="product-card" onClick={handleProductPage}>
+    <div className="product-card" onClick={handleProductPage} onMouseOver={handleMouseOver} onMouseLeave={handleMouseOut}>
       <img className="card-image" src={item.images[0]} alt={clickedSubcategory!.title} />
       <span
         className="card-status"
@@ -58,6 +58,11 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
       <span className="card-price" style={{ color }}>
         {formatCurrency(item.price)}
       </span>
+      {isHovering && (
+        <div className="card-hover">
+          <img className="image-hover" src={item.images[1]} alt={' '} />
+        </div>
+      )}
     </div>
   );
 };
