@@ -2,6 +2,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
+import { useApp } from '../../contexts/AppContext';
+import { IDecodedToken } from '../../interfaces/decodedToken';
 
 export default function PositionedMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -13,6 +16,14 @@ export default function PositionedMenu() {
     setAnchorEl(null);
   };
 
+  const { setToken, setDecodedToken, color, decodedToken } = useApp() 
+
+  const handleLogin = () => {
+    localStorage.removeItem('token')
+    setToken('')
+    setDecodedToken({} as IDecodedToken)
+  }
+
   return (
     <div>
       <Button
@@ -22,7 +33,7 @@ export default function PositionedMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Dashboard
+        Menu
       </Button>
       <Menu
         id="demo-positioned-menu"
@@ -39,16 +50,13 @@ export default function PositionedMenu() {
           horizontal: 'left',
         }}
       >
+        Hello, {decodedToken.name}!
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
+          <MenuItem onClick={handleClose}>Logout</MenuItem>
+        </Link>
       </Menu>
     </div>
   );
 }
-
-        // <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
-        //   <StyledMenuItem>
-        //     Log out
-        //   </StyledMenuItem>
-        // </Link> 
