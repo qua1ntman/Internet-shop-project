@@ -31,4 +31,20 @@ export class User {
   @Column({ default: Role.USER })
   @IsEmpty()
   role: Role;
+
+  @Column({ default: false })
+  @IsEmpty()
+  subscribed: boolean;
+
+  @Column({ nullable: true })
+  @IsEmpty()
+  chatId: number;
+}
+
+export class UserLogin {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  password: string;
 }

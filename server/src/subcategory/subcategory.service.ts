@@ -7,11 +7,15 @@ import { Subcategory } from './subcategory.entity';
 export class SubcategoryService {
   constructor(
     @InjectRepository(Subcategory)
-    private repo: Repository<Subcategory>,
+    public repo: Repository<Subcategory>,
   ) {}
 
   findAll() {
-    return this.repo.find();
+    return this.repo.find({
+      relations: {
+        products: true,
+      },
+    });
   }
 
   add(subcategory: Subcategory) {
@@ -19,7 +23,14 @@ export class SubcategoryService {
   }
 
   findById(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.findOne({
+      where: {
+        id,
+      },
+      relations: {
+        products: true,
+      },
+    });
   }
 
   async deleteById(id: number) {

@@ -2,42 +2,76 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { Repository } from 'typeorm';
-import { CategoryService } from '../category/category.service';
-import { Category } from '../category/category.entity';
+import { SubcategoryService } from '../subcategory/subcategory.service';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(Product)
     private repo: Repository<Product>,
-
-    private categoryService: CategoryService,
+    private subcategoryService: SubcategoryService,
   ) {}
 
-  findAll() {
+  async findAll(
+    brand: string,
+    collection: string,
+    subcategory: string,
+    page: number,
+  ) {
+    const perPage = 10;
+    const skip = (page - 1) * perPage;
+    const take = perPage;
+
+    if (subcategory) {
+      const subcategories = await this.subcategoryService.repo.find({
+        where: {
+          title: subcategory,
+        },
+        relations: {
+          products: true,
+        },
+      });
+
+      let products = subcategories
+        .map((subcategory) => subcategory.products)
+        .flat();
+
+      if (brand)
+        products = products.filter((product) => product.brand === brand);
+      if (collection)
+        products = products.filter(
+          (product) => product.collection === collection,
+        );
+
+      return products.slice(skip, skip + take);
+    }
+
     return this.repo.find({
-      relations: {
-        categories: true,
+      where: {
+        brand,
+        collection,
       },
+      skip,
+      take,
     });
   }
 
   async add(product: Product) {
-    product.categoryIds = Array.from(new Set(product.categoryIds));
-    product.categories = await Promise.all(
-      product.categoryIds.map((id) => {
-        return this.categoryService.findById(id);
-      }),
+    const subcategories = await Promise.all(
+      product.subcategoryIds.map((id) => this.subcategoryService.findById(id)),
     );
 
-    const invalidIds = [];
-    product.categories.forEach((category, index) => {
-      if (category instanceof Category) return;
-      invalidIds.push(product.categoryIds[index]);
+    if (subcategories.includes(null))
+      return subcategories.filter((sc) => sc === null);
+
+    product.subcategoryIds = undefined;
+    await this.repo.save(product);
+    subcategories.forEach((subcategory) => {
+      subcategory.products.push(product);
+      this.subcategoryService.add(subcategory);
     });
 
-    if (invalidIds.length) return invalidIds;
-    return await this.repo.save(product);
+    return product;
   }
 
   findById(id: number) {

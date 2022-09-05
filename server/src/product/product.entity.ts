@@ -1,15 +1,14 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import {
   IsBoolean,
   IsEmpty,
   IsInt,
+  IsJSON,
   IsNumber,
   IsOptional,
   IsString,
   IsUrl,
 } from 'class-validator';
-import { Category } from '../category/category.entity';
-import { JoinTable } from 'typeorm';
 
 @Entity()
 export class Product {
@@ -19,7 +18,7 @@ export class Product {
 
   @Column()
   @IsString()
-  title: string;
+  brand: string;
 
   @Column({ nullable: true })
   @IsString()
@@ -31,18 +30,13 @@ export class Product {
   @IsOptional()
   thumbnail: string;
 
-  @Column('simple-array', { default: [] })
+  @Column('simple-array', { default: {} })
   @IsUrl(undefined, { each: true })
   @IsOptional()
   images: string[];
 
-  @IsEmpty()
-  @ManyToMany(() => Category)
-  @JoinTable()
-  categories: Category[];
-
   @IsInt({ each: true })
-  categoryIds: number[];
+  subcategoryIds: number[];
 
   @IsBoolean()
   @Column({ default: false })
@@ -50,10 +44,41 @@ export class Product {
   new: boolean;
 
   @IsString()
-  @Column()
+  @Column({ default: '' })
+  @IsOptional()
   color: string;
+
+  @IsOptional()
+  @IsJSON()
+  @Column('simple-json', { default: {} })
+  colors: object;
 
   @IsNumber({ maxDecimalPlaces: 2 })
   @Column('float')
   price: number;
+
+  @Column('simple-array', { default: {} })
+  @IsOptional()
+  @IsString({ each: true })
+  material: string[];
+
+  @Column({ nullable: true })
+  @IsOptional()
+  @IsString()
+  collection: string;
+
+  @Column({ nullable: true })
+  @IsOptional()
+  @IsString()
+  kind: string;
+
+  @Column('float', { nullable: true })
+  @IsOptional()
+  @IsNumber({ maxDecimalPlaces: 2 })
+  discount: number;
+
+  @Column('simple-array', { default: '' })
+  @IsOptional()
+  @IsString({ each: true })
+  size: string[];
 }

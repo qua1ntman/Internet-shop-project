@@ -11,7 +11,11 @@ export class CategoryService {
   ) {}
 
   findAll() {
-    return this.repo.find();
+    return this.repo.find({
+      relations: {
+        subcategories: true,
+      },
+    });
   }
 
   add(category: Category) {
@@ -19,7 +23,10 @@ export class CategoryService {
   }
 
   findById(id: number) {
-    return this.repo.findOneBy({ id });
+    return this.repo.findOne({
+      where: { id },
+      relations: { subcategories: true },
+    });
   }
 
   async deleteById(id: number) {

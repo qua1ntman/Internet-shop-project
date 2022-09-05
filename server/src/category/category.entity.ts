@@ -1,6 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IsEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Subcategory } from '../subcategory/subcategory.entity';
+import { JoinColumn } from 'typeorm';
 
 @Entity()
 export class Category {
@@ -22,12 +30,8 @@ export class Category {
   @IsOptional()
   thumbnail: string;
 
-  @Column('simple-array', { default: [] })
-  @IsUrl(undefined, { each: true })
-  @IsOptional()
-  images: string[];
-
-  @OneToMany(() => Subcategory, (subcategory) => subcategory.category)
   @IsEmpty()
+  @ManyToMany(() => Subcategory)
+  @JoinTable()
   subcategories: Subcategory[];
 }
