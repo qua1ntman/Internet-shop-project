@@ -1,10 +1,10 @@
 import React from 'react'
-import { localStorageStateUpdator } from '../../helpers/localStorageStateUpdator';
 import { ISubCategoryData } from '../../interfaces/dataInterface';
 import { useCategory } from './../../contexts/CategoryContext';
 import './Sort.scss'
 import { productSorter } from './../../helpers/sorter';
 import { useApp } from '../../contexts/AppContext';
+import { storageStateUpdator } from '../../helpers/storageStateUpdator';
 
 export const Sort = () => {
 
@@ -19,21 +19,21 @@ export const Sort = () => {
 
   const handlePriceSort = () => {
     let data: string = sort === 'ᐁ' ? 'ᐃ' : sort === 'ᐃ' ? 'ᐁ' : 'ᐃ'
-    localStorageStateUpdator(setSort, data, 'sort')
+    storageStateUpdator(setSort, data, 'sort')
     let sortedData: ISubCategoryData = 
       JSON.parse(JSON.stringify(clickedSubcategory))
     sortedData.products = productSorter(sortedData.products!, sort)
-    localStorageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
+    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
     setClickedSubcategory(sortedData)
   }
 
   const handleTitleSort = () => {
     let data: string = sort === 'A-Z' ? 'Z-A' : sort === 'Z-A' ? 'A-Z' : 'Z-A'
-    localStorageStateUpdator(setSort, data, 'sort')
+    storageStateUpdator(setSort, data, 'sort')
     let sortedData: ISubCategoryData = 
       JSON.parse(JSON.stringify(clickedSubcategory))
     sortedData.products = productSorter(sortedData.products!, sort)
-    localStorageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
+    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
     setClickedSubcategory(sortedData)
   }
 

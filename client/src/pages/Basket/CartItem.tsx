@@ -1,74 +1,53 @@
-import { useShoppingCart } from "../../contexts/ShoppingCartContext";
-import storeItems from "./items.json";
 import { formatCurrency } from "../../helpers/formatCurrency";
 import React from "react";
+import { IProductDataAndAmount } from './../../interfaces/dataInterface';
+import { storageStateUpdator } from "../../helpers/storageStateUpdator";
+import { useApp } from "../../contexts/AppContext";
 
-type CartItemProps = {
-  id: number;
-  quantity: number;
-};
+export function CartItem({ product }: {product: IProductDataAndAmount}) {
 
-export function CartItem({ id, quantity }: CartItemProps) {
-  const {
-    getItemQuantity,
-    increaseCartQuantity,
-    decreaseCartQuantity,
-    removeFromCart,
-  } = useShoppingCart();
-  
-  const quant = getItemQuantity(id);
+  const { cardProducts, setCardProducts } = useApp()
 
-  const item = storeItems.find((i) => i.id === id);
-  if (!item) return null;
+  const handleRemoveCard = (id: number, size: number | string) => {
+    storageStateUpdator(
+      setCardProducts, 
+      (() => cardProducts
+      .filter((item) => !(item.size === size && item.id === id) ))(),
+      'cardProducts', 'session'
+    )
+    console.log(cardProducts, (() => cardProducts
+      .filter((item) => !(item.size === size && item.id === id) ))());
+    
+  }
 
   return (
     <tbody>
       <tr className="item">
         <td className="item-image">
           <img
-            src={item.imgUrl}
+            src={product.images[0]}
             alt={' '}
             style={{ width: "125px", height: "75px", objectFit: "cover" }}
           />
         </td>
         <td >
-          {item.name}{" "}
+          {product.brand}{" "}
         </td>
         <td>
-          {quantity === 0 ? (
-            <button
-              className="button-quantity"
-              onClick={() => increaseCartQuantity(id)}
-            >
-              {quant}
-              </button>
-            ) : (
-            <div
-              className=""
-              style={{ gap: ".5rem" }}
-            >
-              <div className="amount">
-                <button className="minus" onClick={() => decreaseCartQuantity(id)}>
-                  -
-                </button>
-                <div>
-                  <span className="">{quantity}</span>
-                </div>
-                <button className="plus" onClick={() => increaseCartQuantity(id)}>
-                  +
-                </button>
-              </div>
-            </div>
+          {product.amount > 0 && (
+            <span>
+              {product.amount}
+            </span>
           )}
         </td>
         <td>
-          {item.id}
+          {product.size}
         </td>
-        <td> {formatCurrency(item.price * quantity)}</td>
+        <td> {formatCurrency(product.price * product.amount)}</td>
         <td>
           <button
             className="button-delete"
-            onClick={() => removeFromCart(item.id)}
+            onClick={() => handleRemoveCard(product.id, product.size)}
           >
           &times;
           </button>

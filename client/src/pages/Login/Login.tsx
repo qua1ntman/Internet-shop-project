@@ -7,7 +7,7 @@ import { isValidEmail } from "../../helpers/validators";
 import { postLogin } from "../../queries/authQueries";
 import { TFormState } from "../../types/defaultObjType";
 import "./Login.scss";
-import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { storageStateUpdator } from './../../helpers/storageStateUpdator';
 import jwt_decode from 'jwt-decode';
 import { useApp } from "../../contexts/AppContext";
 
@@ -39,7 +39,7 @@ export const Login = () => {
     e.preventDefault();
     postLogin(formData)
       .then((res) => {
-        localStorageStateUpdator(setToken, res.data.token, 'token')
+        storageStateUpdator(setToken, res.data.token, 'token')
         setDecodedToken(jwt_decode(res.data.token))
       })
       .catch((err) => {

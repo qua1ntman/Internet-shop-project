@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import {  IProductData } from "../../interfaces/dataInterface";
 import "./ProductCard.scss";
 import { changeOpasity } from "./../../helpers/changeOpasity";
 import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
-import { useShoppingCart } from "../../contexts/ShoppingCartContext";
-import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { storageStateUpdator } from './../../helpers/storageStateUpdator';
 import { useApp } from "../../contexts/AppContext";
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
-  
   const navigate = useNavigate();
 
   const { color, setChosenProduct } = useApp();
@@ -31,15 +29,16 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
     clickedSubcategory
   } = useCategory();
 
+
   const handleProductPage = () => {
-    localStorageStateUpdator(setChosenProduct, item, 'product')
+    storageStateUpdator(setChosenProduct, item, 'product')
     navigate({
       pathname: `/product/${item.id}`,
     });
   };
 
   return (
-    <div className="product-card" onClick={handleProductPage} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <div className="product-card" onClick={handleProductPage}>
       <img className="card-image" src={item.images[0]} alt={clickedSubcategory!.title} />
       <span
         className="card-status"
@@ -59,17 +58,6 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
       <span className="card-price" style={{ color }}>
         {formatCurrency(item.price)}
       </span>
-      <div className="card-hover">
-        {isHovering && (
-          <><img src={item.images[1]} alt={clickedSubcategory!.title} />
-          <ul className="item-size">
-            {item.size.map((size) => (
-            <li key={size}>{size}</li>
-            ))}
-          </ul>
-          <button className="button-add" onClick={() => increaseCartQuantity(item.id)}>Add to cart</button></>
-        )}
-      </div>
     </div>
   );
 };

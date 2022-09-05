@@ -6,9 +6,9 @@ import { TFormState } from "../../types/defaultObjType";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../../components/Logo/Logo";
 import { postRegister } from './../../queries/authQueries';
-import { localStorageStateUpdator } from "../../helpers/localStorageStateUpdator";
 import jwt_decode from 'jwt-decode'
 import { useApp } from "../../contexts/AppContext";
+import { storageStateUpdator } from "../../helpers/storageStateUpdator";
 
 export const Register = () => {
   const { 
@@ -69,7 +69,7 @@ export const Register = () => {
 
     postRegister(toServerData)
       .then((res) => {
-        localStorageStateUpdator(setToken, res.data.token, 'token')
+        storageStateUpdator(setToken, res.data.token, 'token')
         setDecodedToken(jwt_decode(res.data.token))
       })
       .catch((err) => {
