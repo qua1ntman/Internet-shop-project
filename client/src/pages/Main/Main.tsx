@@ -27,7 +27,11 @@ export const Main = () => {
 
   return (
     <div className="main-category-data-container">
-      <h2>Welcome to our shop. We are MIO Market & Co. - world wide commercial company. Our target is to simplify all motions to get the product you want</h2>
+      <h2>
+        Welcome to our shop. 
+        We are MIO Market & Co. - world wide commercial company.
+        Our target is to simplify all motions to get the product you want.
+      </h2>
       <div className="main-cards-container">
         {!clickedSubcategory && 
           <Loader />
