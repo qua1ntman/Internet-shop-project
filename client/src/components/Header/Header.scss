@@ -11,10 +11,13 @@
 }
 
 .login,
-.lang,
 .cart {
-  color: white;
-  font-size: 20px;
+  color: rgb(56, 54, 68);;
+  font-size: 1.2rem;
+}
+
+.lang {
+  display: none;
 }
 
 .cart {
@@ -43,7 +46,6 @@
     align-self: baseline;
     order: 1;
     width: 100%;
-    // padding-top: 15px;
   }
 }
 
@@ -55,12 +57,11 @@
     align-self: baseline;
     order: 1;
     width: 100%;
-    // padding-top: 15px;
+  }
+  .login,
+  .lang,
+  .cart {
+    color: rgb(56, 54, 68);;
+    font-size: 1rem;
   }
 }
-
-// .search {
-//   align-self: baseline;
-//     order: -1;
-//     width: 90%;
-// }
