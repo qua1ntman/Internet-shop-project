@@ -1,6 +1,5 @@
-import { MenuProps } from '@material-ui/core/Menu';
 
-export interface IMenuProps extends MenuProps {
+export interface IMenuProps  {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   styles: any
 }
