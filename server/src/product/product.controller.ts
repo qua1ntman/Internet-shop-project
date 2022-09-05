@@ -7,20 +7,30 @@ import {
   NotFoundException,
   Param,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { GuardAdmin } from '../guard/guard.admin';
 import { validateSync } from 'class-validator';
 import { Product } from './product.entity';
+import { UserService } from '../user/user.service';
 
 @Controller('product')
 export class ProductController {
-  constructor(private service: ProductService) {}
+  constructor(
+    private service: ProductService,
+    private userService: UserService,
+  ) {}
 
   @Get()
-  findAll() {
-    return this.service.findAll();
+  findAll(
+    @Query('brand') brand: string,
+    @Query('collection') collection: string,
+    @Query('subcategory') subcategory: string,
+    @Query('page') page: number,
+  ) {
+    return this.service.findAll(brand, collection, subcategory, page);
   }
 
   @Post()
@@ -30,16 +40,18 @@ export class ProductController {
     const result = await this.service.add(product);
     if (Array.isArray(result))
       throw new BadRequestException(
-        `Unknown category ids [${result.join(', ')}]`,
+        `Unknown subcategory ids [${result.join(', ')}]`,
       );
+
+    await this.userService.notifyBot(product);
     return result;
   }
 
   @Get(':id')
   async id(@Param('id') id: number) {
     if (isNaN(id)) throw new NotFoundException();
-    const category = await this.service.findById(id);
-    if (category) return category;
+    const product = await this.service.findById(id);
+    if (product) return product;
     throw new NotFoundException();
   }
 
@@ -47,8 +59,8 @@ export class ProductController {
   @UseGuards(GuardAdmin)
   async idDelete(@Param('id') id: number) {
     if (isNaN(id)) throw new NotFoundException();
-    const category = await this.service.deleteById(id);
-    if (category) return category;
+    const product = await this.service.deleteById(id);
+    if (product) return product;
     throw new NotFoundException();
   }
 }
