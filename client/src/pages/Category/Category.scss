@@ -14,6 +14,8 @@
   width: max(150px, 20%);
   align-items: center;
   margin: 20px;
+  align-self: start;
+    position: sticky;
   & > a {
     margin: 10px;
   }
