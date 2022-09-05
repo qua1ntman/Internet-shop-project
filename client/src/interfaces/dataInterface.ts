@@ -59,6 +59,25 @@ export interface IProductData {
   size: number[] | string[]
 }
 
+export interface IProductDataAndAmount {
+  id: number,
+  brand: string,
+  description: string | null,
+  thumbnail: string | null,
+  images: string[],
+  new: boolean,
+  color: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  colors: any,
+  price: number,
+  material: string | string[],
+  collection: string,
+  kind: string,
+  discount: number
+  size: number | string
+  amount: number
+}
+
 export interface ITeamItem {
   name: string;
   position: string;
