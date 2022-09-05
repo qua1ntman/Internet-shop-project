@@ -9,7 +9,15 @@ type CartItemProps = {
 };
 
 export function CartItem({ id, quantity }: CartItemProps) {
-  const { removeFromCart } = useShoppingCart();
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCart();
+  
+  const quant = getItemQuantity(id);
+
   const item = storeItems.find((i) => i.id === id);
   if (!item) return null;
 
@@ -27,10 +35,30 @@ export function CartItem({ id, quantity }: CartItemProps) {
           {item.name}{" "}
         </td>
         <td>
-          {quantity > 0 && (
-            <span>
-              {quantity}
-            </span>
+          {quantity === 0 ? (
+            <button
+              className="button-quantity"
+              onClick={() => increaseCartQuantity(id)}
+            >
+              {quant}
+              </button>
+            ) : (
+            <div
+              className=""
+              style={{ gap: ".5rem" }}
+            >
+              <div className="amount">
+                <button className="minus" onClick={() => decreaseCartQuantity(id)}>
+                  -
+                </button>
+                <div>
+                  <span className="">{quantity}</span>
+                </div>
+                <button className="plus" onClick={() => increaseCartQuantity(id)}>
+                  +
+                </button>
+              </div>
+            </div>
           )}
         </td>
         <td>
