@@ -1,17 +1,27 @@
 import { useShoppingCart } from "../../../contexts/ShoppingCartContext";
 import { CartItem } from "../CartItem";
-import storeItems from "../items.json";
-import React from "react";
+import React, { useEffect } from "react";
 import { Drawer } from "@mui/material";
 import "./ShoppingCart.scss";
 import { formatCurrency } from "../../../helpers/formatCurrency";
+import { useApp } from "../../../contexts/AppContext";
 
 type ShoppingCartProps = {
   isOpen: boolean;
 };
 
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
-  const { closeCart, cartItems } = useShoppingCart();
+
+
+
+  const { closeCart } = useShoppingCart();
+
+  const { cardProducts } = useApp()
+
+  useEffect(() => {
+    console.log(cardProducts);
+  }, [cardProducts])
+
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>
       <h2 className="basket-header"> Your shopping list</h2>
@@ -27,18 +37,20 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
             <th>Delete</th>
           </tr>
         </thead>
-        {cartItems.map(item => (
-          <CartItem key={item.id} {...item} />
-        ))}
+        {cardProducts &&
+          cardProducts.map(item => (
+            <CartItem key={`${item.id}${item.size}`} product={item} />
+          ))
+        }
         <tfoot>
           <tr>
             <td>
               Total{' '}
                 {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const item = storeItems.find(i => i.id === cartItem.id)
-                  return total + (item?.price || 0) * cartItem.quantity
-                }, 0)
+                cardProducts ? cardProducts.reduce((total, cartItem) => {
+                  const item = cardProducts.find(i => i.id === cartItem.id)
+                  return total + (item?.price || 0) * cartItem.amount
+                }, 0) : 0
               )}
             </td>
           </tr>

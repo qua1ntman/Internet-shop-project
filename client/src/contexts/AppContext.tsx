@@ -11,6 +11,7 @@ import { IProductData, ICategoryData } from "../interfaces/dataInterface";
 import { IDecodedToken } from "../interfaces/decodedToken";
 import jwt_decode from 'jwt-decode'
 import { themeTextChanger, themeBackChanger } from "../helpers/themeStyleChanger";
+import { IProductDataAndAmount } from './../interfaces/dataInterface';
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
 export const AppContext = createContext(Object) as unknown as Context<{
@@ -25,6 +26,8 @@ export const AppContext = createContext(Object) as unknown as Context<{
   setToken: Dispatch<SetStateAction<string>>;
   decodedToken: IDecodedToken;
   setDecodedToken: Dispatch<SetStateAction<IDecodedToken>>;
+  cardProducts: IProductDataAndAmount[]
+  setCardProducts: Dispatch<SetStateAction<IProductDataAndAmount[]>>
 }>;
 
 export const useApp = () => {
@@ -40,6 +43,15 @@ export const AppProvider = ({
     categories: ICategoryData[], 
     setCategories: Dispatch<SetStateAction<ICategoryData[]>>
   } }) => {
+  
+  const [
+    cardProducts, 
+    setCardProducts
+  ] = useState(
+    sessionStorage.getItem('cardProducts') 
+      ? JSON.parse(sessionStorage.getItem('cardProducts')!) 
+      : [] as IProductDataAndAmount[]
+  )
 
   const [
     chosenProduct, 
@@ -88,6 +100,8 @@ export const AppProvider = ({
           setToken,
           decodedToken,
           setDecodedToken,
+          cardProducts, 
+          setCardProducts,
           ...props
         }}
       >

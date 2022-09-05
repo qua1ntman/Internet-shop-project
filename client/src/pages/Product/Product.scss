@@ -52,3 +52,26 @@
   display: flex;
   flex-direction: column;
 }
+
+.product-amount {
+  display: flex;
+  gap: 10px;
+  & > div {
+    min-width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.plus-btn {
+  font-weight: bold;
+  border: 1px solid black;
+  line-height: 8px;
+}
+
+.minus-btn {
+  font-weight: bold;
+  border: 1px solid black;
+  line-height: 8px;
+}

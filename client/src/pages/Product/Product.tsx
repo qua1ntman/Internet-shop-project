@@ -1,33 +1,69 @@
-import React, { useState } from "react";
-import { IProductData } from "./../../interfaces/dataInterface";
+import React, { useEffect, useRef, useState } from "react";
 import "./Product.scss";
 import { useCategory } from './../../contexts/CategoryContext';
 import { useApp } from "../../contexts/AppContext";
+import { formatCurrency } from './../../helpers/formatCurrency';
+import { Loader } from './../../components/Loader/Loader';
+import { storageStateUpdator } from './../../helpers/storageStateUpdator';
 
-export const Product = ({ product }: { product: IProductData | undefined }) => {
+export const Product = () => {
 
-  const [bigImg, setBigImg] = useState(product!.images[0]);
+  const sizeFieldRef = useRef() as React.MutableRefObject<HTMLSelectElement>
+ 
+  const { 
+    theme, 
+    color, 
+    chosenProduct, 
+    setCardProducts, 
+    cardProducts
+  } = useApp();
+
+  const [bigImg, setBigImg] = useState(chosenProduct!.images[0]);
+
+  const [amount, setAmount] = useState(1)
+
+  const [
+    productSize, 
+    setProductSize
+  ] = useState<string | number>(chosenProduct.size[0])
 
   const { clickedSubcategory } = useCategory()
 
-  const { theme, color } = useApp();
-
-  const handleCatd = () => {
-    
+  const handleCard = () => {
+    storageStateUpdator(
+      setCardProducts, 
+      (() => {
+        let existProd = cardProducts.find((item) => 
+          item.id === chosenProduct.id 
+          && item.size === productSize
+        )
+        if (existProd) {
+          return cardProducts.map((item) => {
+            if (item.id === existProd!.id) {
+              return { ...existProd!, amount: item.amount + amount } 
+            } else return item
+          })
+        }
+        
+        return [
+          ...cardProducts, { 
+            ...chosenProduct, 
+            amount: amount, 
+            size: productSize
+          }
+        ]
+      })(),
+      'cardProducts', 'session'
+    )
+   
   }
 
-  product = product 
-    ? product 
-    : localStorage.getItem('product') 
-      ? JSON.parse(localStorage.getItem('product')!) 
-      : undefined
-
-  if (product) {
+    if (chosenProduct) {
     return (
       <div className="product-page-container">
         <div className="product-images-container">
           <div className="product-slider">
-            {product.images.map((img, i) => {
+            {chosenProduct.images.map((img, i) => {
               return (
                 <img
                   onClick={() => setBigImg(img)}
@@ -46,10 +82,16 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
         <div className="product-info-container">
           <div className="product-sizes">
             <label htmlFor="size" style={{ color }}>
-              Size:{" "}
+              Size: 
             </label>
-            <select name="size" id="size" defaultValue={product.size[0]}>
-              {product.size.map((item: string | number, i: number) => {
+            <select 
+              name="size" 
+              id="size" 
+              defaultValue={chosenProduct.size[0]}
+              ref={sizeFieldRef}
+              onChange={() => setProductSize(sizeFieldRef.current.value)}
+            >
+              {chosenProduct.size.map((item: string | number, i: number) => {
                 return (
                   <option key={i} value={item}>
                     {item}
@@ -72,11 +114,11 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
             </div>
             <div className="product-description-value">
               {[
-                Array.isArray(product.material) ? product.material.join(", ") : product.material,
-                product.color,
-                product.collection,
-                product.brand,
-                `${product.kind ? "Yes" : "No"}`,
+                Array.isArray(chosenProduct.material) ? chosenProduct.material.join(", ") : chosenProduct.material,
+                chosenProduct.color,
+                chosenProduct.collection,
+                chosenProduct.brand,
+                `${chosenProduct.kind ? "Yes" : "No"}`,
               ].map((y, i) => {
                 return (
                   <span style={{ color }} key={i}>
@@ -86,18 +128,34 @@ export const Product = ({ product }: { product: IProductData | undefined }) => {
               })}
             </div>
           </div>
+          <div className="price">Price: {formatCurrency(chosenProduct.price)}</div>
+          <div className="product-amount">
+            Amount: 
+            <button 
+              className="default-btn plus-btn"
+              onClick={() => setAmount(() => amount-1)}
+              disabled={amount === 1}
+            >-</button>
+            <div>
+              <span>{amount}</span>
+            </div>
+            <button 
+              className="default-btn minus-btn"
+              onClick={() => setAmount(() => amount+1)}
+            >+</button>
+          </div>
           <button
             className="default-btn add-to-cart"
             style={{
               color: theme === "light" ? "white" : "black",
               backgroundColor: color,
             }}
-            onClick={handleCatd}
+            onClick={handleCard}
           >
             ADD TO CARD
           </button>
         </div>
       </div>
     );
-  } else return <div>No no no</div>;
+  } else return <Loader />;
 };
