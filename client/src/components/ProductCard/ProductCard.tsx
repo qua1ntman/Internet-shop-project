@@ -13,7 +13,22 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
 
   const { color, setChosenProduct } = useApp();
 
-  const { clickedSubcategory } = useCategory();
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+
+  const { increaseCartQuantity } = useShoppingCart();
+
+  const {
+    clickedSubcategory
+  } = useCategory();
+
 
   const handleProductPage = () => {
     storageStateUpdator(setChosenProduct, item, 'product')

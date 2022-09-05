@@ -1,9 +1,12 @@
 .main-nav {
   display: flex;
-  height: 40px;
+  flex-direction: row;
+  height: 100%;
   width: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   & > ul {
     margin: auto;
     display: flex;
@@ -23,4 +26,12 @@
 
 .link-active {
   text-decoration: underline;
+}
+
+@media screen and (min-width: 350px) and (max-width: 768px) {
+  .main-nav {
+    & > ul {
+      gap: 20px;
+    }
+  }
 }

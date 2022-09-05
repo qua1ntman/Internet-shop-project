@@ -6,6 +6,8 @@ import { getSubcategory } from "../../queries/categoryQueries";
 import { ProductCardContainer } from "../../components/ProductCardContainer/ProductCardContainer";
 import { Loader } from "../../components/Loader/Loader";
 import { useApp } from "../../contexts/AppContext";
+import Burger from "../../assets/svg/burger.svg";
+import DOMPurify from "dompurify";
 import { storageStateUpdator } from "../../helpers/storageStateUpdator";
 
 export const Category = () => {
@@ -17,6 +19,15 @@ export const Category = () => {
     clickedSubcategory,
     setSort
   } = useCategory();
+
+  const clickedBurger = () => {
+    let x = document.getElementById("subcategories") as HTMLElement;
+    if(x.className === "subcategories") {
+      x.className += " responsive";
+    } else {
+      x.className = "subcategories";
+    }
+  }
 
   useEffect(() => {
     if (
@@ -61,7 +72,7 @@ export const Category = () => {
       {!isDataExist() && <Loader />}
       {isDataExist() && 
         <>
-          <div className="subcategories">
+          <div className="subcategories" id="subcategories">
             {clickedCategory!.subcategories.map((item) => {
               return (
                 <Link
@@ -74,6 +85,11 @@ export const Category = () => {
                 >{item.title}</Link>
               );
             })}
+            <span 
+              className="burger"
+              onClick={clickedBurger}
+              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(Burger) }}
+            ></span>
           </div>
           <Routes>
             <Route
