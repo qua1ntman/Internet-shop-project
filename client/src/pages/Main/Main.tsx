@@ -15,7 +15,7 @@ export const Main = () => {
   const { categories } = useApp()
 
   useEffect(() => {
-    getSubcategory(JSON.parse(localStorage.getItem('subcategory')!).id || categories[0].subcategories[0].id)
+    getSubcategory(localStorage.getItem('subcategory') ? JSON.parse(localStorage.getItem('subcategory')!).id : categories[0].subcategories[0].id)
       .then((res) => {
         setClickedSubcategory(res.data)
       })
