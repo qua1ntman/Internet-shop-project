@@ -26,9 +26,9 @@ import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import { CategoryProvider } from "./contexts/CategoryContext";
 import { getCategories } from "./queries/categoryQueries";
 import { Loader } from "./components/Loader/Loader";
-import { localStorageStateUpdator } from "./helpers/localStorageStateUpdator";
 import { IDecodedToken } from "./interfaces/decodedToken";
 import { AppProvider } from "./contexts/AppContext";
+import { storageStateUpdator } from "./helpers/storageStateUpdator";
 
 
 // Контекст для пропсов, в данном случае для useState хука внутри App
@@ -52,34 +52,6 @@ setBackgroundColor()
 
 export const App = () => {
 
-  // const [
-  //   chosenProduct, 
-  //   setChosenProduct
-  // ] = useState<IProductData>(
-  //   localStorage.getItem('product')
-  //   ? JSON.parse(localStorage.getItem('product')!)
-  //   : {} as IProductData);
-
-  // const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // const [
-  //   decodedToken, 
-  //   setDecodedToken
-  // ] = useState<IDecodedToken>(
-  //   localStorage.getItem('token') 
-  //     ? jwt_decode(localStorage.getItem('token')!) 
-  //     : {} as IDecodedToken
-  // )
-  
-  // useEffect(() => {
-  //   console.log(decodedToken);
-  // }, [decodedToken])
-
-  // Хук для изменения темы
-  // const [theme, setTheme] = useState<string>(
-  //   localStorage.getItem("theme") || "light"
-  // );
-
   const [
     categories, 
     setCategories
@@ -92,45 +64,37 @@ export const App = () => {
     getCategories()
       .then((res) => {
         const categoryData: ICategoryData[] = res.data;
-        localStorageStateUpdator(setCategories, categoryData, 'categories')
+        storageStateUpdator(setCategories, categoryData, 'categories')
       })
       .catch((e: Error) => {
         console.log(e.message);
       }); 
   }, []);
 
-
-
-  // let { color } = themeTextChanger(theme);
-  // let { backgroundColor } = themeBackChanger(theme);
-
   if (!categories || categories.length === 0) return <Loader/>
 
   return (
-    <ShoppingCartProvider>
+    <AppProvider 
+      props={{ 
+        categories, 
+        setCategories
+      }}
+      >
       <CategoryProvider>
-        <AppProvider 
-          props= {{ 
-            categories, 
-            setCategories
-          }}
-        >
+        <ShoppingCartProvider>
           <Router>
               <Routes>
                 <Route 
                   path={"/*"} 
-                  element={<Content 
-                    // categories={categories} 
-                    // chosenProduct={chosenProduct}
-                  />} 
+                  element={<Content />} 
                 />
                 <Route path={"login"} element={<Login />} />
                 <Route path={"register"} element={<Register />} />
                 <Route path={"*"} element={<ErrorPage />} />
               </Routes>
           </Router>
-        </AppProvider>
+        </ShoppingCartProvider>
       </CategoryProvider>
-    </ShoppingCartProvider>
+    </AppProvider>
   );
 };

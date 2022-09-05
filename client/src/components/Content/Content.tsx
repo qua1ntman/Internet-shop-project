@@ -9,9 +9,9 @@ import { ICategoryData } from "../../interfaces/dataInterface";
 import { Category } from "../../pages/Category/Category";
 import { ErrorPage } from "../../pages/ErrorPage/ErrorPage";
 import { Product } from "../../pages/Product/Product";
-import { Store } from "../../pages/Store/Store";
 import { About } from "../../pages/About/About";
 import { useApp } from "../../contexts/AppContext";
+import { Main } from './../../pages/Main/Main';
 
 
 export const Content = () => {
@@ -28,7 +28,7 @@ export const Content = () => {
         <div className="container">
           <Routes>
             <Route path={"/"} element={<Navigate to={"main"} />} />
-            <Route path={"main"} element={<Store />} />
+            <Route path={"main/*"} element={<Main />} />
             {categories.map((item: ICategoryData) => {
               return (
                 <Route
@@ -41,7 +41,7 @@ export const Content = () => {
             <Route path={"about"} element={<About/>} />
             <Route
               path={`/product/${chosenProduct?.id}`}
-              element={<Product product={chosenProduct} />}
+              element={<Product />}
             />
             <Route path={"*"} element={<ErrorPage />} />
           </Routes>

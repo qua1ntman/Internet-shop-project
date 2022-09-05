@@ -5,8 +5,8 @@ import { useCategory } from "../../contexts/CategoryContext";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { ProductCardContainer } from "../../components/ProductCardContainer/ProductCardContainer";
 import { Loader } from "../../components/Loader/Loader";
-import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 import { useApp } from "../../contexts/AppContext";
+import { storageStateUpdator } from "../../helpers/storageStateUpdator";
 
 export const Category = () => {
   const { color } = useApp();
@@ -28,7 +28,7 @@ export const Category = () => {
       } else {
         getSubcategory(JSON.parse(localStorage.getItem('subcategory')!).id)
           .then((res) => {
-            localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+            storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
           })
           .catch((e: Error) => {
             console.log(e.message)
@@ -42,13 +42,13 @@ export const Category = () => {
   const handleSubcategoryChange = (id: number) => {
     getSubcategory(id)
       .then((res) => {
-        localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+        storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
       })
       .catch((e: Error) => {
         console.log(e.message)
       })
     let emptySort = ''
-    localStorageStateUpdator(setSort, emptySort, 'sort')
+    storageStateUpdator(setSort, emptySort, 'sort')
   }
   
   const isDataExist = () => {    

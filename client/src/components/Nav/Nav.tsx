@@ -4,8 +4,8 @@ import "./Nav.scss";
 import { useCategory } from "./../../contexts/CategoryContext";
 import { getSubcategory } from "../../queries/categoryQueries";
 import { ICategoryData } from "../../interfaces/dataInterface";
-import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
 import { useApp } from "../../contexts/AppContext";
+import { storageStateUpdator } from "../../helpers/storageStateUpdator";
 
 export const Nav = () => {
   const { color, backgroundColor, categories } = useApp();
@@ -21,11 +21,11 @@ export const Nav = () => {
   const handleCategory = (
     item: ICategoryData
   ) => {
-    localStorageStateUpdator(setClickedCategory, item, 'category')
+    storageStateUpdator(setClickedCategory, item, 'category')
     
     getSubcategory(item.subcategories[0].id)
       .then((res) => {
-        localStorageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+        storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
         navigate(item.title.toLowerCase())
       })
       .catch((err: Error) => {

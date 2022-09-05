@@ -5,7 +5,7 @@ import { changeOpasity } from "./../../helpers/changeOpasity";
 import { formatCurrency } from "./../../helpers/formatCurrency";
 import { useNavigate } from "react-router-dom";
 import { useCategory } from "../../contexts/CategoryContext";
-import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdator';
+import { storageStateUpdator } from './../../helpers/storageStateUpdator';
 import { useApp } from "../../contexts/AppContext";
 
 export const ProductCard = ({ item }: { item: IProductData }) => {
@@ -13,13 +13,10 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
 
   const { color, setChosenProduct } = useApp();
 
-  const { 
-
-    clickedSubcategory
-  } = useCategory();
+  const { clickedSubcategory } = useCategory();
 
   const handleProductPage = () => {
-    localStorageStateUpdator(setChosenProduct, item, 'product')
+    storageStateUpdator(setChosenProduct, item, 'product')
     navigate({
       pathname: `/product/${item.id}`,
     });
