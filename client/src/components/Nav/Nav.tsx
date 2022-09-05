@@ -8,6 +8,7 @@ import { localStorageStateUpdator } from './../../helpers/localStorageStateUpdat
 import { useApp } from "../../contexts/AppContext";
 
 export const Nav = () => {
+
   const { color, backgroundColor, categories } = useApp();
 
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ export const Nav = () => {
 
   return (
     <nav className="main-nav" style={{ backgroundColor }}>
-      <ul>
+      <ul id="nav-category" className="nav-category">
         {categories!.map((item) => (
           <li
             key={item.title}
