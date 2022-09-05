@@ -10,6 +10,7 @@
 .subcategories {
   display: flex;
   flex-direction: column;
+  padding-left: 30px;
   width: max(150px, 20%);
   align-items: center;
   margin: 20px;
@@ -17,4 +18,3 @@
     margin: 10px;
   }
 }
-

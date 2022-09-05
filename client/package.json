@@ -39,6 +39,7 @@
     "@babel/runtime": "^7.18.9",
     "@types/dompurify": "^2.3.3",
     "@types/fork-ts-checker-webpack-plugin": "^0.4.5",
+    "@types/material-ui": "^0.21.12",
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
     "@types/react-bootstrap": "^0.32.30",

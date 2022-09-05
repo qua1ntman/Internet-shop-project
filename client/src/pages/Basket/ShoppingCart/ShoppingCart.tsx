@@ -12,8 +12,6 @@ type ShoppingCartProps = {
 
 export function ShoppingCart({ isOpen }: ShoppingCartProps) {
 
-
-
   const { closeCart } = useShoppingCart();
 
   const { cardProducts } = useApp()
@@ -21,6 +19,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
   useEffect(() => {
     console.log(cardProducts);
   }, [cardProducts])
+
 
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>

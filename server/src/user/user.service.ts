@@ -5,6 +5,8 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { JwtPayload } from '../JwtPayload';
+import { Bot } from '../Bot';
+import { Product } from '../product/product.entity';
 
 @Injectable()
 export class UserService {
@@ -39,10 +41,9 @@ export class UserService {
 
   private generateToken(user: User) {
     if (!user) return null;
+
     return {
-      token: this.jwtService.sign(<JwtPayload>{
-        role: user.role,
-      }),
+      token: this.jwtService.sign(<JwtPayload>{ ...user, password: undefined }),
     };
   }
 
@@ -52,5 +53,63 @@ export class UserService {
       bcrypt.compareSync(user.password, userToCheck.password)
       ? userToCheck
       : null;
+  }
+
+  async botAdd(token: string) {
+    const user = await this.findById(
+      (this.jwtService.decode(token) as JwtPayload).id,
+    );
+
+    const pin = Array(4)
+      .fill(null)
+      .map(() => Math.floor(Math.random() * 10))
+      .join('');
+
+    Bot.instance.commands.set(pin, (context) => {
+      Bot.instance.commands.delete(pin);
+
+      user.subscribed = true;
+      user.chatId = context.chatId;
+      this.repo.save(user);
+
+      context.send('Subscribed');
+    });
+
+    // 5 minutes
+    setTimeout(() => Bot.instance.commands.delete(pin), 300000);
+
+    return pin;
+  }
+
+  async botDisable(token: string) {
+    const user = await this.findById(
+      (this.jwtService.decode(token) as JwtPayload).id,
+    );
+
+    user.subscribed = false;
+  }
+
+  async botEnable(token: string) {
+    const user = await this.findById(
+      (this.jwtService.decode(token) as JwtPayload).id,
+    );
+
+    user.subscribed = true;
+  }
+
+  async notifyBot(product: Product) {
+    const users = await this.getBotUsers();
+    users.forEach((user) => {
+      Bot.instance.api.sendMessage({
+        chat_id: user.chatId,
+        text: `Product ${product.brand} added\n`,
+      });
+    });
+  }
+
+  private getBotUsers() {
+    return this.repo.findBy({
+      subscribed: true,
+    });
   }
 }

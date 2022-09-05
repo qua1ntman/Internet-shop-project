@@ -6,8 +6,9 @@
 }
 
 .cards-container {
-  display: grid;
-  grid-auto-columns: min-content;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
 }

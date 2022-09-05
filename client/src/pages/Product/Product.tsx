@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Product.scss";
 import { useCategory } from './../../contexts/CategoryContext';
 import { useApp } from "../../contexts/AppContext";
@@ -39,7 +39,7 @@ export const Product = () => {
         )
         if (existProd) {
           return cardProducts.map((item) => {
-            if (item.id === existProd!.id) {
+            if (item.size === existProd!.size && item.id === existProd!.id) {
               return { ...existProd!, amount: item.amount + amount } 
             } else return item
           })

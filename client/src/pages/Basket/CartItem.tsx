@@ -4,7 +4,6 @@ import { IProductDataAndAmount } from './../../interfaces/dataInterface';
 import { storageStateUpdator } from "../../helpers/storageStateUpdator";
 import { useApp } from "../../contexts/AppContext";
 
-
 export function CartItem({ product }: {product: IProductDataAndAmount}) {
 
   const { cardProducts, setCardProducts } = useApp()

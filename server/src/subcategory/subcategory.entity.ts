@@ -1,6 +1,15 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { IsEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Category } from '../category/category.entity';
+import { Product } from '../product/product.entity';
 
 @Entity()
 export class Subcategory {
@@ -22,12 +31,12 @@ export class Subcategory {
   @IsOptional()
   thumbnail: string;
 
-  @Column('simple-array', { default: [] })
-  @IsUrl(undefined, { each: true })
-  @IsOptional()
-  images: string[];
-
+  @ManyToMany(() => Category)
   @IsEmpty()
-  @ManyToOne(() => Category, (category) => category.subcategories)
-  category: Category;
+  categories: Category[];
+
+  @ManyToMany(() => Product)
+  @IsEmpty()
+  @JoinTable()
+  products: Product[];
 }
