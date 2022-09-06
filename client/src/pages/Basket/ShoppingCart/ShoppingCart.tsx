@@ -1,6 +1,6 @@
 import { useShoppingCart } from "../../../contexts/ShoppingCartContext";
 import { CartItem } from "../CartItem";
-import React, { useEffect } from "react";
+import React from "react";
 import { Drawer } from "@mui/material";
 import "./ShoppingCart.scss";
 import { formatCurrency } from "../../../helpers/formatCurrency";
@@ -15,11 +15,6 @@ export function ShoppingCart({ isOpen }: ShoppingCartProps) {
   const { closeCart } = useShoppingCart();
 
   const { cardProducts } = useApp()
-
-  useEffect(() => {
-    console.log(cardProducts);
-  }, [cardProducts])
-
 
   return (
     <Drawer anchor='right' open={isOpen} onClose={closeCart}>

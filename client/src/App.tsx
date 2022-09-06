@@ -46,10 +46,9 @@ export const appContext = createContext(Object) as unknown as Context<{
 }>;
 
 // Установка body backgroundColor в зависимости от темы
-setBackgroundColor()
 
 export const App = () => {
-
+  
   const [
     categories, 
     setCategories
@@ -57,9 +56,9 @@ export const App = () => {
     localStorage.getItem('categories') 
     ? JSON.parse(localStorage.getItem('categories')!) 
     : [] as ICategoryData[]);
-
-  useEffect(() => {
-    getCategories()
+    
+    useEffect(() => {
+      getCategories()
       .then((res) => {
         const categoryData: ICategoryData[] = res.data;
         storageStateUpdator(setCategories, categoryData, 'categories')
@@ -67,32 +66,35 @@ export const App = () => {
       .catch((e: Error) => {
         console.log(e.message);
       }); 
-  }, []);
-
-  if (!categories || categories.length === 0) return <Loader/>
-
-  return (
-    <AppProvider 
-      props={{ 
-        categories, 
-        setCategories
-      }}
-      >
-      <CategoryProvider>
-        <ShoppingCartProvider>
-          <Router>
-              <Routes>
-                <Route 
-                  path={"/*"} 
-                  element={<Content />} 
-                />
-                <Route path={"login"} element={<Login />} />
-                <Route path={"register"} element={<Register />} />
-                <Route path={"*"} element={<ErrorPage />} />
-              </Routes>
-          </Router>
-        </ShoppingCartProvider>
-      </CategoryProvider>
-    </AppProvider>
+      setBackgroundColor()
+    }, []);
+    
+    if (!categories || categories.length === 0) return <Loader/>
+    
+    return (
+      <div className="container">
+        <AppProvider 
+          props={{ 
+            categories, 
+            setCategories
+          }}
+          >
+          <CategoryProvider>
+            <ShoppingCartProvider>
+              <Router>
+                  <Routes>
+                    <Route 
+                      path={"/*"} 
+                      element={<Content />} 
+                    />
+                    <Route path={"login"} element={<Login />} />
+                    <Route path={"register"} element={<Register />} />
+                    <Route path={"*"} element={<ErrorPage />} />
+                  </Routes>
+              </Router>
+            </ShoppingCartProvider>
+          </CategoryProvider>
+        </AppProvider>
+      </div>
   );
 };
