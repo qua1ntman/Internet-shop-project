@@ -22,6 +22,9 @@
 
 .cart {
   position: relative;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .badge-circle {
