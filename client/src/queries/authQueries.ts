@@ -12,5 +12,5 @@ export const postLogin = (data: TFormState) => {
 }
 
 export const getTelegramCode = () => {
-  return axios.post(`${url}/user/bot`)
+  return axios.post(`${url}/user/bot`, {}, { headers: { 'Authorization': `Bearer ${localStorage.getItem('token') || null}` } })
 }
