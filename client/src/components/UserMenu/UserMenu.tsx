@@ -51,8 +51,6 @@ export default function PositionedMenu() {
         }}
       >
         Hello, {decodedToken.name}!
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
         <Link to='#' style={{ color }} className="login" onClick={handleLogin}>
           <MenuItem onClick={handleClose}>Logout</MenuItem>
         </Link>
