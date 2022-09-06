@@ -19,22 +19,20 @@ export const Sort = () => {
 
   const handlePriceSort = () => {
     let data: string = sort === 'ᐁ' ? 'ᐃ' : sort === 'ᐃ' ? 'ᐁ' : 'ᐃ'
-    storageStateUpdator(setSort, data, 'sort')
+    storageStateUpdator(setSort, data, 'sort', 'session')
     let sortedData: ISubCategoryData = 
       JSON.parse(JSON.stringify(clickedSubcategory))
-    sortedData.products = productSorter(sortedData.products!, sort)
-    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
-    setClickedSubcategory(sortedData)
+    sortedData.products = productSorter(sortedData.products!, data)
+    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory', 'session')
   }
 
   const handleTitleSort = () => {
     let data: string = sort === 'A-Z' ? 'Z-A' : sort === 'Z-A' ? 'A-Z' : 'Z-A'
-    storageStateUpdator(setSort, data, 'sort')
+    storageStateUpdator(setSort, data, 'sort', 'session')
     let sortedData: ISubCategoryData = 
       JSON.parse(JSON.stringify(clickedSubcategory))
-    sortedData.products = productSorter(sortedData.products!, sort)
-    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory')
-    setClickedSubcategory(sortedData)
+    sortedData.products = productSorter(sortedData.products!, data)
+    storageStateUpdator(setClickedSubcategory, sortedData, 'subcategory', 'session')
   }
 
   return (
@@ -44,14 +42,14 @@ export const Sort = () => {
         className="sort-btn"
         onClick={handlePriceSort}
       >
-        Sort by Price {sort === 'ᐃ' ? 'ᐃ' : sort === 'ᐁ' ? 'ᐁ' : ''}
+        Sort by Price {sort === 'ᐃ' ? 'ᐁ' : sort === 'ᐁ' ? 'ᐃ' : ''}
       </div>
       <div 
         style={{ color }}
         className="sort-btn"
         onClick={handleTitleSort}
       >
-        Sort by Name {sort === 'A-Z' ? '(A-Z)' : sort === 'Z-A' ? '(Z-A)': ''}
+        Sort by Name {sort === 'A-Z' ? '(Z-A)' : sort === 'Z-A' ? '(A-Z)': ''}
       </div>
     </div>
   )

@@ -35,7 +35,7 @@ export class ProductController {
 
   @Post()
   @UseGuards(GuardAdmin)
-  async add(@Body() product: Product) {
+  async add(@Body() product: Pro    duct) {
     validateSync(product);
     const result = await this.service.add(product);
     if (Array.isArray(result))

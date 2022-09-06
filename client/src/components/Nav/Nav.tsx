@@ -17,21 +17,25 @@ export const Nav = () => {
     clickedCategory, 
     setClickedCategory, 
     setClickedSubcategory,
+    setSort
   } = useCategory();
 
   const handleCategory = (
     item: ICategoryData
   ) => {
-    storageStateUpdator(setClickedCategory, item, 'category')
-    
-    getSubcategory(item.subcategories[0].id)
-      .then((res) => {
-        storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
-        navigate(item.title.toLowerCase())
-      })
-      .catch((err: Error) => {
-        console.log(err.message)
-      })
+    if (clickedCategory.title !== item.title) {
+      storageStateUpdator(setClickedCategory, item, 'category')
+      let emptyStr = ''
+      storageStateUpdator(setSort, emptyStr, 'sort', 'session')
+      getSubcategory(item.subcategories[0].id)
+        .then((res) => {
+          storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+          navigate(item.title.toLowerCase())
+        })
+        .catch((err: Error) => {
+          console.log(err.message)
+        })
+    }
   }
 
   return (

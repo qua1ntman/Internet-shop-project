@@ -51,15 +51,17 @@ export const Category = () => {
 
 
   const handleSubcategoryChange = (id: number) => {
-    getSubcategory(id)
-      .then((res) => {
-        storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
-      })
-      .catch((e: Error) => {
-        console.log(e.message)
-      })
-    let emptySort = ''
-    storageStateUpdator(setSort, emptySort, 'sort')
+    if (clickedSubcategory.id !== id ) {
+      getSubcategory(id)
+        .then((res) => {
+          storageStateUpdator(setClickedSubcategory, res.data, 'subcategory')
+        })
+        .catch((e: Error) => {
+          console.log(e.message)
+        })
+      let emptySort = ''
+      storageStateUpdator(setSort, emptySort, 'sort')
+    }
   }
   
   const isDataExist = () => {    
