@@ -10,3 +10,7 @@ export const postRegister = (data: TFormState) => {
 export const postLogin = (data: TFormState) => {
   return axios.post(`${url}/user/login`, data)   
 }
+
+export const getTelegramCode = () => {
+  return axios.post(`${url}/user/bot`)
+}
