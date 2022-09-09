@@ -51,9 +51,11 @@ export const ProductCard = ({ item }: { item: IProductData }) => {
       </span>
       <span className="card-type" style={{ color: changeOpasity(color, 0.5) }}>
         {clickedSubcategory!.title.toUpperCase()} |{" "}
-        {Array.isArray(item.kind)
-          ? item.kind.join(", ").toLocaleUpperCase()
-          : item.kind.toUpperCase()}
+        {item.kind !== null 
+          ? Array.isArray(item.kind)
+            ? item.kind.join(", ").toUpperCase()
+            : item.kind.toUpperCase() 
+          : null}
       </span>
       <span className="card-price" style={{ color }}>
         {formatCurrency(item.price)}
