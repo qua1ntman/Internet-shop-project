@@ -1,0 +1,42 @@
+footer {
+  height: max(60px, 10vh);
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  font-size: 1.2rem;
+}
+
+.rs-logo {
+  & > svg {
+    height: 40px;
+    width: auto;
+  }
+}
+
+.devs-links {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+  & a {
+    font-size: 1.2rem;
+    color: white;
+  }
+}
+
+
+@media screen and (min-width: 350px) and (max-width: 768px) {
+  .devs-links {
+    width: 150px;
+    & a {
+      font-size: 1rem;
+    }
+  }
+  .rs-logo {
+    & > svg {
+      height: 26px;
+    }
+  }
+}
